@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+
+	<!-- Send debug messages to System.out -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Send debug messages to a file -->
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- Daily rollover -->
+			<fileNamePattern>${catalina.home}/logs/xmpp-server-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- Keep 7 days' worth of history -->
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- <logger name="com.momentous.wifiesta.notifier.core" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger> -->
+
+	<!-- By default, the level of the root level is set to INFO ( TRACE < DEBUG < INFO < WARN < ERROR) -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

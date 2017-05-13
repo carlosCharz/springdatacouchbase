@@ -1,5 +1,7 @@
 package com.wedevol.springdatacouchbase.core.service;
 
+import java.util.List;
+
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 /**
@@ -9,6 +11,16 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
  */
 
 public interface UserService {
+	
+	UserDoc findById(Long id);
+
+	UserDoc create(UserDoc user);
+
+	void update(Long id, UserDoc user);
+
+	void delete(Long id);
+	
+	List<UserDoc> findAll();
 
 	UserDoc findByUserId(Long userId);
 	

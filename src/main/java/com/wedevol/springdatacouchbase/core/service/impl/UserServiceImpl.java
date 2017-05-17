@@ -1,5 +1,6 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
+import com.wedevol.iclass.core.entity.Instructor;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ErrorType;
@@ -30,9 +33,9 @@ public class UserServiceImpl implements UserService {
 	// TODO remove logs
 
 	@Override
-	public UserDoc findByUserId(Long userId) {
+	public UserDoc findByEmail(String email) {
 		try {
-			List<UserDoc> groupList = repo.findByUserId(userId);
+			List<UserDoc> groupList = repo.findByEmail(email);
 			if (groupList == null || groupList.isEmpty()) {
 				return null;
 			} else if (groupList.size() > 1) {
@@ -49,8 +52,51 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDoc findOne(String key) {
-		return repo.findOne(key);
+	public List<UserDoc> findAll() {
+		final Iterable<UserDoc> instructorsIterator = repo.findAll();
+		List<UserDoc> myList = IteratorUtils.toList(instructorsIterator);  
+	}
+
+	@Override
+	public UserDoc findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDoc create(UserDoc user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Long id, UserDoc user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Long count() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean exists(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDoc> findUsersByNickname(String nickname) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

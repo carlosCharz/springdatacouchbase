@@ -16,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 public interface UserRepository extends CrudRepository<UserDoc, String> {
 
 	// The docs are indexed by type
-	@Query("#{#n1ql.selectEntity} WHERE type='fcmg' and userId = $1")
-	List<UserDoc> findByUserId(Long userId);
+	@Query("#{#n1ql.selectEntity} WHERE type='user' and email = $1")
+	List<UserDoc> findByEmail(String email);
 	
 }

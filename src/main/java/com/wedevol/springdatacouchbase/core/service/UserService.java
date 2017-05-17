@@ -12,6 +12,10 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 public interface UserService {
 	
+	// CRUD repository interface
+	
+	List<UserDoc> findAll();
+	
 	UserDoc findById(Long id);
 
 	UserDoc create(UserDoc user);
@@ -20,10 +24,16 @@ public interface UserService {
 
 	void delete(Long id);
 	
-	List<UserDoc> findAll();
-
-	UserDoc findByUserId(Long userId);
+	Long count();
 	
-	UserDoc findOne(String id);
+	Boolean exists(Long id);
+	
+	// Custom methods
+
+	UserDoc findByEmail(String email);
+	
+	List<UserDoc> findUsersByNickname(String nickname);
+	
+	
 
 }

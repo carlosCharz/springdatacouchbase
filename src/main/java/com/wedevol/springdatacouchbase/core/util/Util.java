@@ -8,20 +8,11 @@ package com.wedevol.springdatacouchbase.core.util;
 
 public class Util {
 
-	public static final String FCM_ELEMENT_NAME = "gcm";
+	public static final String USER_KEY_PREFIX = "user::";
 
 	public static boolean isNullOrEmpty(String param) {
 		return param == null || param.trim()
 										.length() == 0;
-	}
-
-	public static boolean isEmpty(String param) {
-		return param.trim()
-					.length() == 0;
-	}
-
-	public static Long getCurrentUnixTime() {
-		return System.currentTimeMillis() / 1000L;
 	}
 
 }

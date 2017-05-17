@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wedevol.springdatacouchbase.core.bean.User;
+import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.service.UserService;
 
 /**
@@ -38,37 +38,29 @@ public class UserController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public List<User> findAll() {
+	public List<UserDoc> findAll() {
 		return userService.findAll();
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public User findById(@PathVariable Long userId) {
+	public UserDoc findById(@PathVariable Long userId) {
 		return userService.findById(userId);
 	}
 	
-	@RequestMapping(value = "/find", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public List<User> findUsersByEmail(@RequestParam(value = "email") String email) {
-		logger.info("Find users by email: " + email);
-		return userService.findUsersByEmail(email);
-	}
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public User create(@Valid @RequestBody User User) {
+	public UserDoc create(@Valid @RequestBody UserDoc user) {
 		return userService.create(user);
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public void update(@PathVariable Long userId, @Valid @RequestBody User User) {
-		userService.update(userId, User);
+	public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
+		userService.update(userId, user);
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
@@ -77,5 +69,37 @@ public class UserController {
 	public void delete(@PathVariable Long userId) {
 		userService.delete(userId);
 	}
+	
+	@RequestMapping(value = "/count", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public Long count() {
+		return userService.count();
+	}
+	
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public Boolean exists(@PathVariable Long userId) {
+		return userService.exists(userId);
+	}
+	
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public UserDoc findByEmail(@RequestParam(value = "email") String email) {
+		logger.info("Find user by email: " + email);
+		return userService.findByEmail(email);
+	}
+	
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
+		logger.info("Find users by nickname: " + nickname);
+		return userService.findUsersByNickname(nickname);
+	}
+
+	
 
 }

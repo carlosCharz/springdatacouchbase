@@ -1,7 +1,7 @@
 package com.wedevol.springdatacouchbase.core.exception;
 
 /**
- * App base runtime exception
+ * Api base runtime exception
  * 
  * @author charz
  *

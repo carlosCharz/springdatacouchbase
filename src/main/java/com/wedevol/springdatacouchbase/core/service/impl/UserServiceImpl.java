@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
-import com.wedevol.springdatacouchbase.core.exception.NotFoundErrorType;
-import com.wedevol.springdatacouchbase.core.exception.ResourceNotFoundException;
+import com.wedevol.springdatacouchbase.core.exception.ApiException;
+import com.wedevol.springdatacouchbase.core.exception.ErrorType;
 import com.wedevol.springdatacouchbase.core.service.UserService;
 
 /**
@@ -59,13 +59,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDoc findById(Long id) {
 		final Optional<UserDoc> studentObj = Optional.ofNullable(repo.findOne(UserDoc.getKeyFor(id)));
-		return studentObj.orElseThrow(() -> new ResourceNotFoundException(NotFoundErrorType.USER_NOT_FOUND));
+		return studentObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 	}
 
 	@Override
 	public UserDoc create(UserDoc user) {
-		// TODO Auto-generated method stub
-		return null;
+		// We first search by email, the student should not exist
+		final Optional<UserDoc> userObj = Optional.ofNullable(this.findByEmail(user.getEmail()));
+		if (userObj.isPresent()) {
+			throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
+		}
+		return repo.save(user);
 	}
 
 	@Override

@@ -1,16 +1,16 @@
 package com.wedevol.springdatacouchbase.core.exception;
 
 /**
- * Resource not found exception
+ * Api not found exception
  * 
  * @author charz
  *
  */
-public class ResourceNotFoundException extends BaseRuntimeException {
+public class ApiException extends BaseRuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ResourceNotFoundException(NotFoundErrorType errorType) {
+	public ApiException(ErrorType errorType) {
 		super(errorType.getCode(), errorType.getMessage());
 	}
 

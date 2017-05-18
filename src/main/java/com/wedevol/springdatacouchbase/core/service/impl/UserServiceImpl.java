@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDoc> findAll() {
 		final Iterable<UserDoc> instructorsIterator = repo.findAll();
-		List<UserDoc> myList = IteratorUtils.toList(instructorsIterator);  
+		return Lists.newArrayList(instructorsIterator);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
-import com.wedevol.iclass.core.entity.Instructor;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
-import com.wedevol.springdatacouchbase.core.exception.ErrorType;
-import com.wedevol.springdatacouchbase.core.exception.ServerException;
+import com.wedevol.springdatacouchbase.core.exception.NotFoundErrorType;
+import com.wedevol.springdatacouchbase.core.exception.ResourceNotFoundException;
 import com.wedevol.springdatacouchbase.core.service.UserService;
 
 /**
@@ -34,20 +33,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDoc findByEmail(String email) {
-		try {
+		//try {
 			List<UserDoc> groupList = repo.findByEmail(email);
 			if (groupList == null || groupList.isEmpty()) {
 				return null;
 			} else if (groupList.size() > 1) {
-				throw new ServerException(ErrorType.ILLEGAL_RESULT_LENGTH);
+				//throw new ServerException(ErrorType.ILLEGAL_RESULT_LENGTH);
 			} else {
 				UserDoc group = groupList.get(0);
 				logger.info("User found: {}", group);
 				return group;
 			}
-		} catch (ServerException e) {
-			logger.error("Server Error: {}", e.getMessage());
-		}
+		//} catch (ServerException e) {
+		//	logger.error("Server Error: {}", e.getMessage());
+		//}
 		return null;
 	}
 
@@ -59,8 +58,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDoc findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		final Optional<UserDoc> studentObj = Optional.ofNullable(repo.findOne(UserDoc.getKeyFor(id)));
+		return studentObj.orElseThrow(() -> new ResourceNotFoundException(NotFoundErrorType.USER_NOT_FOUND));
 	}
 
 	@Override

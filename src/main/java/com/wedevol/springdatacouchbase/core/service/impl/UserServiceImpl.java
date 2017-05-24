@@ -14,6 +14,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
 import com.wedevol.springdatacouchbase.core.exception.ErrorType;
 import com.wedevol.springdatacouchbase.core.service.UserService;
+import com.wedevol.springdatacouchbase.core.util.Util;
 
 /**
  * Service that manages the valid operations over the user repository
@@ -28,26 +29,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository repo;
-	
-	// TODO remove logs
 
 	@Override
 	public UserDoc findByEmail(String email) {
-		//try {
-			List<UserDoc> groupList = repo.findByEmail(email);
-			if (groupList == null || groupList.isEmpty()) {
-				return null;
-			} else if (groupList.size() > 1) {
-				//throw new ServerException(ErrorType.ILLEGAL_RESULT_LENGTH);
-			} else {
-				UserDoc group = groupList.get(0);
-				logger.info("User found: {}", group);
-				return group;
-			}
-		//} catch (ServerException e) {
-		//	logger.error("Server Error: {}", e.getMessage());
-		//}
-		return null;
+		return repo.findByEmail(email);
 	}
 
 	@Override
@@ -74,32 +59,41 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(Long id, UserDoc user) {
-		// TODO Auto-generated method stub
-		
+		// The user should exist
+		final UserDoc existingUser = this.findById(id);
+		if (!Util.isNullOrEmpty(user.getName())) {
+			existingUser.setName(user.getName());
+		}
+		if (!Util.isNullOrEmpty(user.getNicknames())) {
+			existingUser.setNicknames(user.getNicknames());
+		}
+		if (user.getAge() != null) {
+			existingUser.setAge(user.getAge());
+		}
+		// Save
+		repo.save(existingUser);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		// The user should exist
+		this.findById(id);
+		repo.delete(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public Long count() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.count();
 	}
 
 	@Override
 	public Boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.exists(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public List<UserDoc> findUsersByNickname(String nickname) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findUsersWithNickname(nickname);
 	}
 
 }

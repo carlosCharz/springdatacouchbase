@@ -43,17 +43,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDoc findById(Long id) {
-		final Optional<UserDoc> studentObj = Optional.ofNullable(repo.findOne(UserDoc.getKeyFor(id)));
-		return studentObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
+		final Optional<UserDoc> userObj = Optional.ofNullable(repo.findOne(UserDoc.getKeyFor(id)));
+		return userObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 	}
 
 	@Override
 	public UserDoc create(UserDoc user) {
-		// We first search by email, the student should not exist
+		// We first search by email, the user should not exist
 		final Optional<UserDoc> userObj = Optional.ofNullable(this.findByEmail(user.getEmail()));
 		if (userObj.isPresent()) {
 			throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
 		}
+		user.setId(UserDoc.getKeyFor(Util.getUniqueId()));
 		return repo.save(user);
 	}
 

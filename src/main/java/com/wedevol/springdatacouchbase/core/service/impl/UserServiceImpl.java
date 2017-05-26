@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.wedevol.springdatacouchbase.core.dao.CountersRepository;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
@@ -26,24 +27,29 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 public class UserServiceImpl implements UserService {
 
 	protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	
+	private static final String USER_COUNTER_KEY = "user::counter";
 
 	@Autowired
-	private UserRepository repo;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private CountersRepository countersRepository;
 
 	@Override
 	public UserDoc findByEmail(String email) {
-		return repo.findByEmail(email);
+		return userRepository.findByEmail(email);
 	}
 
 	@Override
 	public List<UserDoc> findAll() {
-		final Iterable<UserDoc> instructorsIterator = repo.findAll();
+		final Iterable<UserDoc> instructorsIterator = userRepository.findAll();
 		return Lists.newArrayList(instructorsIterator);
 	}
 
 	@Override
 	public UserDoc findById(Long id) {
-		final Optional<UserDoc> userObj = Optional.ofNullable(repo.findOne(UserDoc.getKeyFor(id)));
+		final Optional<UserDoc> userObj = Optional.ofNullable(userRepository.findOne(UserDoc.getKeyFor(id)));
 		return userObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 	}
 
@@ -54,8 +60,8 @@ public class UserServiceImpl implements UserService {
 		if (userObj.isPresent()) {
 			throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
 		}
-		user.setId(UserDoc.getKeyFor(Util.getUniqueId()));
-		return repo.save(user);
+		user.setId(UserDoc.getKeyFor(countersRepository.counter(USER_COUNTER_KEY)));
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -72,29 +78,29 @@ public class UserServiceImpl implements UserService {
 			existingUser.setAge(user.getAge());
 		}
 		// Save
-		repo.save(existingUser);
+		userRepository.save(existingUser);
 	}
 
 	@Override
 	public void delete(Long id) {
 		// The user should exist
 		this.findById(id);
-		repo.delete(UserDoc.getKeyFor(id));
+		userRepository.delete(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public Long count() {
-		return repo.count();
+		return userRepository.count();
 	}
 
 	@Override
 	public Boolean exists(Long id) {
-		return repo.exists(UserDoc.getKeyFor(id));
+		return userRepository.exists(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public List<UserDoc> findUsersByNickname(String nickname) {
-		return repo.findUsersWithNickname(nickname);
+		return userRepository.findUsersWithNickname(nickname);
 	}
 
 }

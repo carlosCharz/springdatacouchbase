@@ -20,7 +20,7 @@ public interface UserRepository extends CrudRepository<UserDoc, String> {
 	// DROP INDEX `users`.`users-primary-index` USING GSI;
 	UserDoc findByEmail(String email);
 	
-	@Query("#{#n1ql.selectEntity} WHERE type='user' AND #{#n1ql.filter} AND ARRAY_LENGTH(nicknames) > 0 AND ANY nick IN nicknames SATISFIES nick = $1 END")
+	@Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND ARRAY_LENGTH(nicknames) > 0 AND ANY nick IN nicknames SATISFIES nick = $1 END")
 	List<UserDoc> findUsersWithNickname(String nickname);
 
 }

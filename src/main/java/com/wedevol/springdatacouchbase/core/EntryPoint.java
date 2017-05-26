@@ -17,6 +17,7 @@ public class EntryPoint {
 	protected static final Logger logger = LoggerFactory.getLogger(EntryPoint.class);
 
 	public static void main(String[] args) {
+		logger.info("Initializing spring");
 		SpringApplication.run(EntryPoint.class, args);
 	}
 

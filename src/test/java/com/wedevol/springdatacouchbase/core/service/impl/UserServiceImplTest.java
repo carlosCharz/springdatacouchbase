@@ -7,8 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
-import com.wedevol.springdatacouchbase.core.service.impl.UserServiceImpl;
+import com.wedevol.springdatacouchbase.core.exception.ApiException;
 
 /**
  * Test the UserServiceImpl
@@ -31,23 +30,25 @@ import com.wedevol.springdatacouchbase.core.service.impl.UserServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
 	
-	private static final String userOneGroup = "user::1::fcmgroup";
+	private static final String userOneKey = "user::1";
 
 	@Mock
 	private UserRepository repoMock;
 
 	@InjectMocks
-	private UserServiceImpl fcmGroupService;
+	private UserServiceImpl userService;
 
-	private UserDoc fcmGroupDoc;
+	private UserDoc userDoc;
 
 	private Long userId;
 
 	@Before
 	public void init() {
-		fcmGroupDoc = new UserDoc();
-		fcmGroupDoc.setUserId(1L);
-		fcmGroupDoc.setHash("abc12456bca");
+		userDoc = new UserDoc();
+		userDoc.setId(userOneKey);
+		userDoc.setNicknames(Arrays.asList("charz", "carlito"));
+		userDoc.setAge(25);
+		userDoc.setEmail("carlos1@yopmail.com");
 
 		userId = 1L;
 	}
@@ -57,92 +58,30 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void findOneAndFcmGroupExists() throws Exception {
+	public void findOneAndUserExists() {
 		// Data preparation
-		when(repoMock.findOne(userOneGroup)).thenReturn(fcmGroupDoc);
+		when(repoMock.findOne(userOneKey)).thenReturn(userDoc);
 
 		// Method call
-		final UserDoc fcmGroup = fcmGroupService.findOne(userOneGroup);
+		final UserDoc user = userService.findById(userId);
 
 		// Verification
-		assertNotNull(fcmGroup);
-		verify(repoMock, times(1)).findOne(userOneGroup);
-		verifyNoMoreInteractions(repoMock);
-	}
-
-	@Test
-	public void findByUserIdAndFcmGroupExists() throws Exception {
-		// Data preparation
-		List<UserDoc> fcmGroupList = new ArrayList<UserDoc>();
-		fcmGroupList.add(fcmGroupDoc);
-		when(repoMock.findByUserId(1L)).thenReturn(fcmGroupList);
-
-		// Method call
-		final UserDoc fcmGroup = fcmGroupService.findByUserId(userId);
-
-		// Verification
-		assertNotNull(fcmGroup);
-		verify(repoMock, times(1)).findByUserId(1L);
-		verifyNoMoreInteractions(repoMock);
-	}
-
-	@Test
-	public void findByUserIdAndFcmGroupDoesNotExist() throws Exception {
-		// Data preparation
-		List<UserDoc> fcmGroupList = new ArrayList<UserDoc>();
-		when(repoMock.findByUserId(1L)).thenReturn(fcmGroupList);
-
-		// Method call
-		final UserDoc token = fcmGroupService.findByUserId(userId);
-
-		// Verification
-		assertNull(token);
-		verify(repoMock, times(1)).findByUserId(1L);
-		verifyNoMoreInteractions(repoMock);
-	}
-
-	@Test
-	public void findByUserIdAndFcmGroupIsNull() throws Exception {
-		// Data preparation
-		when(repoMock.findByUserId(1L)).thenReturn(null);
-
-		// Method call
-		final UserDoc fcmGroup = fcmGroupService.findByUserId(userId);
-
-		// Verification
-		assertNull(fcmGroup);
-		verify(repoMock, times(1)).findByUserId(1L);
+		assertNotNull(user);
+		verify(repoMock, times(1)).findOne(userOneKey);
 		verifyNoMoreInteractions(repoMock);
 	}
 	
-	@Test
-	public void findOneAndFcmGroupIsNull() throws Exception {
+	@Test(expected = ApiException.class)
+	public void findOneAndUserIsNull() {
 		// Data preparation
-		when(repoMock.findOne(userOneGroup)).thenReturn(null);
+		when(repoMock.findOne(userOneKey)).thenReturn(null);
 
 		// Method call
-		final UserDoc fcmGroup = fcmGroupService.findOne(userOneGroup);
+		final UserDoc user = userService.findById(userId);
 
 		// Verification
-		assertNull(fcmGroup);
-		verify(repoMock, times(1)).findOne(userOneGroup);
-		verifyNoMoreInteractions(repoMock);
-	}
-
-	@Test
-	public void finByUserIdAndThereAreManyFcmGroups() throws Exception {
-		// Data preparation
-		List<UserDoc> fcmGroupList = new ArrayList<UserDoc>();
-		fcmGroupList.add(fcmGroupDoc);
-		fcmGroupList.add(fcmGroupDoc);
-		when(repoMock.findByUserId(1L)).thenReturn(fcmGroupList);
-
-		// Method call
-		final UserDoc token = fcmGroupService.findByUserId(userId);
-
-		// Verification
-		assertNull(token);
-		verify(repoMock, times(1)).findByUserId(1L);
+		assertNull(user);
+		verify(repoMock, times(1)).findOne(userOneKey);
 		verifyNoMoreInteractions(repoMock);
 	}
 

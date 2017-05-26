@@ -77,14 +77,14 @@ public class UserController {
 		return userService.count();
 	}
 	
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{userId}/exists", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public Boolean exists(@PathVariable Long userId) {
 		return userService.exists(userId);
 	}
 	
-	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	@RequestMapping(value = "/find/email", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public UserDoc findByEmail(@RequestParam(value = "email") String email) {
@@ -92,14 +92,12 @@ public class UserController {
 		return userService.findByEmail(email);
 	}
 	
-	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	@RequestMapping(value = "/find/nickname", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
 		logger.info("Find users by nickname: " + nickname);
 		return userService.findUsersByNickname(nickname);
 	}
-
-	
 
 }

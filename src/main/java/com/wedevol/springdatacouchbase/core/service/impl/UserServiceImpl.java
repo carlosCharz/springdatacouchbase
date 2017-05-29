@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
-import com.wedevol.springdatacouchbase.core.dao.CountersRepository;
+import com.wedevol.springdatacouchbase.core.dao.UserCounterRepository;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
@@ -27,29 +27,27 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 public class UserServiceImpl implements UserService {
 
 	protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-	
-	private static final String USER_COUNTER_KEY = "user::counter";
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository userRepo;
 	
 	@Autowired
-	private CountersRepository countersRepository;
+	private UserCounterRepository userCounterRepo;
 
 	@Override
 	public UserDoc findByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepo.findByEmail(email);
 	}
 
 	@Override
 	public List<UserDoc> findAll() {
-		final Iterable<UserDoc> instructorsIterator = userRepository.findAll();
+		final Iterable<UserDoc> instructorsIterator = userRepo.findAll();
 		return Lists.newArrayList(instructorsIterator);
 	}
 
 	@Override
 	public UserDoc findById(Long id) {
-		final Optional<UserDoc> userObj = Optional.ofNullable(userRepository.findOne(UserDoc.getKeyFor(id)));
+		final Optional<UserDoc> userObj = Optional.ofNullable(userRepo.findOne(UserDoc.getKeyFor(id)));
 		return userObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 	}
 
@@ -60,8 +58,8 @@ public class UserServiceImpl implements UserService {
 		if (userObj.isPresent()) {
 			throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
 		}
-		user.setId(UserDoc.getKeyFor(countersRepository.counter(USER_COUNTER_KEY)));
-		return userRepository.save(user);
+		user.setId(UserDoc.getKeyFor(userCounterRepo.counter()));
+		return userRepo.save(user);
 	}
 
 	@Override
@@ -78,29 +76,29 @@ public class UserServiceImpl implements UserService {
 			existingUser.setAge(user.getAge());
 		}
 		// Save
-		userRepository.save(existingUser);
+		userRepo.save(existingUser);
 	}
 
 	@Override
 	public void delete(Long id) {
 		// The user should exist
 		this.findById(id);
-		userRepository.delete(UserDoc.getKeyFor(id));
+		userRepo.delete(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public Long count() {
-		return userRepository.count();
+		return userRepo.count();
 	}
 
 	@Override
 	public Boolean exists(Long id) {
-		return userRepository.exists(UserDoc.getKeyFor(id));
+		return userRepo.exists(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public List<UserDoc> findUsersByNickname(String nickname) {
-		return userRepository.findUsersWithNickname(nickname);
+		return userRepo.findUsersWithNickname(nickname);
 	}
 
 }

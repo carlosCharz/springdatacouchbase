@@ -35,13 +35,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public List<UserDoc> findAll() {
-		return userService.findAll();
-	}
-
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -68,13 +61,6 @@ public class UserController {
 	@ResponseBody
 	public void delete(@PathVariable Long userId) {
 		userService.delete(userId);
-	}
-	
-	@RequestMapping(value = "/count", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public Long count() {
-		return userService.count();
 	}
 	
 	@RequestMapping(value = "/{userId}/exists", method = RequestMethod.GET)

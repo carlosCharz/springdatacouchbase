@@ -14,8 +14,6 @@ public interface UserService {
 	
 	// CRUD repository interface
 	
-	List<UserDoc> findAll();
-	
 	UserDoc findById(Long id);
 
 	UserDoc create(UserDoc user);
@@ -23,8 +21,6 @@ public interface UserService {
 	void update(Long id, UserDoc user);
 
 	void delete(Long id);
-	
-	Long count();
 	
 	Boolean exists(Long id);
 	

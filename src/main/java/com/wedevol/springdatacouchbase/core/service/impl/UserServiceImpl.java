@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
 import com.wedevol.springdatacouchbase.core.dao.UserCounterRepository;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
@@ -37,12 +36,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDoc findByEmail(String email) {
 		return userRepo.findByEmail(email);
-	}
-
-	@Override
-	public List<UserDoc> findAll() {
-		final Iterable<UserDoc> instructorsIterator = userRepo.findAll();
-		return Lists.newArrayList(instructorsIterator);
 	}
 
 	@Override
@@ -84,11 +77,6 @@ public class UserServiceImpl implements UserService {
 		// The user should exist
 		this.findById(id);
 		userRepo.delete(UserDoc.getKeyFor(id));
-	}
-
-	@Override
-	public Long count() {
-		return userRepo.count();
 	}
 
 	@Override

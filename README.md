@@ -12,4 +12,3 @@ This is my template for a spring boot project that uses spring data and couchbas
 
  * Java 8
  * Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
- * Guava

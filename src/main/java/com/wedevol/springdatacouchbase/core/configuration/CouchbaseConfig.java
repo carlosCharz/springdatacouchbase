@@ -41,4 +41,12 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 	protected String getBucketPassword() {
 		return couchbaseSetting.getPassword();
 	}
+	
+	@Override
+	public String typeKey() {
+		// By default, this attribute is named "_class". 
+		// Spring Data automatically adds to each document an attribute containing the full class name of the entity.
+		// This field is the one used by N1QL queries to filter only documents corresponding to the repository’s entity.
+		return "type";
+	}
 }

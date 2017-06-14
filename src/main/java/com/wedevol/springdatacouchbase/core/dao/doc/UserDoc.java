@@ -20,7 +20,7 @@ import com.couchbase.client.java.repository.annotation.Id;
 public class UserDoc implements Serializable {
 
 	private static final long serialVersionUID = 3072475211055736282L;
-	protected static final String userKeyPrefix = "user::";
+	protected static final String USER_KEY_PREFIX = "user::";
 
 	@Id
 	@Field
@@ -50,7 +50,7 @@ public class UserDoc implements Serializable {
 	}
 	
 	public static String getKeyFor(Long id) {
-		return userKeyPrefix + id;
+		return USER_KEY_PREFIX + id;
 	}
 
 	public String getId() {

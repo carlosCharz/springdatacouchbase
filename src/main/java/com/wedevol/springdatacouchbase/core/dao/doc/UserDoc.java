@@ -3,8 +3,6 @@ package com.wedevol.springdatacouchbase.core.dao.doc;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.couchbase.core.mapping.Document;
 
 import com.couchbase.client.java.repository.annotation.Field;
@@ -26,15 +24,12 @@ public class UserDoc implements Serializable {
 	@Field
 	private String id;
 	@Field
-	@NotNull
 	private String name;
 	@Field
 	private List<String> nicknames;
 	@Field
-	@NotNull
 	private Integer age;
 	@Field
-	@NotNull
 	private String email;
 
 	public UserDoc() {

@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 		if (!Util.isNullOrEmpty(user.getName())) {
 			existingUser.setName(user.getName());
 		}
-		if (!Util.isNullOrEmpty(user.getNicknames())) {
+		if (user.getNicknames() != null) {
 			existingUser.setNicknames(user.getNicknames());
 		}
 		if (user.getAge() != null) {

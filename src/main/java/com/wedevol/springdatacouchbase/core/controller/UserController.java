@@ -39,6 +39,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public UserDoc findById(@PathVariable Long userId) {
+		logger.info("Find user by id: {}", userId);
 		return userService.findById(userId);
 	}
 	
@@ -46,6 +47,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public UserDoc create(@Valid @RequestBody UserDoc user) {
+		logger.info("Create user");
 		return userService.create(user);
 	}
 
@@ -53,6 +55,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
+		logger.info("Update user: {}", userId);
 		userService.update(userId, user);
 	}
 
@@ -60,6 +63,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public void delete(@PathVariable Long userId) {
+		logger.info("Delete user: {}", userId);
 		userService.delete(userId);
 	}
 	
@@ -67,6 +71,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public Boolean exists(@PathVariable Long userId) {
+		logger.info("Exists user {}?", userId);
 		return userService.exists(userId);
 	}
 	
@@ -74,7 +79,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public UserDoc findByEmail(@RequestParam(value = "email") String email) {
-		logger.info("Find user by email: " + email);
+		logger.info("Find user by email: {}", email);
 		return userService.findByEmail(email);
 	}
 	
@@ -82,7 +87,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
-		logger.info("Find users by nickname: " + nickname);
+		logger.info("Find users by nickname: {}", nickname);
 		return userService.findUsersByNickname(nickname);
 	}
 

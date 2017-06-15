@@ -30,7 +30,8 @@ import com.wedevol.springdatacouchbase.core.exception.ApiException;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
 	
-	private static final String userOneKey = "user::1";
+	private static final Long USER_ONE_ID = 1L;
+	private static final String USER_ONE_KEY = UserDoc.getKeyFor(USER_ONE_ID);
 
 	@Mock
 	private UserRepository repoMock;
@@ -40,17 +41,13 @@ public class UserServiceImplTest {
 
 	private UserDoc userDoc;
 
-	private Long userId;
-
 	@Before
 	public void init() {
 		userDoc = new UserDoc();
-		userDoc.setId(userOneKey);
+		userDoc.setId(USER_ONE_ID);
 		userDoc.setNicknames(Arrays.asList("charz", "carlito"));
 		userDoc.setAge(25);
 		userDoc.setEmail("carlos1@yopmail.com");
-
-		userId = 1L;
 	}
 
 	@After
@@ -60,28 +57,28 @@ public class UserServiceImplTest {
 	@Test
 	public void findOneAndUserExists() {
 		// Data preparation
-		when(repoMock.findOne(userOneKey)).thenReturn(userDoc);
+		when(repoMock.findOne(USER_ONE_KEY)).thenReturn(userDoc);
 
 		// Method call
-		final UserDoc user = userService.findById(userId);
+		final UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
 		assertNotNull(user);
-		verify(repoMock, times(1)).findOne(userOneKey);
+		verify(repoMock, times(1)).findOne(USER_ONE_KEY);
 		verifyNoMoreInteractions(repoMock);
 	}
 	
 	@Test(expected = ApiException.class)
 	public void findOneAndUserIsNull() {
 		// Data preparation
-		when(repoMock.findOne(userOneKey)).thenReturn(null);
+		when(repoMock.findOne(USER_ONE_KEY)).thenReturn(null);
 
 		// Method call
-		final UserDoc user = userService.findById(userId);
+		final UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
 		assertNull(user);
-		verify(repoMock, times(1)).findOne(userOneKey);
+		verify(repoMock, times(1)).findOne(USER_ONE_KEY);
 		verifyNoMoreInteractions(repoMock);
 	}
 

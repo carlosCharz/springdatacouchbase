@@ -21,8 +21,9 @@ public class UserDoc implements Serializable {
 	protected static final String USER_KEY_PREFIX = "user::";
 
 	@Id
+	private String key;
 	@Field
-	private String id;
+	private Long id;
 	@Field
 	private String name;
 	@Field
@@ -35,8 +36,9 @@ public class UserDoc implements Serializable {
 	public UserDoc() {
 	}
 
-	public UserDoc(String id, String name, List<String> nicknames, Integer age, String email) {
+	public UserDoc(String key, Long id, String name, List<String> nicknames, Integer age, String email) {
 		super();
+		this.key = key;
 		this.id = id;
 		this.name = name;
 		this.nicknames = nicknames;
@@ -48,12 +50,21 @@ public class UserDoc implements Serializable {
 		return USER_KEY_PREFIX + id;
 	}
 
-	public String getId() {
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
+		this.key = UserDoc.getKeyFor(id);
 	}
 
 	public String getName() {

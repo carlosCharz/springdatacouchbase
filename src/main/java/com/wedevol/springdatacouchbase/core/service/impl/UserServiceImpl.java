@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 		if (userObj.isPresent()) {
 			throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
 		}
-		user.setId(UserDoc.getKeyFor(userCounterRepo.counter()));
+		user.setId(userCounterRepo.counter()); // internally we set the key with that id
 		return userRepo.save(user);
 	}
 

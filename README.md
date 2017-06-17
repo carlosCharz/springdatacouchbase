@@ -2,20 +2,20 @@
 
 This is my template for a spring boot project that uses spring data and couchbase.
 
-##Architecture
+## Architecture
  
  1. **Controller:** is the presentation layer where the end points are located
  1. **Service:** is the service layer where the business logic resides
  1. **Repository:** is the persistence layer where the CRUD repository is located
  
-##Technologies
+## Technologies
 
 1. Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
 2. Java 8
 3. Tomcat 8.5
 4. Maven
  
-##Exposed methods
+## Exposed methods
 
 **1. Get user by id. HTTP Method: GET**
 ```
@@ -66,7 +66,7 @@ http://localhost:8091/springdatacouchbase/users/find/nickname?nickname=charz
 http://localhost:8091/springdatacouchbase/users/1/exists
 ```
 
-##Considerations about couchbase
+## Considerations about couchbase
  
  * To create a primary index on the bucket.
  ```
@@ -79,14 +79,14 @@ http://localhost:8091/springdatacouchbase/users/1/exists
  * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field.
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
 
-##Documentation and Examples
+## Documentation and Examples
  
 * [Couchbase CRUD Repository documentation](http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#repositories.core-concepts): There you will find core concepts.
 * [Spring Data and Couchbase](https://blog.couchbase.com/spring-data-couchbase-2-is-out-quick-getting-started-with-spring-initializr/): There you will find more considerations when working with spring data and couchbase.
 * [Introduction to spring data and couchbase](http://www.baeldung.com/spring-data-couchbase): There you will find an introduction example.
 * [Couchbase CRUD Excample](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
 
-##About me
+## About me
 I am Carlos Becerra - MSc. Softwware & Systems.  But to tell you the truth, I'd prefer to be a passionate developer. You can contact me via:
 
 * [Google+](https://plus.google.com/+CarlosBecerraRodr%C3%ADguez)
@@ -94,7 +94,7 @@ I am Carlos Becerra - MSc. Softwware & Systems.  But to tell you the truth, I'd 
 
 _**Any improvement or comment about the project is always welcome! As well as others shared their code publicly I want to share mine! Thanks!**_
 
-##License
+## License
 ```javas
 Copyright 2017 Carlos Becerra
 

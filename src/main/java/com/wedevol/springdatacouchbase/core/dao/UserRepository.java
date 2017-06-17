@@ -11,15 +11,13 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
  * Standard CRUD repository for user doc + query methods
  * 
  * Note: To use N1QL we should at least create a primary NQ1L index or, to be more specific, a N1QL secondary indexes tailored for queries for better performance
- * 
- * CREATE PRIMARY INDEX `users-primary-index` ON `users` USING GSI;
- * DROP INDEX `users`.`users-primary-index` USING GSI;
  *
  * @author Charz++
  */
 
 public interface UserRepository extends CrudRepository<UserDoc, String> {
 
+	// This method is a query method defined in the interface. In addition to query methods, query derivation for both count and delete queries, is available.
 	UserDoc findByEmail(String email);
 	
 	// This method uses the Query annotation to provide a N1QL statement inline. A few N1QL-specific values are provided through SpEL.

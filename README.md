@@ -5,84 +5,85 @@ This is my template for a spring boot project that uses spring data and couchbas
 ##Architecture
  
  1. **Controller:** is the presentation layer where the end points are located
- 1. **Service:** is the service layer the business logic resides
- 1. **Repository:** is the persistence layer where the CRUD repository from spring data takes action
+ 1. **Service:** is the service layer where the business logic resides
+ 1. **Repository:** is the persistence layer where the CRUD repository is located
  
- ##Technologies
+##Technologies
 
-1. Spring
-2. Tomcat
-3. Maven
-4. Git
-
- ##Libraries used
-
- * Java 8
- * Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
+1. Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
+2. Java 8
+3. Tomcat 8.5
+4. Maven
  
- ##Exposed methods
+##Exposed methods
 
-1. **Get user by id. HTTP Method: GET**
+**1. Get user by id. HTTP Method: GET**
 ```
-http://localhost:8080/springdatacouchbase/users/1
-```
-
-2. **Update user. HTTP Method: PUT**
-```
-http://localhost:8080/springdatacouchbase/users/1
+http://localhost:8091/springdatacouchbase/users/1
 ```
 
-3. **Create a user. HTTP Method: POST**
+**2. Create a user. HTTP Method: POST**
 ```
-http://localhost:8080/springdatacouchbase/users
+http://localhost:8091/springdatacouchbase/users
 ```
 ```
 {
-  "name": "Carlos1",
+  "name": "Carlos",
   "nicknames": ["charz"],
-  "age": 26,
+  "age": 25,
   "email": "carlos1@yopmail.com"
 }
 ```
 
-4. **Delete a user. HTTP Method: DELETE**
+**3. Update a user. HTTP Method: PUT**
 ```
-http://localhost:8080/springdatacouchbase/users/1
+http://localhost:8091/springdatacouchbase/users/1
 ```
-
-5. **Find by email. HTTP Method: GET**
 ```
-http://localhost:8080/springdatacouchbase/users/find/email?email=carlos1@yopmail.com
-```
-
-6. **Find by nickname. HTTP Method: GET**
-```
-http://localhost:8080/springdatacouchbase/users/find/nickname?nickname=charz
+{
+  "name": "Carlos2",
+  "age": 26,
+}
 ```
 
-7. **User exists. HTTP Method: GET**
+**4. Delete a user. HTTP Method: DELETE**
 ```
-http://localhost:8080/springdatacouchbase/users/1/exists
+http://localhost:8091/springdatacouchbase/users/1
 ```
 
- ##Considerations about couchbase
+**5. Find user by email. HTTP Method: GET**
+```
+http://localhost:8091/springdatacouchbase/users/find/email?email=carlos1@yopmail.com
+```
+
+**6. Find user by nickname. HTTP Method: GET**
+```
+http://localhost:8091/springdatacouchbase/users/find/nickname?nickname=charz
+```
+
+**7. User exists? HTTP Method: GET**
+```
+http://localhost:8091/springdatacouchbase/users/1/exists
+```
+
+##Considerations about couchbase
  
- * To create a primary index on the bucket
+ * To create a primary index on the bucket.
  ```
  CREATE PRIMARY INDEX `users-primary-index` ON `users` USING GSI;
  ```
- * To delete the primary index of the bucket
+ * To delete the primary index of the bucket.
  ```
  DROP INDEX `users`.`users-primary-index` USING GSI;
  ```
- * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field
+ * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field.
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
- 
- For more information read the following documentation: 
+
+##Documentation and Examples
  
 * [Couchbase CRUD Repository documentation](http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#repositories.core-concepts): There you will find core concepts.
 * [Spring Data and Couchbase](https://blog.couchbase.com/spring-data-couchbase-2-is-out-quick-getting-started-with-spring-initializr/): There you will find more considerations when working with spring data and couchbase.
-* [Introduction to spring data and couchbase](http://www.baeldung.com/spring-data-couchbase): There you will find an introduction example for spring data and couchbase.
+* [Introduction to spring data and couchbase](http://www.baeldung.com/spring-data-couchbase): There you will find an introduction example.
 * [Couchbase CRUD Excample](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
 
 ##About me

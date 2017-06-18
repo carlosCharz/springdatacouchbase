@@ -13,7 +13,8 @@ This is my template for a spring boot project that uses spring data and couchbas
 1. Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
 2. Java 8
 3. Tomcat 8.5
-4. Maven
+4. Couchbase 4.6
+5. Maven
  
 ## Exposed methods
 

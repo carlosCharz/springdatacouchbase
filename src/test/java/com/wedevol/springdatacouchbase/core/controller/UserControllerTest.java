@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,11 +45,15 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 public class UserControllerTest {
 
 	private static final Long USER_ONE_ID = 1L;
+	private static final Long USER_TWO_ID = 2L;
+	private static final Long USER_THREE_ID = 3L;
+	private static final Long USER_FOUR_ID = 3L;
 
 	private static final String USER_ONE_KEY = UserDoc.getKeyFor(USER_ONE_ID);
+	private static final String USER_TWO_KEY = UserDoc.getKeyFor(USER_TWO_ID);
+	private static final String USER_THREE_KEY = UserDoc.getKeyFor(USER_THREE_ID);
 
-	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 	private MockMvc mockMvc;
 	private HttpMessageConverter mappingJackson2HttpMessageConverter;
 	private UserDoc user;
@@ -73,10 +78,22 @@ public class UserControllerTest {
 	@Before
 	public void init() {
 		this.mockMvc = webAppContextSetup(webApplicationContext).build();
-
-		//this.userRepository.deleteAllInBatch();
-
-		this.user = userRepository.save(new UserDoc(USER_ONE_KEY, USER_ONE_ID, "Carlos1", null, 26, "carlos1@yopmail.com"));
+		user = new UserDoc(USER_ONE_KEY, USER_ONE_ID, "Carlos", Arrays.asList("charz"), 26, "carlos@yopmail.com");
+		UserDoc user2 = new UserDoc(USER_TWO_KEY, USER_TWO_ID, "Carlos2", Arrays.asList("charles2"), 25, "carlos2@yopmail.com");
+		UserDoc user3 = new UserDoc(USER_THREE_KEY, USER_THREE_ID, "Carlos3", Arrays.asList("charles3"), 26, "carlos3@yopmail.com");
+		
+		userRepository.save(user);
+		userRepository.save(user2);
+		userRepository.save(user3);
+		
+		userList = Arrays.asList(user, user2, user3);
+	}
+	
+	@After
+	public void tearDown() {
+		this.userRepository.delete(USER_ONE_KEY);
+		this.userRepository.delete(USER_TWO_KEY);
+		this.userRepository.delete(USER_THREE_KEY);
 	}
 
     @Test
@@ -84,9 +101,11 @@ public class UserControllerTest {
         mockMvc.perform(get("/users/" + USER_ONE_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.id", is("1")))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.nicknames[0]", is("charz")))
                 .andExpect(jsonPath("$.name", is("Carlos")))
-                .andExpect(jsonPath("$.email", is("A description")));
+                .andExpect(jsonPath("$.age", is(26)))
+                .andExpect(jsonPath("$.email", is("carlos@yopmail.com")));
     }
 
 	protected String json(Object o) throws IOException {

@@ -1,6 +1,7 @@
 package com.wedevol.springdatacouchbase.core.controller;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -82,8 +83,8 @@ public class UserControllerTest {
 	public void init() {
 		mockMvc = webAppContextSetup(webApplicationContext).build();
 		user = new UserDoc(USER_ONE_KEY, USER_ONE_ID, "Carlos", Arrays.asList("charz"), 26, "carlos@yopmail.com");
-		UserDoc user2 = new UserDoc(USER_TWO_KEY, USER_TWO_ID, "Carlos2", Arrays.asList("charles2"), 25, "carlos2@yopmail.com");
-		UserDoc user3 = new UserDoc(USER_THREE_KEY, USER_THREE_ID, "Carlos3", Arrays.asList("charles3"), 26, "carlos3@yopmail.com");
+		UserDoc user2 = new UserDoc(USER_TWO_KEY, USER_TWO_ID, "Carlos2", Arrays.asList("charz", "charles2"), 25, "carlos2@yopmail.com");
+		UserDoc user3 = new UserDoc(USER_THREE_KEY, USER_THREE_ID, "Carlos3", Arrays.asList("charz", "charles3"), 26, "carlos3@yopmail.com");
 		
 		userRepository.save(user);
 		userRepository.save(user2);
@@ -98,6 +99,7 @@ public class UserControllerTest {
 		userRepository.delete(USER_TWO_KEY);
 		userRepository.delete(USER_THREE_KEY);
 		userRepository.delete(USER_FOUR_KEY);
+		userRepository.delete("user::counter");
 	}
 	
 	@Test (expected = NestedServletException.class)
@@ -127,7 +129,17 @@ public class UserControllerTest {
                .content(json(user4)))
                .andExpect(status().isCreated());
     }
+    
+    @Test
+    public void getExistingUserByNickname() throws Exception {
+        mockMvc.perform(get("/users/find/nickname")
+        			.param("nickname", "charz"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$", hasSize(3)));
+    }
 
+	@SuppressWarnings("unchecked")
 	protected String json(Object o) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		mappingJackson2HttpMessageConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);

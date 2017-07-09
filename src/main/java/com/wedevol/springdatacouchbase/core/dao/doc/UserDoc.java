@@ -46,6 +46,12 @@ public class UserDoc implements Serializable {
 		this.email = email;
 	}
 	
+	public UserDoc(Long id, String name, List<String> nicknames) {
+		this.id = id;
+		this.name = name;
+		this.nicknames = nicknames;
+	}
+	
 	public static String getKeyFor(Long id) {
 		return USER_KEY_PREFIX + id;
 	}

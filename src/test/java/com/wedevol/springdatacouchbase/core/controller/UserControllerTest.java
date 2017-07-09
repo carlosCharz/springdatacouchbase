@@ -2,6 +2,7 @@ package com.wedevol.springdatacouchbase.core.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -110,19 +111,28 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(CONTENT_TYPE))
                 .andExpect(jsonPath("$.id", Matchers.is(1)))
-                .andExpect(jsonPath("$.nicknames[0]", Matchers.is("charz")))
                 .andExpect(jsonPath("$.name", Matchers.is("Carlos")))
                 .andExpect(jsonPath("$.age", Matchers.is(26)))
+                .andExpect(jsonPath("$.nicknames[0]", Matchers.is("charz")))
                 .andExpect(jsonPath("$.email", Matchers.is("carlos@yopmail.com")));
     }
     
     @Test
     public void createUser() throws Exception {
-    	UserDoc user4 = new UserDoc(USER_FOUR_KEY, USER_FOUR_ID, "Alfredo", Arrays.asList("alfredo"), 30, "alfredo@yopmail.com");
+    	UserDoc user4 = new UserDoc(USER_FOUR_KEY, USER_FOUR_ID, "Alfredo", Arrays.asList("alfredo"), 40, "alfredo@yopmail.com");
         mockMvc.perform(post("/users")
                .contentType(CONTENT_TYPE)
                .content(json(user4)))
                .andExpect(status().isCreated());
+    }
+    
+    @Test
+    public void updateUser() throws Exception {
+    	UserDoc user3 = new UserDoc(USER_THREE_ID, "Jose", Arrays.asList("pancho"));
+        mockMvc.perform(put("/users/" + USER_THREE_ID)
+               .contentType(CONTENT_TYPE)
+               .content(json(user3)))
+               .andExpect(status().isOk());
     }
     
     @Test

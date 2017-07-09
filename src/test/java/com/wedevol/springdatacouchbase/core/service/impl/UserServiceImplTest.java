@@ -1,20 +1,15 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
 import java.util.Arrays;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
@@ -57,29 +52,29 @@ public class UserServiceImplTest {
 	@Test
 	public void findOneAndUserExists() {
 		// Data preparation
-		when(repoMock.findOne(USER_ONE_KEY)).thenReturn(userDoc);
+		Mockito.when(repoMock.findOne(USER_ONE_KEY)).thenReturn(userDoc);
 
 		// Method call
 		final UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
-		assertNotNull(user);
-		verify(repoMock, times(1)).findOne(USER_ONE_KEY);
-		verifyNoMoreInteractions(repoMock);
+		Assert.assertNotNull(user);
+		Mockito.verify(repoMock, Mockito.times(1)).findOne(USER_ONE_KEY);
+		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 	
 	@Test(expected = ApiException.class)
 	public void findOneAndUserIsNull() {
 		// Data preparation
-		when(repoMock.findOne(USER_ONE_KEY)).thenReturn(null);
+		Mockito.when(repoMock.findOne(USER_ONE_KEY)).thenReturn(null);
 
 		// Method call
 		final UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
-		assertNull(user);
-		verify(repoMock, times(1)).findOne(USER_ONE_KEY);
-		verifyNoMoreInteractions(repoMock);
+		Assert.assertNull(user);
+		Mockito.verify(repoMock, Mockito.times(1)).findOne(USER_ONE_KEY);
+		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 
 }

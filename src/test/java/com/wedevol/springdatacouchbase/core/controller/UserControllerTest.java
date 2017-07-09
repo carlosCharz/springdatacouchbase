@@ -1,7 +1,7 @@
 package com.wedevol.springdatacouchbase.core.controller;
 
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -128,6 +128,24 @@ public class UserControllerTest {
                .contentType(contentType)
                .content(json(user4)))
                .andExpect(status().isCreated());
+    }
+    
+    @Test
+    public void existUser() throws Exception {
+        mockMvc.perform(get("/users/" + USER_ONE_ID + "/exists"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$", is(true)));
+    }
+    
+    @Test
+    public void getExistingUserByEmail() throws Exception {
+        mockMvc.perform(get("/users/find/email")
+        			.param("email", "carlos2@yopmail.com"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id", is(2)))
+                .andExpect(jsonPath("$.email", is("carlos2@yopmail.com")));
     }
     
     @Test

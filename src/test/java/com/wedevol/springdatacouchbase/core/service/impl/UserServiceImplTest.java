@@ -2,7 +2,6 @@ package com.wedevol.springdatacouchbase.core.service.impl;
 
 import java.util.Arrays;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
 
 /**
- * Test the UserServiceImpl
+ * Test the User Service Implementation
  *
  * @author Charz++
  */
@@ -41,12 +40,8 @@ public class UserServiceImplTest {
 		userDoc = new UserDoc();
 		userDoc.setId(USER_ONE_ID);
 		userDoc.setNicknames(Arrays.asList("charz", "carlito"));
-		userDoc.setAge(25);
-		userDoc.setEmail("carlos1@yopmail.com");
-	}
-
-	@After
-	public void tearDown() {
+		userDoc.setAge(26);
+		userDoc.setEmail("carlos@yopmail.com");
 	}
 	
 	@Test

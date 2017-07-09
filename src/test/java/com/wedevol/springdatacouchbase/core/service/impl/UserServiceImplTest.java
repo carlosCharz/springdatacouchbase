@@ -1,7 +1,9 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +52,7 @@ public class UserServiceImplTest {
 		Mockito.when(repoMock.findOne(USER_ONE_KEY)).thenReturn(userDoc);
 
 		// Method call
-		final UserDoc user = userService.findById(USER_ONE_ID);
+		UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
 		Assert.assertNotNull(user);
@@ -64,7 +66,7 @@ public class UserServiceImplTest {
 		Mockito.when(repoMock.findOne(USER_ONE_KEY)).thenReturn(null);
 
 		// Method call
-		final UserDoc user = userService.findById(USER_ONE_ID);
+		UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
 		Assert.assertNull(user);
@@ -78,11 +80,39 @@ public class UserServiceImplTest {
 		Mockito.when(repoMock.findByEmail("carlos@yopmail.com")).thenReturn(userDoc);
 
 		// Method call
-		final UserDoc user = userService.create(userDoc);
+		UserDoc user = userService.create(userDoc);
 
 		// Verification
 		Assert.assertNull(user);
 		Mockito.verify(repoMock, Mockito.times(1)).findByEmail(Mockito.anyString());
+		Mockito.verifyNoMoreInteractions(repoMock);
+	}
+	
+	@Test(expected = ApiException.class)
+	public void updateUserAndUserNotExists() {
+		// Data preparation
+		Mockito.when(repoMock.findByEmail("carlos@yopmail.com")).thenReturn(null);
+
+		// Method call
+		userService.update(USER_ONE_ID, userDoc);
+
+		// Verification
+		Mockito.verify(repoMock, Mockito.times(1)).findByEmail(Mockito.anyString());
+		Mockito.verifyNoMoreInteractions(repoMock);
+	}
+	
+	@Test
+	public void findUsersByNicknameAndUsersExist() {
+		// Data preparation
+		List<UserDoc> users = Arrays.asList(userDoc, userDoc, userDoc);
+		Mockito.when(repoMock.findUsersWithNickname(Mockito.anyString())).thenReturn(users);
+
+		// Method call
+		List<UserDoc> userList = userService.findUsersByNickname("charz");
+
+		// Verification
+		Assert.assertThat(userList, Matchers.hasSize(3));
+		Mockito.verify(repoMock, Mockito.times(1)).findUsersWithNickname(Mockito.anyString());
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 

@@ -16,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
 
 /**
- * Test the User Service Implementation
+ * Test the User Service Implementation: test the service logic
  *
  * @author Charz++
  */
@@ -54,7 +54,7 @@ public class UserServiceImplTest {
 
 		// Verification
 		Assert.assertNotNull(user);
-		Mockito.verify(repoMock, Mockito.times(1)).findOne(USER_ONE_KEY);
+		Mockito.verify(repoMock, Mockito.times(1)).findOne(Mockito.anyString());
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 	
@@ -68,7 +68,21 @@ public class UserServiceImplTest {
 
 		// Verification
 		Assert.assertNull(user);
-		Mockito.verify(repoMock, Mockito.times(1)).findOne(USER_ONE_KEY);
+		Mockito.verify(repoMock, Mockito.times(1)).findOne(Mockito.anyString());
+		Mockito.verifyNoMoreInteractions(repoMock);
+	}
+	
+	@Test(expected = ApiException.class)
+	public void createUserAndUserAlreadyExists() {
+		// Data preparation
+		Mockito.when(repoMock.findByEmail("carlos@yopmail.com")).thenReturn(userDoc);
+
+		// Method call
+		final UserDoc user = userService.create(userDoc);
+
+		// Verification
+		Assert.assertNull(user);
+		Mockito.verify(repoMock, Mockito.times(1)).findByEmail(Mockito.anyString());
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 

@@ -35,7 +35,7 @@ import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 /**
- * Test the User Controller
+ * Test the User Controller: test the endpoints directly
  *
  * @author Charz++
  */

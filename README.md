@@ -5,8 +5,8 @@ This is my template for a spring boot project that uses spring data and couchbas
 ## Architecture
  
  1. **Controller:** is the presentation layer where the end points are located
- 1. **Service:** is the service layer where the business logic resides
- 1. **Repository:** is the persistence layer where the CRUD repository is located
+ 2. **Service:** is the service layer where the business logic resides
+ 3. **Repository:** is the persistence layer where the CRUD repository is located
  
 ## Technologies
 
@@ -15,6 +15,11 @@ This is my template for a spring boot project that uses spring data and couchbas
 3. Tomcat 8.5
 4. Couchbase 4.6
 5. Maven
+
+## Unit Tests
+
+ 1. **For the Controller:** it uses the Spring Boot Test framework with mockMvc and hamcrest matchers
+ 2. **For the Service:** it uses the Mockito framework with hamcrest matchers and mock and injectMocks annotations 
  
 ## Exposed methods
 

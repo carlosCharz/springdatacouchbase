@@ -23,11 +23,6 @@
 		</encoder>
 	</appender>
 
-	<!-- <logger name="com.momentous.wifiesta.notifier.core" level="DEBUG">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
-	</logger> -->
-
 	<!-- By default, the level of the root level is set to INFO ( TRACE < DEBUG < INFO < WARN < ERROR) -->
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />

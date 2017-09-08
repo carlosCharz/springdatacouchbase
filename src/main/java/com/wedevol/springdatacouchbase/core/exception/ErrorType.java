@@ -11,7 +11,7 @@ public enum ErrorType {
 	private final int code;
 	private final String message;
 
-	ErrorType(int code, String message) {
+	private ErrorType(int code, String message) {
 		this.code = code;
 		this.message = message;
 	}

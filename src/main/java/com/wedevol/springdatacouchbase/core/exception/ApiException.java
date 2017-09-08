@@ -1,7 +1,7 @@
 package com.wedevol.springdatacouchbase.core.exception;
 
 /**
- * Api not found exception
+ * Api exception
  * 
  * @author charz
  *
@@ -9,16 +9,16 @@ package com.wedevol.springdatacouchbase.core.exception;
 public class ApiException extends BaseRuntimeException {
 
 	private static final long serialVersionUID = 1L;
-	private ErrorType errorStatus;
+	private ErrorType errorType;
 
 	public ApiException(ErrorType errorStatus) {
 		super(errorStatus.getMessage());
-		this.errorStatus = errorStatus;
+		this.errorType = errorStatus;
 	}
 
 	@Override
 	public Integer getCode() {
-		return this.errorStatus.getCode();
+		return this.errorType.getCode();
 	}
 
 }

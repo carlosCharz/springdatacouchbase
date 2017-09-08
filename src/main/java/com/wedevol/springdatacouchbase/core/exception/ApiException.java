@@ -9,9 +9,16 @@ package com.wedevol.springdatacouchbase.core.exception;
 public class ApiException extends BaseRuntimeException {
 
 	private static final long serialVersionUID = 1L;
+	private ErrorType errorStatus;
 
-	public ApiException(ErrorType errorType) {
-		super(errorType.getCode(), errorType.getMessage());
+	public ApiException(ErrorType errorStatus) {
+		super(errorStatus.getMessage());
+		this.errorStatus = errorStatus;
+	}
+
+	@Override
+	public Integer getCode() {
+		return this.errorStatus.getCode();
 	}
 
 }

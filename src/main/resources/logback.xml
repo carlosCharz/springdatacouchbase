@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<configuration>
+<configuration scan="true">
 
 	<!-- Send debug messages to System.out -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -17,6 +17,8 @@
 			<fileNamePattern>${catalina.home}/logs/springdatacouchbase-%d{yyyy-MM-dd}.log</fileNamePattern>
 			<!-- Keep 7 days' worth of history -->
 			<maxHistory>7</maxHistory>
+			<!-- logs up to a maximum size of 10GB -->
+			<totalSizeCap>10GB</totalSizeCap>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%file:%line] %msg%n</pattern>

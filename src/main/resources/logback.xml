@@ -18,7 +18,7 @@
 			<!-- Keep 7 days' worth of history -->
 			<maxHistory>7</maxHistory>
 			<!-- logs up to a maximum size of 10GB -->
-			<totalSizeCap>10GB</totalSizeCap>
+			<totalSizeCap>3GB</totalSizeCap>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%file:%line] %msg%n</pattern>

@@ -48,7 +48,7 @@ http://localhost:8091/springdatacouchbase/users/1
 ```
 {
   "name": "Carlos2",
-  "age": 26,
+  "age": 26
 }
 ```
 

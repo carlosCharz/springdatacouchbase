@@ -74,7 +74,7 @@ public class UserController {
 		logger.info("Exists user {}?", userId);
 		return userService.exists(userId);
 	}
-	
+
 	@RequestMapping(value = "/find/email", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -82,7 +82,7 @@ public class UserController {
 		logger.info("Find user by email: {}", email);
 		return userService.findByEmail(email);
 	}
-	
+
 	@RequestMapping(value = "/find/nickname", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -91,4 +91,20 @@ public class UserController {
 		return userService.findUsersByNickname(nickname);
 	}
 
+	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public List<UserDoc> findAll() {
+		logger.info("Get all users");
+		return userService.findAll();
+	}
+
+	@RequestMapping(value = "/count", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public Long count() {
+		Long numUsers = userService.count();
+		logger.info("Number of users: {}", numUsers);
+		return numUsers;
+	}
 }

@@ -116,4 +116,33 @@ public class UserServiceImplTest {
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 
+	@Test
+	public void findAllUsers() {
+		// Data preparation
+		List<UserDoc> users = Arrays.asList(userDoc, userDoc, userDoc);
+		Mockito.when(repoMock.findAllUsers()).thenReturn(users);
+
+		// Method call
+		List<UserDoc> userList = userService.findAll();
+
+		// Verification
+		Assert.assertThat(userList, Matchers.hasSize(3));
+		Mockito.verify(repoMock, Mockito.times(1)).findAllUsers();
+		Mockito.verifyNoMoreInteractions(repoMock);
+	}
+
+	@Test
+	public void count() {
+		// Data preparation
+		List<UserDoc> users = Arrays.asList(userDoc, userDoc, userDoc);
+		Mockito.when(repoMock.countUsers()).thenReturn(new Long(users.size()));
+
+		// Method call
+		Long numUsers = userService.count();
+
+		// Verification
+		Assert.assertThat(numUsers, Matchers.is(new Long(3)));
+		Mockito.verify(repoMock, Mockito.times(1)).countUsers();
+		Mockito.verifyNoMoreInteractions(repoMock);
+	}
 }

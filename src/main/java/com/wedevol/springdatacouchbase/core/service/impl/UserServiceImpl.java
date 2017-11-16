@@ -1,5 +1,7 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +26,6 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-	protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private UserRepository userRepo;
@@ -89,4 +89,13 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findUsersWithNickname(nickname);
 	}
 
+	@Override
+	public List<UserDoc> findAll() {
+		return userRepo.findAllUsers();
+	}
+
+	@Override
+	public Long count(){
+		return userRepo.countUsers();
+	}
 }

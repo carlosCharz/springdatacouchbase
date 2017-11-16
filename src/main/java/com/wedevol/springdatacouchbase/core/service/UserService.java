@@ -23,13 +23,14 @@ public interface UserService {
 	void delete(Long id);
 	
 	Boolean exists(Long id);
-	
+
 	// Custom methods
 
 	UserDoc findByEmail(String email);
 	
 	List<UserDoc> findUsersByNickname(String nickname);
 	
-	
+	List<UserDoc> findAll();
 
+	Long count();
 }

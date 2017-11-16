@@ -16,7 +16,6 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
  */
 
 public interface UserRepository extends CrudRepository<UserDoc, String> {
-
 	// This method is a query method defined in the interface. In addition to query methods, query derivation for both count and delete queries, is available.
 	UserDoc findByEmail(String email);
 	
@@ -24,4 +23,10 @@ public interface UserRepository extends CrudRepository<UserDoc, String> {
 	@Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND ARRAY_LENGTH(nicknames) > 0 AND ANY nick IN nicknames SATISFIES nick = $1 END")
 	List<UserDoc> findUsersWithNickname(String nickname);
 
+	// This method uses an annotation to provide all of the users
+	@Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter}")
+	List<UserDoc> findAllUsers();
+
+	@Query("SELECT COUNT(u.id) as c FROM users u WHERE #{#n1ql.filter}")
+	Long countUsers();
 }

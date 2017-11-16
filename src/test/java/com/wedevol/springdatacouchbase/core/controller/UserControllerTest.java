@@ -162,6 +162,22 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$", Matchers.hasSize(2)));
     }
 
+    @Test
+	public void findAll() throws Exception{
+		mockMvc.perform(get("/users/findAll"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(CONTENT_TYPE))
+				.andExpect(jsonPath("$", Matchers.hasSize(3)));
+	}
+
+	@Test
+	public void count() throws Exception{
+		mockMvc.perform(get("/users/count"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(CONTENT_TYPE))
+				.andExpect(jsonPath("$", Matchers.is(3)));
+	}
+
 	@SuppressWarnings("unchecked")
 	protected String json(Object o) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();

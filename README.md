@@ -72,6 +72,16 @@ http://localhost:8091/springdatacouchbase/users/find/nickname?nickname=charz
 http://localhost:8091/springdatacouchbase/users/1/exists
 ```
 
+**8. Find all users. HTTP Method: GET**
+```
+http://localhost:8091/springdatacouchbase/users/findAll
+```
+
+**9. Count users. HTTP Method: GET**
+```
+http://localhost:8091/springdatacouchbase/users/count
+```
+
 ## Considerations about couchbase
  
  * To create a primary index on the bucket.

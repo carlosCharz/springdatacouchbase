@@ -164,15 +164,15 @@ public class UserControllerTest {
 
     @Test
 	public void findAll() throws Exception{
-		mockMvc.perform(get("/users/findAll"))
+		mockMvc.perform(get("/users/find/all"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(CONTENT_TYPE))
 				.andExpect(jsonPath("$", Matchers.hasSize(3)));
 	}
 
 	@Test
-	public void count() throws Exception{
-		mockMvc.perform(get("/users/count"))
+	public void countAll() throws Exception{
+		mockMvc.perform(get("/users/count/all"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(CONTENT_TYPE))
 				.andExpect(jsonPath("$", Matchers.is(3)));

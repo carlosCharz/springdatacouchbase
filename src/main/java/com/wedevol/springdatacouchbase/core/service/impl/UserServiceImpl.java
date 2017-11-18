@@ -1,12 +1,8 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Long count(){
-		return userRepo.countUsers();
+	public Integer countAll(){
+		return userRepo.countAll();
 	}
 }

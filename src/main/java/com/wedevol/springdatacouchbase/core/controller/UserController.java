@@ -91,20 +91,19 @@ public class UserController {
 		return userService.findUsersByNickname(nickname);
 	}
 
-	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/find/all", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<UserDoc> findAll() {
-		logger.info("Get all users");
+		logger.info("Find all users");
 		return userService.findAll();
 	}
 
-	@RequestMapping(value = "/count", method = RequestMethod.GET)
+	@RequestMapping(value = "/count/all", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public Long count() {
-		Long numUsers = userService.count();
-		logger.info("Number of users: {}", numUsers);
-		return numUsers;
+	public Integer countAll() {
+		logger.info("Count all users");
+		return userService.countAll();
 	}
 }

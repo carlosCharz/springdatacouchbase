@@ -32,5 +32,5 @@ public interface UserService {
 	
 	List<UserDoc> findAll();
 
-	Long count();
+	Integer countAll();
 }

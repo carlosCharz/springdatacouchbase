@@ -132,17 +132,17 @@ public class UserServiceImplTest {
 	}
 
 	@Test
-	public void count() {
+	public void countAllUsers() {
 		// Data preparation
 		List<UserDoc> users = Arrays.asList(userDoc, userDoc, userDoc);
-		Mockito.when(repoMock.countUsers()).thenReturn(new Long(users.size()));
+		Mockito.when(repoMock.countAll()).thenReturn(users.size());
 
 		// Method call
-		Long numUsers = userService.count();
+		Integer usersQty = userService.countAll();
 
 		// Verification
-		Assert.assertThat(numUsers, Matchers.is(new Long(3)));
-		Mockito.verify(repoMock, Mockito.times(1)).countUsers();
+		Assert.assertThat(usersQty, Matchers.is(3));
+		Mockito.verify(repoMock, Mockito.times(1)).countAll();
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 }

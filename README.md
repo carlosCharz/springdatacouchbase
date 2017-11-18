@@ -13,7 +13,7 @@ This is my template for a spring boot project that uses spring data and couchbas
 1. Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
 2. Java 8
 3. Tomcat 8.5
-4. Couchbase 4.6
+4. Couchbase 5
 5. Maven
 
 ## Unit Tests
@@ -25,12 +25,12 @@ This is my template for a spring boot project that uses spring data and couchbas
 
 **1. Get user by id. HTTP Method: GET**
 ```
-http://localhost:8091/springdatacouchbase/users/1
+http://localhost:8080/springdatacouchbase/users/1
 ```
 
 **2. Create a user. HTTP Method: POST**
 ```
-http://localhost:8091/springdatacouchbase/users
+http://localhost:8080/springdatacouchbase/users
 ```
 ```
 {
@@ -43,7 +43,7 @@ http://localhost:8091/springdatacouchbase/users
 
 **3. Update a user. HTTP Method: PUT**
 ```
-http://localhost:8091/springdatacouchbase/users/1
+http://localhost:8080/springdatacouchbase/users/1
 ```
 ```
 {
@@ -54,32 +54,32 @@ http://localhost:8091/springdatacouchbase/users/1
 
 **4. Delete a user. HTTP Method: DELETE**
 ```
-http://localhost:8091/springdatacouchbase/users/1
+http://localhost:8080/springdatacouchbase/users/1
 ```
 
 **5. Find user by email. HTTP Method: GET**
 ```
-http://localhost:8091/springdatacouchbase/users/find/email?email=carlos1@yopmail.com
+http://localhost:8080/springdatacouchbase/users/find/email?email=carlos1@yopmail.com
 ```
 
 **6. Find user by nickname. HTTP Method: GET**
 ```
-http://localhost:8091/springdatacouchbase/users/find/nickname?nickname=charz
+http://localhost:8080/springdatacouchbase/users/find/nickname?nickname=charz
 ```
 
 **7. User exists? HTTP Method: GET**
 ```
-http://localhost:8091/springdatacouchbase/users/1/exists
+http://localhost:8080/springdatacouchbase/users/1/exists
 ```
 
 **8. Find all users. HTTP Method: GET**
 ```
-http://localhost:8091/springdatacouchbase/users/findAll
+http://localhost:8080/springdatacouchbase/users/find/all
 ```
 
-**9. Count users. HTTP Method: GET**
+**9. Count all users. HTTP Method: GET**
 ```
-http://localhost:8091/springdatacouchbase/users/count
+http://localhost:8080/springdatacouchbase/users/count/all
 ```
 
 ## Considerations about couchbase
@@ -94,6 +94,7 @@ http://localhost:8091/springdatacouchbase/users/count
  ```
  * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field.
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
+ * For couchbase 5 the bucket name and password is the username and password. You can check it out in tab Security of the web console.
 
 ## Documentation and Examples
  
@@ -101,6 +102,7 @@ http://localhost:8091/springdatacouchbase/users/count
 * [Spring Data and Couchbase](https://blog.couchbase.com/spring-data-couchbase-2-is-out-quick-getting-started-with-spring-initializr/): There you will find more considerations when working with spring data and couchbase.
 * [Introduction to spring data and couchbase](http://www.baeldung.com/spring-data-couchbase): There you will find an introduction example.
 * [Couchbase CRUD Excample](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
+* [Couchbase 5](https://developer.couchbase.com/documentation/server/current/introduction/whats-new.html): The new couchbase 5 is role based and there are some changes that need to be considered.
 
 ## About me
 I am Carlos Becerra - MSc. Softwware & Systems.  But to tell you the truth, I'd prefer to be a passionate developer. You can contact me via:

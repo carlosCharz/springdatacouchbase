@@ -8,7 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
+import org.springframework.data.couchbase.core.query.Consistency;
 import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
+
+import com.couchbase.client.java.env.CouchbaseEnvironment;
+import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
 
 /**
  * Class that connects to Couchbase
@@ -40,6 +44,22 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 	@Override
 	protected String getBucketPassword() {
 		return couchbaseSetting.getPassword();
+	}
+	
+	@Override
+	protected CouchbaseEnvironment getEnvironment() {
+	        DefaultCouchbaseEnvironment.builder()
+	        								.connectTimeout(60000) // by default 5 sec (5000 ms)
+	        								.queryTimeout(20000) // by default 75 sec (75000 ms)
+	        								.socketConnectTimeout(45000); // by default 1 sec (1000 ms)
+	        return super.getEnvironment();
+	}
+	
+	@Override
+	public Consistency getDefaultConsistency() {
+		// By default, READ_YOUR_OWN_WRITES
+		// Values: READ_YOUR_OWN_WRITES, STRONGLY_CONSISTENT, UPDATE_AFTER, EVENTUALLY_CONSISTENT
+	    return Consistency.READ_YOUR_OWN_WRITES; 
 	}
 	
 	@Override

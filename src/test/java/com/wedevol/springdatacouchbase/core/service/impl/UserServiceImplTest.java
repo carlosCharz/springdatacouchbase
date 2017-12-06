@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
+import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
 
@@ -36,14 +37,20 @@ public class UserServiceImplTest {
 	private UserServiceImpl userService;
 
 	private UserDoc userDoc;
+	private UserBasicDoc userBasicDoc;
 
 	@Before
 	public void init() {
 		userDoc = new UserDoc();
 		userDoc.setId(USER_ONE_ID);
+		userDoc.setName("Carlos");
 		userDoc.setNicknames(Arrays.asList("charz", "carlito"));
 		userDoc.setAge(26);
 		userDoc.setEmail("carlos@yopmail.com");
+		
+		userBasicDoc = new UserBasicDoc();
+		userDoc.setId(USER_ONE_ID);
+		userDoc.setName("Carlos");
 	}
 	
 	@Test
@@ -113,6 +120,21 @@ public class UserServiceImplTest {
 		// Verification
 		Assert.assertThat(userList, Matchers.hasSize(3));
 		Mockito.verify(repoMock, Mockito.times(1)).findUsersWithNickname(Mockito.anyString());
+		Mockito.verifyNoMoreInteractions(repoMock);
+	}
+	
+	@Test
+	public void findUsersByNameAndUsersExist() {
+		// Data preparation
+		List<UserBasicDoc> users = Arrays.asList(userBasicDoc);
+		Mockito.when(repoMock.findUsersWithName(Mockito.anyString())).thenReturn(users);
+
+		// Method call
+		List<UserBasicDoc> userList = userService.findUsersByName("CARLOS");
+
+		// Verification
+		Assert.assertThat(userList, Matchers.hasSize(1));
+		Mockito.verify(repoMock, Mockito.times(1)).findUsersWithName(Mockito.anyString());
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 

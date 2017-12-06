@@ -2,6 +2,7 @@ package com.wedevol.springdatacouchbase.core.service;
 
 import java.util.List;
 
+import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 /**
@@ -29,6 +30,8 @@ public interface UserService {
 	UserDoc findByEmail(String email);
 	
 	List<UserDoc> findUsersByNickname(String nickname);
+	
+	List<UserBasicDoc> findUsersByName(String name);
 	
 	List<UserDoc> findAll();
 

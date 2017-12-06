@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.service.UserService;
 
@@ -89,6 +90,14 @@ public class UserController {
 	public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
 		logger.info("Find users by nickname: {}", nickname);
 		return userService.findUsersByNickname(nickname);
+	}
+	
+	@RequestMapping(value = "/find/name", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public List<UserBasicDoc> findUsersByName(@RequestParam(value = "name") String name) {
+		logger.info("Find users by name: {}", name);
+		return userService.findUsersByName(name);
 	}
 
 	@RequestMapping(value = "/find/all", method = RequestMethod.GET)

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wedevol.springdatacouchbase.core.dao.UserCounterRepository;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
+import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 import com.wedevol.springdatacouchbase.core.exception.ApiException;
 import com.wedevol.springdatacouchbase.core.exception.ErrorType;
@@ -83,6 +84,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDoc> findUsersByNickname(String nickname) {
 		return userRepo.findUsersWithNickname(nickname);
+	}
+	
+	@Override
+	public List<UserBasicDoc> findUsersByName(String name) {
+		final String cleanName = name.toLowerCase().trim();
+		return userRepo.findUsersWithName(cleanName);
 	}
 
 	@Override

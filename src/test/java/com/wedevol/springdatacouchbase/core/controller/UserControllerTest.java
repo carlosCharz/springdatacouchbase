@@ -161,6 +161,15 @@ public class UserControllerTest {
                 .andExpect(content().contentType(CONTENT_TYPE))
                 .andExpect(jsonPath("$", Matchers.hasSize(2)));
     }
+    
+    @Test
+    public void getExistingUserByName() throws Exception {
+        mockMvc.perform(get("/users/find/name")
+        			.param("name", "CARLOS"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(CONTENT_TYPE))
+                .andExpect(jsonPath("$", Matchers.hasSize(1)));
+    }
 
     @Test
 	public void findAll() throws Exception{

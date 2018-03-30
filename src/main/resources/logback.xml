@@ -25,7 +25,7 @@
 		</encoder>
 	</appender>
 
-	<!-- By default, the level of the root level is set to INFO ( TRACE < DEBUG < INFO < WARN < ERROR) -->
+	<!-- level: TRACE < DEBUG < INFO < WARN < ERROR -->
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />

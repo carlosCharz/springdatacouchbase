@@ -104,6 +104,7 @@ http://localhost:8080/springdatacouchbase/users/count/all
 * [Couchbase CRUD Excample](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
 * [Couchbase 5](https://developer.couchbase.com/documentation/server/current/introduction/whats-new.html): The new couchbase 5 is role based and there are some changes that need to be considered.
 * [Spring Data Couchbase Properties](http://s-xu.blogspot.com.ar/2016/09/spring-boot-common-application.html): Spring Boot common application properties.
+* [Spring Boot 2 - Release Notes] (https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Release-Notes): Spring Boot 2.0 Release Notes.
 
 ## About me
 I am Carlos Becerra - MSc. Softwware & Systems.  But to tell you the truth, I'd prefer to be a passionate developer. You can contact me via:

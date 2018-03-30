@@ -91,11 +91,11 @@ public class UserControllerTest {
 	@After
 	public void tearDown() {
 		// delete all the test data created from the database
-		userRepository.delete(USER_ONE_KEY);
-		userRepository.delete(USER_TWO_KEY);
-		userRepository.delete(USER_THREE_KEY);
-		userRepository.delete(USER_FOUR_KEY);
-		userRepository.delete("user::counter");
+		userRepository.deleteById(USER_ONE_KEY);
+		userRepository.deleteById(USER_TWO_KEY);
+		userRepository.deleteById(USER_THREE_KEY);
+		userRepository.deleteById(USER_FOUR_KEY);
+		userRepository.deleteById("user::counter");
 	}
 	
 	@Test (expected = NestedServletException.class)

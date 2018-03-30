@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDoc findById(Long id) {
-		final Optional<UserDoc> userObj = Optional.ofNullable(userRepo.findOne(UserDoc.getKeyFor(id)));
+		final Optional<UserDoc> userObj = userRepo.findById(UserDoc.getKeyFor(id));
 		return userObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 	}
 
@@ -73,12 +73,12 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long id) {
 		// The user should exist
 		this.findById(id);
-		userRepo.delete(UserDoc.getKeyFor(id));
+		userRepo.deleteById(UserDoc.getKeyFor(id));
 	}
 
 	@Override
 	public Boolean exists(Long id) {
-		return userRepo.exists(UserDoc.getKeyFor(id));
+		return userRepo.existsById(UserDoc.getKeyFor(id));
 	}
 
 	@Override

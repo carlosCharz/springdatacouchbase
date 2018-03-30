@@ -2,6 +2,7 @@ package com.wedevol.springdatacouchbase.core.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -11,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
@@ -56,28 +57,25 @@ public class UserServiceImplTest {
 	@Test
 	public void findOneAndUserExists() {
 		// Data preparation
-		Mockito.when(repoMock.findOne(USER_ONE_KEY)).thenReturn(userDoc);
+		Mockito.when(repoMock.findById(USER_ONE_KEY)).thenReturn(Optional.of(userDoc));
 
 		// Method call
 		UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
 		Assert.assertNotNull(user);
-		Mockito.verify(repoMock, Mockito.times(1)).findOne(Mockito.anyString());
+		Mockito.verify(repoMock, Mockito.times(1)).findById(Mockito.anyString());
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 	
 	@Test(expected = ApiException.class)
 	public void findOneAndUserIsNull() {
-		// Data preparation
-		Mockito.when(repoMock.findOne(USER_ONE_KEY)).thenReturn(null);
-
 		// Method call
 		UserDoc user = userService.findById(USER_ONE_ID);
 
 		// Verification
 		Assert.assertNull(user);
-		Mockito.verify(repoMock, Mockito.times(1)).findOne(Mockito.anyString());
+		Mockito.verify(repoMock, Mockito.times(1)).findById(Mockito.anyString());
 		Mockito.verifyNoMoreInteractions(repoMock);
 	}
 	
@@ -97,9 +95,6 @@ public class UserServiceImplTest {
 	
 	@Test(expected = ApiException.class)
 	public void updateUserAndUserNotExists() {
-		// Data preparation
-		Mockito.when(repoMock.findByEmail("carlos@yopmail.com")).thenReturn(null);
-
 		// Method call
 		userService.update(USER_ONE_ID, userDoc);
 

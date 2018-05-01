@@ -1,7 +1,6 @@
 package com.wedevol.springdatacouchbase.core.service;
 
 import java.util.List;
-
 import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
@@ -12,28 +11,28 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
  */
 
 public interface UserService {
-	
-	// CRUD repository interface
-	
-	UserDoc findById(Long id);
 
-	UserDoc create(UserDoc user);
+  // CRUD repository interface
 
-	void update(Long id, UserDoc user);
+  UserDoc findById(Long id);
 
-	void delete(Long id);
-	
-	Boolean exists(Long id);
+  UserDoc create(UserDoc user);
 
-	// Custom methods
+  void update(Long id, UserDoc user);
 
-	UserDoc findByEmail(String email);
-	
-	List<UserDoc> findUsersByNickname(String nickname);
-	
-	List<UserBasicDoc> findUsersByName(String name);
-	
-	List<UserDoc> findAll();
+  void delete(Long id);
 
-	Integer countAll();
+  Boolean exists(Long id);
+
+  // Custom methods
+
+  UserDoc findByEmail(String email);
+
+  List<UserDoc> findUsersByNickname(String nickname);
+
+  List<UserBasicDoc> findUsersByName(String name);
+
+  List<UserDoc> findAll();
+
+  Integer countAll();
 }

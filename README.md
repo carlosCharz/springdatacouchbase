@@ -92,9 +92,25 @@ http://localhost:8080/springdatacouchbase/users/count/all
  ```
  DROP INDEX `users`.`users-primary-index` USING GSI;
  ```
+  * To create a secondary index for the query 'findUsersWithName'
+ ```
+ CREATE INDEX `idx_user_find_by_name` ON `users` (name) WHERE type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' USING GSI;
+ ```
+  * To delete the secondary index: idx_user_find_by_name.
+ ```
+ DROP INDEX `users`.`idx_user_find_by_name` USING GSI;
+ ```
+   * To create a secondary index for the query 'findUsersWithNickname'
+ ```
+ CREATE INDEX `idx_user_find_by_nickname` ON `users` (DISTINCT ARRAY x FOR x IN nicknames END) WHERE type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' USING GSI;
+ ```
+   * To delete the secondary index: idx_user_find_by_nickname.
+ ```
+ DROP INDEX `users`.`idx_user_find_by_nickname` USING GSI;
+ ```
  * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field.
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
- * For couchbase 5 the bucket name and password is the username and password. You can check it out in tab Security of the web console.
+ * For Couchbase 5 the bucket name and password is the username and password located on the Security tab on the web console.
 
 ## Documentation and Examples
  
@@ -104,6 +120,7 @@ http://localhost:8080/springdatacouchbase/users/count/all
 * [Couchbase CRUD Excample](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
 * [Couchbase 5](https://developer.couchbase.com/documentation/server/current/introduction/whats-new.html): The new couchbase 5 is role based and there are some changes that need to be considered.
 * [Spring Data Couchbase Properties](http://s-xu.blogspot.com.ar/2016/09/spring-boot-common-application.html): Spring Boot common application properties.
+* [Spring Data Couchbase Documentation](https://docs.spring.io/spring-data/couchbase/docs/3.1.0.M3/reference/html/): Spring Data Couchbase Documentation.
 * [Spring Boot 2 - Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Release-Notes): Spring Boot 2.0 Release Notes.
 
 ## About me
@@ -116,7 +133,7 @@ _**Any improvement or comment about the project is always welcome! As well as ot
 
 ## License
 ```javas
-Copyright 2017 Carlos Becerra
+Copyright 2018 Carlos Becerra
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

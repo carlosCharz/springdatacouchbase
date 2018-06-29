@@ -8,7 +8,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 /**
- * Standard CRUD repository for user doc + query methods
+ * Standard CRUD repository for User doc + query methods
  * 
  * Note:
  * 

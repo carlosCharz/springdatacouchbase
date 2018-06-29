@@ -5,10 +5,11 @@ All notable changes to the spring data couchbase project will be documented in t
 
 -------------------------------------------------------------------------------------
 
-## [project_r1_v3] - 2018-06-28
+## [project_r1_v3] - 2018-06-29
 
 ## Added
 - secondary indexes: idx_user_find_by_nickname, idx_user_find_by_name
+- examples of key generation: UserDoc -> uses a Couchbase atomic counter. CarDoc -> uses doc attributes. ProductDoc -> uses random uuid.
 
 ## Modified
 - upgrade spring boot to 2.0.3

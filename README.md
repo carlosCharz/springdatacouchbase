@@ -82,7 +82,7 @@ http://localhost:8080/springdatacouchbase/users/find/all
 http://localhost:8080/springdatacouchbase/users/count/all
 ```
 
-## Considerations about couchbase
+## Considerations about Couchbase
  
  * To create a primary index on the bucket.
  ```
@@ -111,6 +111,7 @@ http://localhost:8080/springdatacouchbase/users/count/all
  * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field.
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
  * For Couchbase 5 the bucket name and password is the username and password located on the Security tab on the web console.
+ * Key generation: UserDoc -> uses a Couchbase atomic counter. CarDoc -> uses doc attributes. ProductDoc -> uses random uuid.
 
 ## Documentation and Examples
  

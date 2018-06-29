@@ -7,7 +7,7 @@ import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
 
 /**
- * Represents a user doc from Couchbase
+ * Represents a user doc from Couchbase. The doc key is generated using a Couchbase atomic counter.
  *
  * @author Charz++
  */
@@ -20,6 +20,7 @@ public class UserDoc implements Serializable {
 
   @Id
   private String key;
+
   @Field
   private Long id;
   @Field

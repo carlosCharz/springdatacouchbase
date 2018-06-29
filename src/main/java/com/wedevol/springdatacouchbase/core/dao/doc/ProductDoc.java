@@ -23,7 +23,7 @@ public class ProductDoc implements Serializable {
   private String id;
 
   @Field
-  private Long name;
+  private String name;
   @Field
   private String description;
   @Field
@@ -39,11 +39,11 @@ public class ProductDoc implements Serializable {
     this.id = id;
   }
 
-  public Long getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(Long name) {
+  public void setName(String name) {
     this.name = name;
   }
 

@@ -5,12 +5,17 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
+import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.data.couchbase.core.query.Consistency;
 import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
+import org.springframework.data.couchbase.repository.config.RepositoryOperationsMapping;
+import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.env.CouchbaseEnvironment;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
+import com.wedevol.springdatacouchbase.core.dao.doc.PlaceDoc;
 
 /**
  * Class that connects to Couchbase
@@ -67,5 +72,36 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
     // This field is the one used by N1QL queries to filter only documents corresponding to the
     // repository’s entity.
     return "type";
+  }
+
+  /*
+   * This is additional configuration if we want some other objects (PlaceDoc) to be stored in other
+   * bucket
+   */
+
+  @Bean(name = "placeBucket") // this is to differentiate with the default beans
+  public Bucket placeBucket() throws Exception {
+    return couchbaseCluster().openBucket("places", "123456abC"); // you can get it from the properties
+  }
+
+  @Bean(name = "placeTemplate") // this is to differentiate with the default beans
+  public CouchbaseTemplate placeTemplate() throws Exception {
+    CouchbaseTemplate template = new CouchbaseTemplate(couchbaseClusterInfo(), // reuse the default bean
+        placeBucket(), // the bucket is non-default
+        mappingCouchbaseConverter(), translationService() // default beans here as well
+    );
+    template.setDefaultConsistency(getDefaultConsistency());
+    return template;
+  }
+
+  @Override
+  public void configureRepositoryOperationsMapping(RepositoryOperationsMapping baseMapping) {
+    try {
+      baseMapping // this is already using couchbaseTemplate as default
+          .mapEntity(PlaceDoc.class, placeTemplate());
+      // every repository dealing with Place will be backed by placeTemplate()
+    } catch (Exception e) {
+      throw new RuntimeException("Place bucket could not be configured properly!");
+    }
   }
 }

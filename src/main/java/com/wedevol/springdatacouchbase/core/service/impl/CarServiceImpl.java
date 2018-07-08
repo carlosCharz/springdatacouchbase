@@ -2,6 +2,8 @@ package com.wedevol.springdatacouchbase.core.service.impl;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.couchbase.config.BeanNames;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.stereotype.Service;
 import com.wedevol.springdatacouchbase.core.dao.doc.CarDoc;
@@ -19,7 +21,9 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @Service
 public class CarServiceImpl implements CarService {
 
+  // add the qualifier in case you have multiple buckets in your configuration otherwise remove it
   @Autowired
+  @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
   private CouchbaseTemplate template;
 
   @Override

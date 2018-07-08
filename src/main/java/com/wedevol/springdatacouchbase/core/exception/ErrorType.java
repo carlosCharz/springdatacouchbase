@@ -7,7 +7,7 @@ package com.wedevol.springdatacouchbase.core.exception;
  */
 public enum ErrorType {
   USER_NOT_FOUND(1, "User not found"), USER_ALREADY_EXISTS(2, "User already exists"), CAR_NOT_FOUND(3,
-      "Car not found"), PRODUCT_NOT_FOUND(4, "Product not found");
+      "Car not found"), PRODUCT_NOT_FOUND(4, "Product not found"), PLACE_NOT_FOUND(5, "Place not found");
 
   private final int code;
   private final String message;

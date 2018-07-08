@@ -1,7 +1,14 @@
 # Changelog
 All notable changes to the spring data couchbase project will be documented in this file, in a per release basis.
 
-## [project_r1_v4] - unreleased
+## [project_r1_v5] - unreleased
+
+-------------------------------------------------------------------------------------
+
+## [project_r1_v4] - 2018-07-07
+
+## Added
+- configuration to support multiple buckets with examples: controller, service, repo, counter, configuration
 
 -------------------------------------------------------------------------------------
 

@@ -21,6 +21,13 @@ This is my template for a spring boot project that uses spring data and couchbas
  1. **For the Controller:** it uses the Spring Boot Test framework with mockMvc and hamcrest matchers
  2. **For the Service:** it uses the Mockito framework with hamcrest matchers and mock and injectMocks annotations 
  
+## Examples
+
+1. User -> atomic counter for key and default bucket (branch master)
+2. Car -> doc attributes for key and default bucket (branch master)
+3. Product -> unique number for key and default bucket (branch master)
+4. Place -> atomic counter for key and multiple buckets (branch multiple_buckets)
+
 ## Exposed methods
 
 **1. Get user by id. HTTP Method: GET**
@@ -67,17 +74,22 @@ http://localhost:8080/springdatacouchbase/users/find/email?email=carlos1@yopmail
 http://localhost:8080/springdatacouchbase/users/find/nickname?nickname=charz
 ```
 
-**7. User exists? HTTP Method: GET**
+**7. Find user by name. HTTP Method: GET**
+```
+http://localhost:8080/springdatacouchbase/users/find/name?name=carlos
+```
+
+**8. User exists? HTTP Method: GET**
 ```
 http://localhost:8080/springdatacouchbase/users/1/exists
 ```
 
-**8. Find all users. HTTP Method: GET**
+**9. Find all users. HTTP Method: GET**
 ```
 http://localhost:8080/springdatacouchbase/users/find/all
 ```
 
-**9. Count all users. HTTP Method: GET**
+**10. Count all users. HTTP Method: GET**
 ```
 http://localhost:8080/springdatacouchbase/users/count/all
 ```

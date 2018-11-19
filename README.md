@@ -23,10 +23,10 @@ This is my template for a spring boot project that uses spring data and couchbas
  
 ## Examples
 
-1. User -> atomic counter for key and default bucket (branch master)
-2. Car -> doc attributes for key and default bucket (branch master)
-3. Product -> unique number for key and default bucket (branch master)
-4. Place -> atomic counter for key and multiple buckets (branch multiple_buckets)
+1. User -> atomic counter for key and default bucket
+2. Car -> doc attributes for key and default bucket
+3. Product -> unique number for key and default bucket
+4. Place -> atomic counter for key and multiple buckets
 
 ## Exposed methods
 

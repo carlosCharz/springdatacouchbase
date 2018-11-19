@@ -1,9 +1,19 @@
 # Changelog
 All notable changes to the spring data couchbase project will be documented in this file, in a per release basis.
 
-## [project_r1_v5] - unreleased
+## [project_r1_v6] - unreleased
 
 -------------------------------------------------------------------------------------
+
+
+## [project_r1_v5] - 2018-11-19
+
+## Modified
+- branch multiple buckets integrated in main repo
+- upgrade spring boot from 2.0.6.RELEASE to 2.1.0.RELEASE https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1.0-M1-Release-Notes
+
+-------------------------------------------------------------------------------------
+
 
 ## [project_r1_v4] - 2018-07-07
 
@@ -11,6 +21,7 @@ All notable changes to the spring data couchbase project will be documented in t
 - configuration to support multiple buckets with examples: controller, service, repo, counter, configuration
 
 -------------------------------------------------------------------------------------
+
 
 ## [project_r1_v3] - 2018-06-29
 
@@ -22,6 +33,7 @@ All notable changes to the spring data couchbase project will be documented in t
 - upgrade spring boot to 2.0.3
 
 -------------------------------------------------------------------------------------
+
 
 ## [project_r1_v2] - 2018-05-01
 **Tag**: project_r1_v2

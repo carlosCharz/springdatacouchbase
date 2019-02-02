@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.wedevol.springdatacouchbase.core.dao.doc.ProductDoc;
@@ -32,7 +31,6 @@ public class ProductController {
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public ProductDoc findById(@PathVariable String id) {
     logger.info("Find product by id: {}", id);
     return productService.findById(id);
@@ -40,7 +38,6 @@ public class ProductController {
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
-  @ResponseBody
   public void create(@Valid @RequestBody ProductDoc product) {
     logger.info("Create product");
     productService.create(product);

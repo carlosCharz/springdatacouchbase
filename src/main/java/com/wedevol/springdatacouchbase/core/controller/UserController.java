@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
@@ -35,7 +34,6 @@ public class UserController {
 
   @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public UserDoc findById(@PathVariable Long userId) {
     logger.info("Find user by id: {}", userId);
     return userService.findById(userId);
@@ -43,7 +41,6 @@ public class UserController {
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
-  @ResponseBody
   public UserDoc create(@Valid @RequestBody UserDoc user) {
     logger.info("Create user");
     return userService.create(user);
@@ -51,7 +48,6 @@ public class UserController {
 
   @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
     logger.info("Update user: {}", userId);
     userService.update(userId, user);
@@ -59,7 +55,6 @@ public class UserController {
 
   @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public void delete(@PathVariable Long userId) {
     logger.info("Delete user: {}", userId);
     userService.delete(userId);
@@ -67,7 +62,6 @@ public class UserController {
 
   @RequestMapping(value = "/{userId}/exists", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public Boolean exists(@PathVariable Long userId) {
     logger.info("Exists user {}?", userId);
     return userService.exists(userId);
@@ -75,7 +69,6 @@ public class UserController {
 
   @RequestMapping(value = "/find/email", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public UserDoc findByEmail(@RequestParam(value = "email") String email) {
     logger.info("Find user by email: {}", email);
     return userService.findByEmail(email);
@@ -83,7 +76,6 @@ public class UserController {
 
   @RequestMapping(value = "/find/nickname", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
     logger.info("Find users by nickname: {}", nickname);
     return userService.findUsersByNickname(nickname);
@@ -91,7 +83,6 @@ public class UserController {
 
   @RequestMapping(value = "/find/name", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public List<UserBasicDoc> findUsersByName(@RequestParam(value = "name") String name) {
     logger.info("Find users by name: {}", name);
     return userService.findUsersByName(name);
@@ -99,7 +90,6 @@ public class UserController {
 
   @RequestMapping(value = "/find/all", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public List<UserDoc> findAll() {
     logger.info("Find all users");
     return userService.findAll();
@@ -107,7 +97,6 @@ public class UserController {
 
   @RequestMapping(value = "/count/all", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public Integer countAll() {
     logger.info("Count all users");
     return userService.countAll();

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.wedevol.springdatacouchbase.core.dao.doc.CarDoc;
@@ -32,7 +31,6 @@ public class CarController {
 
   @RequestMapping(value = "/{number}/{manufacturer}", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
   public CarDoc findByKey(@PathVariable Long number, @PathVariable String manufacturer) {
     logger.info("Find car by key: {}-{}", number, manufacturer);
     return carService.findByKey(number, manufacturer);
@@ -40,7 +38,6 @@ public class CarController {
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
-  @ResponseBody
   public void create(@Valid @RequestBody CarDoc car) {
     logger.info("Create car");
     carService.create(car);

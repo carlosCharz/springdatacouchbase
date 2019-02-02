@@ -1,7 +1,16 @@
 # Changelog
 All notable changes to the spring data couchbase project will be documented in this file, in a per release basis.
 
-## [project_r1_v6] - unreleased
+## [project_r1_v7] - unreleased
+
+-------------------------------------------------------------------------------------
+
+
+## [project_r1_v6] - 2018-02-02
+
+## Modified
+- upgrade spring boot from 2.1.0.RELEASE to 2.1.2.RELEASE
+- remove @ResponseBody annotation because the @RestController already includes that
 
 -------------------------------------------------------------------------------------
 

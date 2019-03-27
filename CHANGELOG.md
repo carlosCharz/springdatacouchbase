@@ -1,7 +1,15 @@
 # Changelog
 All notable changes to the spring data couchbase project will be documented in this file, in a per release basis.
 
-## [project_r1_v7] - unreleased
+## [unreleased]
+
+-------------------------------------------------------------------------------------
+
+
+## [project_r1_v7] - 2018-03-27
+
+## Modified
+- upgrade spring boot from 2.1.2.RELEASE to 2.1.3.RELEASE
 
 -------------------------------------------------------------------------------------
 

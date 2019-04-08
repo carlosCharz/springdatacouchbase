@@ -13,7 +13,7 @@ This is my template for a spring boot project that uses spring data and couchbas
 1. Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
 2. Java 8
 3. Tomcat 8.5
-4. Couchbase 5
+4. Couchbase 5.x
 5. Maven
 
 ## Unit Tests
@@ -98,11 +98,11 @@ http://localhost:8080/springdatacouchbase/users/count/all
  
  * To create a primary index on the bucket.
  ```
- CREATE PRIMARY INDEX `users-primary-index` ON `users` USING GSI;
+ CREATE PRIMARY INDEX `users_primary_index` ON `users` USING GSI;
  ```
  * To delete the primary index of the bucket.
  ```
- DROP INDEX `users`.`users-primary-index` USING GSI;
+ DROP INDEX `users`.`users_primary_index` USING GSI;
  ```
   * To create a secondary index for the query 'findUsersWithName'
  ```
@@ -122,7 +122,8 @@ http://localhost:8080/springdatacouchbase/users/count/all
  ```
  * In the UserDoc.java (@Document) we can annotate the key (@id) to be part of the json as well using @Field.
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
- * For Couchbase 5 the bucket name and password is the username and password located on the Security tab on the web console.
+ * Above Couchbase 5 the bucket name and password is the username and password located on the Security tab on the web console.
+ * For doc expiration use for example: @Document(expiry = 10) or @Document(expiryExpression = "${valid.document.expiry}").
  * Key generation: UserDoc -> uses a Couchbase atomic counter. CarDoc -> uses doc attributes. ProductDoc -> uses random uuid.
 
 ## Documentation and Examples

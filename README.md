@@ -1,6 +1,6 @@
-# Spring Data with Couchbase
+# Spring Data with Couchbase + Tests
 
-This is my template for a spring boot project that uses spring data and couchbase.
+This is my template for a spring boot project that uses spring data and couchbase. It includes integration and unit tests.
 
 ## Architecture
  
@@ -16,10 +16,10 @@ This is my template for a spring boot project that uses spring data and couchbas
 4. Couchbase 5.x
 5. Maven
 
-## Unit Tests
+## Tests
 
- 1. **For the Controller:** it uses the Spring Boot Test framework with mockMvc and hamcrest matchers
- 2. **For the Service:** it uses the Mockito framework with hamcrest matchers and mock and injectMocks annotations 
+ 1. **Integration Test (for the Controller):** it uses the Spring Boot Test framework with mockMvc and hamcrest matchers
+ 2. **Unit Test (for the Service):** it uses the Mockito framework with hamcrest matchers, mock and injectMocks annotations 
  
 ## Examples
 

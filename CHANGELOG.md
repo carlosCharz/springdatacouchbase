@@ -6,6 +6,14 @@ All notable changes to the spring data couchbase project will be documented in t
 -------------------------------------------------------------------------------------
 
 
+## [project_r1_v8] - 2018-05-25
+
+## Modified
+- upgrade spring boot from 2.1.3.RELEASE to 2.1.5.RELEASE https://github.com/spring-projects/spring-boot/releases/tag/v2.1.5.RELEASE
+
+-------------------------------------------------------------------------------------
+
+
 ## [project_r1_v7] - 2018-03-27
 
 ## Modified

@@ -12,8 +12,11 @@ All notable changes to the spring data Couchbase project will be documented in t
 - The service logs the newly created key
 - Add another example for Java UUID generator for the key: PhoneDoc
 - Add Couchbase Document validations for the ProductDoc: @NotNull
-- Fix the hashCode and equals methods
 - Minor code cleanup
+
+## Fixed
+- Fix the hashCode and equals methods
+- Fix HTTP response statuses
 
 
 -------------------------------------------------------------------------------------

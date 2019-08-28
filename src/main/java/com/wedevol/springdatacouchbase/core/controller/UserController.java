@@ -49,7 +49,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
   public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
     logger.info("Update user: {}", userId);
@@ -57,7 +57,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable Long userId) {
     logger.info("Delete user: {}", userId);
     userService.delete(userId);

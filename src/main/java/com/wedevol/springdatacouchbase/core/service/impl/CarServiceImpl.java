@@ -1,6 +1,8 @@
 package com.wedevol.springdatacouchbase.core.service.impl;
 
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.couchbase.config.BeanNames;
@@ -12,8 +14,8 @@ import com.wedevol.springdatacouchbase.core.exception.ErrorType;
 import com.wedevol.springdatacouchbase.core.service.CarService;
 
 /**
- * Service that manages the creation of a Car to exemplify the use of doc attributes for key
- * generation.
+ * Service that manages the creation of a Car to exemplify the use of doc attributes with automatic prefix and suffix
+ * for key generation and the usage of the template methods (not the CRUD repository).
  *
  * @author Charz++
  */
@@ -21,23 +23,24 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @Service
 public class CarServiceImpl implements CarService {
 
-  // add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+  protected static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
+
+  // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
   @Autowired
   @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
-  private CouchbaseTemplate template;
+  private CouchbaseTemplate defaultTemplate;
 
   @Override
   public CarDoc findByKey(Long number, String manufacturer) {
-    final CarDoc carDoc = new CarDoc(number, manufacturer);
-    final Optional<CarDoc> carObj =
-        Optional.ofNullable(template.findById(template.getGeneratedId(carDoc), CarDoc.class));
+    CarDoc carDoc = new CarDoc(number, manufacturer);
+    Optional<CarDoc> carObj = Optional.ofNullable(defaultTemplate.findById(defaultTemplate.getGeneratedId(carDoc), CarDoc.class));
     return carObj.orElseThrow(() -> new ApiException(ErrorType.CAR_NOT_FOUND));
   }
 
   @Override
   public void create(CarDoc car) {
-    template.insert(car);
+    defaultTemplate.insert(car);
+    logger.info("car key: {}", car.getKey());
   }
-
 
 }

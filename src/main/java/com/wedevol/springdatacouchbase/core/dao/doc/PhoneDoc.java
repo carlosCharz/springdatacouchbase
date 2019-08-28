@@ -6,46 +6,53 @@ import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 import org.springframework.data.couchbase.core.mapping.id.IdAttribute;
 import org.springframework.data.couchbase.core.mapping.id.IdPrefix;
-import org.springframework.data.couchbase.core.mapping.id.IdSuffix;
+import org.springframework.lang.NonNull;
 import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
 
 /**
- * Represents a Car doc from Couchbase. The doc key is generated using doc attributes with automatic prefix and suffix.
+ * Represents a Phone doc from Couchbase. The doc key is generated using Java UUID with automatic prefix.
  *
  * @author Charz++
  */
 
 @Document
-public class CarDoc implements Serializable {
+public class PhoneDoc implements Serializable {
 
   private static final long serialVersionUID = 3072475211055736282L;
 
   @IdPrefix(order = 0)
-  private String keyPrefix = "car";
+  private String keyPrefix = "ph";
   @Id
   @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "::")
   private String key;
-  @IdSuffix(order = 0)
-  private String keySuffix = "test";
 
   @Field
   @IdAttribute(order = 0)
-  private Long number;
+  @NonNull
+  private String id;
+  
   @Field
-  @IdAttribute(order = 1)
   private String manufacturer;
-
   @Field
   private String model;
   @Field
   private Integer year;
+  
+  public PhoneDoc() {}
 
-  public CarDoc() {}
+  public static PhoneDoc from(String id) {
+    return new PhoneDoc(id);
+  }
 
-  public CarDoc(Long number, String manufacturer) {
+  private PhoneDoc(String id) {
     super();
-    this.number = number;
+    this.id = id;
+  }
+
+  public PhoneDoc(String model, String manufacturer) {
+    super();
+    this.model = model;
     this.manufacturer = manufacturer;
   }
 
@@ -57,12 +64,12 @@ public class CarDoc implements Serializable {
     this.key = key;
   }
 
-  public Long getNumber() {
-    return number;
+  public String getId() {
+    return id;
   }
 
-  public void setNumber(Long number) {
-    this.number = number;
+  public void setId(String id) {
+    this.id = id;
   }
 
   public String getManufacturer() {
@@ -93,8 +100,7 @@ public class CarDoc implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
-    result = prime * result + ((number == null) ? 0 : number.hashCode());
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
     return result;
   }
 
@@ -106,16 +112,11 @@ public class CarDoc implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    CarDoc other = (CarDoc) obj;
-    if (manufacturer == null) {
-      if (other.manufacturer != null)
+    PhoneDoc other = (PhoneDoc) obj;
+    if (id == null) {
+      if (other.id != null)
         return false;
-    } else if (!manufacturer.equals(other.manufacturer))
-      return false;
-    if (number == null) {
-      if (other.number != null)
-        return false;
-    } else if (!number.equals(other.number))
+    } else if (!id.equals(other.id))
       return false;
     return true;
   }

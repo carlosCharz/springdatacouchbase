@@ -18,7 +18,7 @@ public class UserCounterRepository {
   private static final long INITIAL_COUNTER_VALUE = 1;
   private static final String USER_COUNTER_KEY = "user::counter";
 
-  // add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+  // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
   @Autowired
   @Qualifier(BeanNames.COUCHBASE_BUCKET)
   private Bucket bucket;

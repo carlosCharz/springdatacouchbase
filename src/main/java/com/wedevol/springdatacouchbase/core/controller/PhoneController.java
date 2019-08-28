@@ -11,37 +11,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.wedevol.springdatacouchbase.core.dao.doc.CarDoc;
-import com.wedevol.springdatacouchbase.core.service.CarService;
+import com.wedevol.springdatacouchbase.core.dao.doc.PhoneDoc;
+import com.wedevol.springdatacouchbase.core.service.PhoneService;
 
 /**
- * Car REST Controller
+ * Phone REST Controller
  * 
  * @author charz
  *
  */
 @RestController
-@RequestMapping("/cars")
-public class CarController {
+@RequestMapping("/phones")
+public class PhoneController {
 
-  protected static final Logger logger = LoggerFactory.getLogger(CarController.class);
+  protected static final Logger logger = LoggerFactory.getLogger(PhoneController.class);
 
   @Autowired
-  private CarService carService;
+  private PhoneService phoneService;
 
-  @RequestMapping(value = "/{number}/{manufacturer}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  public CarDoc findByKey(@PathVariable Long number, @PathVariable String manufacturer) {
-    logger.info("Find car by key: {}-{}", number, manufacturer);
-    return carService.findByKey(number, manufacturer);
+  public PhoneDoc findById(@PathVariable String id) {
+    logger.info("Find phone by id: {}", id);
+    return phoneService.findById(id);
   }
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
   // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
-  public void create(@Valid @RequestBody CarDoc car) {
-    logger.info("Create car");
-    carService.create(car);
+  public void create(@Valid @RequestBody PhoneDoc phone) {
+    logger.info("Create phone");
+    phoneService.create(phone);
   }
 
 }

@@ -2,6 +2,8 @@ package com.wedevol.springdatacouchbase.core.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.wedevol.springdatacouchbase.core.dao.UserCounterRepository;
@@ -22,6 +24,8 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 @Service
 public class UserServiceImpl implements UserService {
 
+  protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
   @Autowired
   private UserRepository userRepo;
 
@@ -35,19 +39,21 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDoc findById(Long id) {
-    final Optional<UserDoc> userObj = userRepo.findById(UserDoc.getKeyFor(id));
+    Optional<UserDoc> userObj = userRepo.findById(UserDoc.getKeyFor(id));
     return userObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
   }
 
   @Override
   public UserDoc create(UserDoc user) {
     // We first search by email, the user should not exist
-    final Optional<UserDoc> userObj = Optional.ofNullable(this.findByEmail(user.getEmail()));
+    Optional<UserDoc> userObj = Optional.ofNullable(this.findByEmail(user.getEmail()));
     if (userObj.isPresent()) {
       throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
     }
     user.setId(userCounterRepo.counter()); // internally we set the key with that id
-    return userRepo.save(user);
+    UserDoc userFromDb = userRepo.save(user);
+    logger.info("user key: {}", userFromDb.getKey());
+    return userFromDb;
   }
 
   @Override

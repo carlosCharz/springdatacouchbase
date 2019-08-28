@@ -38,6 +38,8 @@ public class PlaceController {
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
+  // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just for
+  // the example.
   public PlaceDoc create(@Valid @RequestBody PlaceDoc place) {
     logger.info("Create place");
     return placeService.create(place);

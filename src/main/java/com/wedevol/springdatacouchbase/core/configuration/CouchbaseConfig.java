@@ -15,6 +15,7 @@ import org.springframework.data.couchbase.repository.config.RepositoryOperations
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.env.CouchbaseEnvironment;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
+import com.wedevol.springdatacouchbase.core.dao.doc.PhoneDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.PlaceDoc;
 
 /**
@@ -46,6 +47,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
   @Override
   protected String getBucketPassword() {
+    logger.info("Get bucket password '{}'", couchbaseSetting.getPassword());
     return couchbaseSetting.getPassword();
   }
 
@@ -75,16 +77,15 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
   }
 
   /*
-   * This is additional configuration if we want some other objects (PlaceDoc) to be stored in other
-   * bucket
+   * This is additional configuration if we want some other objects (PlaceDoc, PhoneDoc) to be stored in other bucket
    */
 
   @Bean(name = "placeBucket") // this is to differentiate with the default beans
   public Bucket placeBucket() throws Exception {
-    return couchbaseCluster().openBucket("places", "123456abC"); // you can get it from the properties
+    return couchbaseCluster().openBucket("places", "123456abC"); // TODO you can get values from properties
   }
 
-  @Bean(name = "placeTemplate") // this is to differentiate with the default beans
+  @Bean(name = "placeBucketTemplate") // this is to differentiate with the default beans
   public CouchbaseTemplate placeTemplate() throws Exception {
     CouchbaseTemplate template = new CouchbaseTemplate(couchbaseClusterInfo(), // reuse the default bean
         placeBucket(), // the bucket is non-default
@@ -98,7 +99,8 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
   public void configureRepositoryOperationsMapping(RepositoryOperationsMapping baseMapping) {
     try {
       baseMapping // this is already using couchbaseTemplate as default
-          .mapEntity(PlaceDoc.class, placeTemplate());
+          .mapEntity(PlaceDoc.class, placeTemplate())
+          .mapEntity(PhoneDoc.class, placeTemplate());
       // every repository dealing with Place will be backed by placeTemplate()
     } catch (Exception e) {
       throw new RuntimeException("Place bucket could not be configured properly!");

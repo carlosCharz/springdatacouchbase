@@ -1,7 +1,20 @@
 # Changelog
-All notable changes to the spring data couchbase project will be documented in this file, in a per release basis.
+All notable changes to the spring data Couchbase project will be documented in this file, in a per release basis.
 
 ## [unreleased]
+
+-------------------------------------------------------------------------------------
+
+## [project_r1_v10] - 2019-08-28
+
+## Modified
+- Upgrade spring boot lib from 2.1.6.RELEASE to 2.1.7.RELEASE https://github.com/spring-projects/spring-boot/releases/tag/v2.1.7.RELEASE
+- The service logs the newly created key
+- Add another example for Java UUID generator for the key: PhoneDoc
+- Add Couchbase Document validations for the ProductDoc: @NotNull
+- Fix the hashCode and equals methods
+- Minor code cleanup
+
 
 -------------------------------------------------------------------------------------
 

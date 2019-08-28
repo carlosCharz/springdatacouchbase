@@ -41,6 +41,8 @@ public class UserController {
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
+  // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just for
+  // the example.
   public UserDoc create(@Valid @RequestBody UserDoc user) {
     logger.info("Create user");
     return userService.create(user);
@@ -48,6 +50,7 @@ public class UserController {
 
   @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
   @ResponseStatus(HttpStatus.OK)
+  // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
   public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
     logger.info("Update user: {}", userId);
     userService.update(userId, user);

@@ -1,6 +1,7 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
 import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
@@ -8,7 +9,7 @@ import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
 
 /**
- * Represents a Product doc from Couchbase. The doc key is generated using a unique number.
+ * Represents a Product doc from Couchbase. The doc key is generated using a unique number (Couchbase UUID).
  *
  * @author Charz++
  */
@@ -23,6 +24,7 @@ public class ProductDoc implements Serializable {
   private String id;
 
   @Field
+  @NotNull
   private String name;
   @Field
   private String description;
@@ -30,6 +32,15 @@ public class ProductDoc implements Serializable {
   private Integer quantity;
 
   public ProductDoc() {}
+
+  public static ProductDoc from(String id) {
+    return new ProductDoc(id);
+  }
+
+  private ProductDoc(String id) {
+    super();
+    this.id = id;
+  }
 
   public String getId() {
     return id;
@@ -67,10 +78,7 @@ public class ProductDoc implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((description == null) ? 0 : description.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
-    result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
     return result;
   }
 
@@ -83,25 +91,10 @@ public class ProductDoc implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     ProductDoc other = (ProductDoc) obj;
-    if (description == null) {
-      if (other.description != null)
-        return false;
-    } else if (!description.equals(other.description))
-      return false;
     if (id == null) {
       if (other.id != null)
         return false;
     } else if (!id.equals(other.id))
-      return false;
-    if (name == null) {
-      if (other.name != null)
-        return false;
-    } else if (!name.equals(other.name))
-      return false;
-    if (quantity == null) {
-      if (other.quantity != null)
-        return false;
-    } else if (!quantity.equals(other.quantity))
       return false;
     return true;
   }

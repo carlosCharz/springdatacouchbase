@@ -6,7 +6,7 @@ import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
 
 /**
- * Represents a place doc from Couchbase. The doc key is generated using a Couchbase atomic counter.
+ * Represents a place doc from Couchbase. The doc key is generated using a Couchbase atomic counter with manual prefix.
  *
  * @author Charz++
  */
@@ -83,10 +83,7 @@ public class PlaceDoc implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((address == null) ? 0 : address.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((key == null) ? 0 : key.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
   }
 
@@ -99,25 +96,10 @@ public class PlaceDoc implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     PlaceDoc other = (PlaceDoc) obj;
-    if (address == null) {
-      if (other.address != null)
-        return false;
-    } else if (!address.equals(other.address))
-      return false;
     if (id == null) {
       if (other.id != null)
         return false;
     } else if (!id.equals(other.id))
-      return false;
-    if (key == null) {
-      if (other.key != null)
-        return false;
-    } else if (!key.equals(other.key))
-      return false;
-    if (name == null) {
-      if (other.name != null)
-        return false;
-    } else if (!name.equals(other.name))
       return false;
     return true;
   }

@@ -1,6 +1,6 @@
 # Spring Data with Couchbase + Tests
 
-This is my template for a spring boot project that uses spring data and couchbase. It includes integration and unit tests.
+This is my template for a spring boot project that uses spring data and Couchbase. It includes integration and unit tests.
 
 ## Architecture
  
@@ -23,10 +23,11 @@ This is my template for a spring boot project that uses spring data and couchbas
  
 ## Examples
 
-1. User -> atomic counter for key and default bucket
-2. Car -> doc attributes for key and default bucket
-3. Product -> unique number for key and default bucket
-4. Place -> atomic counter for key and multiple buckets
+1. User -> key: external Couchbase atomic counter (with manual prefix) | bucket: default | repo: crud repo
+2. Car -> key: doc attributes (with automatic prefix and suffix) | bucket: default | repo: template
+3. Product -> key: auto generated Couchbase unique number | bucket: default | repo: template
+4. Place -> key: external Couchbase atomic counter with doc attributes (with manual prefix) | bucket: non-default | repo: crud repo (for multiple buckets)
+5. Phone -> key: external Java UUID key with doc attributes (with automatic prefix) | bucket: non-default | repo: crud repo (for multiple buckets)
 
 ## Exposed methods
 
@@ -129,13 +130,15 @@ http://localhost:8080/springdatacouchbase/users/count/all
 ## Documentation and Examples
  
 * [Couchbase CRUD Repository documentation](http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#repositories.core-concepts): There you will find core concepts.
-* [Spring Data and Couchbase](https://blog.couchbase.com/spring-data-couchbase-2-is-out-quick-getting-started-with-spring-initializr/): There you will find more considerations when working with spring data and couchbase.
-* [Introduction to spring data and couchbase](http://www.baeldung.com/spring-data-couchbase): There you will find an introduction example.
-* [Couchbase CRUD Excample](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
-* [Couchbase 5](https://developer.couchbase.com/documentation/server/current/introduction/whats-new.html): The new couchbase 5 is role based and there are some changes that need to be considered.
+* [Spring Data and Couchbase](https://blog.couchbase.com/spring-data-couchbase-2-is-out-quick-getting-started-with-spring-initializr/): There you will find more considerations when working with spring data and Couchbase.
+* [Introduction to spring data and Couchbase](http://www.baeldung.com/spring-data-couchbase): There you will find an introduction example.
+* [Couchbase CRUD Example](https://blog.couchbase.com/vaadin-couchbase-crud-sample/): There you will find a CRUD example.
+* [Couchbase 5](https://developer.couchbase.com/documentation/server/current/introduction/whats-new.html): The new Couchbase 5 is role based and there are some changes that need to be considered.
 * [Spring Data Couchbase Properties](http://s-xu.blogspot.com.ar/2016/09/spring-boot-common-application.html): Spring Boot common application properties.
 * [Spring Data Couchbase Documentation](https://docs.spring.io/spring-data/couchbase/docs/3.1.0.M3/reference/html/): Spring Data Couchbase Documentation.
 * [Spring Boot 2 - Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Release-Notes): Spring Boot 2.0 Release Notes.
+* [Couchbase Spring Data - More customization](https://www.adictosaltrabajo.com/2019/01/22/mas-spring-data-couchbase/): Couchbase Spring Data - More customization (in Spanish)
+* [Couchbase Spring Data - Official Git](https://github.com/spring-projects/spring-data-couchbase): Couchbase Spring Data Official Git
 
 ## About me
 I am Carlos Becerra - MSc. Softwware & Systems.  But to tell you the truth, I'd prefer to be a passionate developer. You can contact me via:

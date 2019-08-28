@@ -38,6 +38,7 @@ public class ProductController {
 
   @RequestMapping(value = "", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
+  // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
   public void create(@Valid @RequestBody ProductDoc product) {
     logger.info("Create product");
     productService.create(product);

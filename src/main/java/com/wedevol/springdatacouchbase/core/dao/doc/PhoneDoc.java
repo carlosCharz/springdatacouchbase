@@ -32,7 +32,7 @@ public class PhoneDoc implements Serializable {
   @NonNull
   private String id;
   
-  @Field
+  @Field("mfr")
   private String manufacturer;
   @Field
   private String model;

@@ -11,7 +11,8 @@ All notable changes to the spring data Couchbase project will be documented in t
 - Upgrade spring boot lib from 2.1.6.RELEASE to 2.1.7.RELEASE https://github.com/spring-projects/spring-boot/releases/tag/v2.1.7.RELEASE
 - The service logs the newly created key
 - Add another example for Java UUID generator for the key: PhoneDoc
-- Add Couchbase Document validations for the ProductDoc: @NotNull
+- Add Couchbase Document @NotNull validations for the ProductDoc and PhoneDoc
+- Set a different name on the @Field annotation for the PhoneDoc
 - Minor code cleanup
 
 ## Fixed

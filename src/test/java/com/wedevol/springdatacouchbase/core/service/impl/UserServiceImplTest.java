@@ -160,4 +160,19 @@ public class UserServiceImplTest {
     Mockito.verify(repoMock, Mockito.times(1)).countAll();
     Mockito.verifyNoMoreInteractions(repoMock);
   }
+  
+  @Test
+  public void deleteUsersByAge() {
+    // Data preparation
+    List<UserDoc> users = Arrays.asList(userDoc);
+    Mockito.when(repoMock.deleteUsersWithAge(Mockito.anyInt())).thenReturn(users);
+
+    // Method call
+    List<UserDoc> usersDeleted = userService.deleteUsersByAge(18);
+
+    // Verification
+    Assert.assertThat(usersDeleted.size(), Matchers.is(1));
+    Mockito.verify(repoMock, Mockito.times(1)).deleteUsersWithAge(Mockito.anyInt());
+    Mockito.verifyNoMoreInteractions(repoMock);
+  }
 }

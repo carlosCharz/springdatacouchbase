@@ -104,4 +104,11 @@ public class UserController {
     logger.info("Count all users");
     return userService.countAll();
   }
+  
+  @RequestMapping(value = "/delete/age", method = RequestMethod.POST)
+  @ResponseStatus(HttpStatus.CREATED)
+  public List<UserDoc> deleteUsersByAge(@RequestParam(value = "age") Integer age) {
+    logger.info("Delete users by age: {}", age);
+    return userService.deleteUsersByAge(age);
+  }
 }

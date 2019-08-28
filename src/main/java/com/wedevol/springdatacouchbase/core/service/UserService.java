@@ -35,4 +35,6 @@ public interface UserService {
   List<UserDoc> findAll();
 
   Integer countAll();
+  
+  List<UserDoc> deleteUsersByAge(Integer age);
 }

@@ -119,7 +119,7 @@ public class UserControllerTest {
   public void updateUser() throws Exception {
     UserDoc user3 = new UserDoc(USER_THREE_ID, "Jose", Arrays.asList("pancho"));
     mockMvc.perform(put("/users/" + USER_THREE_ID).contentType(CONTENT_TYPE).content(json(user3)))
-        .andExpect(status().isOk());
+        .andExpect(status().is2xxSuccessful());
   }
 
   @Test

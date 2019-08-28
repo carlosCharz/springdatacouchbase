@@ -105,4 +105,12 @@ public class UserServiceImpl implements UserService {
   public Integer countAll() {
     return userRepo.countAll();
   }
+
+  @Override
+  public List<UserDoc> deleteUsersByAge(Integer age) {
+    List<UserDoc> userDocs = userRepo.deleteUsersWithAge(age);
+    logger.info("size: {}", userDocs.size());
+    return userDocs;
+  }
+
 }

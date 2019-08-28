@@ -95,6 +95,11 @@ http://localhost:8080/springdatacouchbase/users/find/all
 http://localhost:8080/springdatacouchbase/users/count/all
 ```
 
+**11. Delete users by age (to exemplify DELETE with N1QL). HTTP Method: POST**
+```
+http://localhost:8080/springdatacouchbase/users/delete/age?age=50
+```
+
 ## Considerations about Couchbase
  
  * To create a primary index on the bucket.

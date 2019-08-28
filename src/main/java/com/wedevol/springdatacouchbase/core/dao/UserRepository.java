@@ -14,7 +14,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
  * 
  * 1. To use N1QL we should at least create a primary NQ1L index or, to be more specific, a N1QL secondary indexes
  * tailored for queries for better performance. 2. Workaround for raw N1QL queries: add "META(c).id as _ID, META(c).cas
- * as _CAS" to the select
+ * as _CAS" to the select and delete
  *
  * @author Charz++
  */
@@ -41,5 +41,9 @@ public interface UserRepository extends CrudRepository<UserDoc, String> {
   // variable
   @Query("SELECT u.id, u.name, META(u).id AS _ID, META(u).cas AS _CAS FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' AND LOWER(u.name) LIKE '%' || $name || '%'")
   List<UserBasicDoc> findUsersWithName(@Param("name") String name);
+  
+  //This method uses Raw N1QL query to delete entities based on a condition (the returning is optional)
+ @Query("DELETE FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' AND u.age < $age RETURNING u.*, META(u).id AS _ID, META(u).cas AS _CAS")
+ List<UserDoc> deleteUsersWithAge(@Param("age") Integer age);
 
 }

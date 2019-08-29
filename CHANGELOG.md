@@ -10,17 +10,20 @@ All notable changes to the spring data Couchbase project will be documented in t
 ## Added
 - Add new example for query: DELETE FROM ...
 - Add another example for Java UUID generator for the key: PhoneDoc
+- Add more links in the documentation with examples
 
 ## Modified
 - Upgrade spring boot lib from 2.1.6.RELEASE to 2.1.7.RELEASE https://github.com/spring-projects/spring-boot/releases/tag/v2.1.7.RELEASE
 - The service logs the newly created key
 - Set a different name on the @Field annotation for the PhoneDoc
 - Add Couchbase Document @NotNull validations for the ProductDoc and PhoneDoc
+- Add more examples of the usage of the template N1ql queries
 - Minor code cleanup
 
 ## Fixed
 - Fix the hashCode and equals methods
 - Fix HTTP response statuses
+- Fix silent exceptions Spring Data Couchbase hide
 
 
 -------------------------------------------------------------------------------------

@@ -31,6 +31,6 @@
 		<appender-ref ref="FILE" />
 	</root>
 	
-	<!-- log the Couchbase queries produced by the framework -->
+	<!-- log the Spring Data Couchbase queries produced by the framework -->
 	<logger name="org.springframework.data.couchbase.repository.query" level="debug"/>
 </configuration>

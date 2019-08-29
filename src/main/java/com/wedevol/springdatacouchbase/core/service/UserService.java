@@ -37,4 +37,8 @@ public interface UserService {
   Integer countAll();
   
   List<UserDoc> deleteUsersByAge(Integer age);
+  
+  List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(String name);
+  
+  List<Long> findAllUserIdsUsingTemplateN1ql();
 }

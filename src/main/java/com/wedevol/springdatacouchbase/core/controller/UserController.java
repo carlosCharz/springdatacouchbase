@@ -111,4 +111,18 @@ public class UserController {
     logger.info("Delete users by age: {}", age);
     return userService.deleteUsersByAge(age);
   }
+  
+  @RequestMapping(value = "/find/name/coverindex", method = RequestMethod.GET)
+  @ResponseStatus(HttpStatus.OK)
+  public List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(@RequestParam(value = "name") String name) {
+    logger.info("Find users by name with cover index: {}", name);
+    return userService.findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(name);
+  }
+  
+  @RequestMapping(value = "/find/ids", method = RequestMethod.GET)
+  @ResponseStatus(HttpStatus.OK)
+  public List<Long> findAllUserIdsUsingTemplateN1ql() {
+    logger.info("Find all user ids with template N1ql");
+    return userService.findAllUserIdsUsingTemplateN1ql();
+  }
 }

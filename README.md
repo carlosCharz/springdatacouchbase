@@ -95,9 +95,19 @@ http://localhost:8080/springdatacouchbase/users/find/all
 http://localhost:8080/springdatacouchbase/users/count/all
 ```
 
-**11. Delete users by age (to exemplify DELETE with N1QL). HTTP Method: POST**
+**11. Delete users by age (to exemplify DELETE with N1QL in the CRUD repo). HTTP Method: POST**
 ```
 http://localhost:8080/springdatacouchbase/users/delete/age?age=50
+```
+
+**12. Get users by name using template N1ql projection with cover index. HTTP Method: GET**
+```
+http://localhost:8080/springdatacouchbase/users/find/name/coverindex?name=carlos
+```
+
+**13. Get users ids using template N1ql. HTTP Method: GET**
+```
+http://localhost:8080/springdatacouchbase/users/find/ids
 ```
 
 ## Considerations about Couchbase
@@ -142,8 +152,11 @@ http://localhost:8080/springdatacouchbase/users/delete/age?age=50
 * [Spring Data Couchbase Properties](http://s-xu.blogspot.com.ar/2016/09/spring-boot-common-application.html): Spring Boot common application properties.
 * [Spring Data Couchbase Documentation](https://docs.spring.io/spring-data/couchbase/docs/3.1.0.M3/reference/html/): Spring Data Couchbase Documentation.
 * [Spring Boot 2 - Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Release-Notes): Spring Boot 2.0 Release Notes.
-* [Couchbase Spring Data - More customization](https://www.adictosaltrabajo.com/2019/01/22/mas-spring-data-couchbase/): Couchbase Spring Data - More customization (in Spanish)
+* [Couchbase Spring Data - More customization](https://www.adictosaltrabajo.com/2019/01/22/mas-spring-data-couchbase/): Couchbase Spring Data - More Customization (in Spanish)
 * [Couchbase Spring Data - Official Git](https://github.com/spring-projects/spring-data-couchbase): Couchbase Spring Data Official Git
+* [Couchbase Spring Data - Pitfalls](http://hecodes.com/2019/07/spring-data-couchbase-pitfalls-to-avoid/): Pitfalls to avoid
+* [Couchbase Spring Data - N1ql Examples](https://www.codota.com/code/java/methods/com.couchbase.client.java.query.N1qlQuery/simple): More N1ql examples using bucket and template
+* [Couchbase SDK - N1ql Examples](https://www.baeldung.com/n1ql-couchbase): More Couchbase SDK N1ql Examples
 
 ## About me
 I am Carlos Becerra - MSc. Softwware & Systems.  But to tell you the truth, I'd prefer to be a passionate developer. You can contact me via:

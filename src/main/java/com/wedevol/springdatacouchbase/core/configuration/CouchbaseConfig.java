@@ -69,16 +69,14 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
   @Override
   public String typeKey() {
     // By default, this attribute is named "_class".
-    // Spring Data automatically adds to each document an attribute containing the full class name of
-    // the entity.
-    // This field is the one used by N1QL queries to filter only documents corresponding to the
-    // repository’s entity.
+    // Spring Data automatically adds to each document an attribute containing the full class name of the entity.
+    // This field is the one used by N1QL queries to filter only documents corresponding to the repository’s entity.
     return "type";
   }
 
-  /*
+  /************
    * This is additional configuration if we want some other objects (PlaceDoc, PhoneDoc) to be stored in other bucket
-   */
+   ************/
 
   @Bean(name = "placeBucket") // this is to differentiate with the default beans
   public Bucket placeBucket() throws Exception {

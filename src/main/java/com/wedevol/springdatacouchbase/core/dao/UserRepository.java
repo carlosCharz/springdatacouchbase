@@ -45,12 +45,12 @@ public interface UserRepository extends CrudRepository<UserDoc, String> {
   @Query("SELECT COUNT(u.id) AS c FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc'")
   Integer countAll();
 
-  // This method uses Raw N1QL query that projects some attributes (not all) using like operator and a parameterized
+  // This method uses raw N1QL query that projects some attributes (not all) using like operator and a parameterized
   // variable
   @Query("SELECT u.id, u.name, META(u).id AS _ID, META(u).cas AS _CAS FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' AND LOWER(u.name) LIKE '%' || $name || '%'")
   List<UserBasicDoc> findUsersWithName(@Param("name") String name);
 
-  // This method uses Raw N1QL query to delete entities based on a condition (the returning is optional)
+  // This method uses raw N1QL query to delete entities based on a condition (the returning is optional)
   @Query("DELETE FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' AND u.age < $age RETURNING u.*, META(u).id AS _ID, META(u).cas AS _CAS")
   List<UserDoc> deleteUsersWithAge(@Param("age") Integer age);
 

@@ -41,4 +41,6 @@ public interface UserService {
   List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(String name);
   
   List<Long> findAllUserIdsUsingTemplateN1ql();
+  
+  List<UserDoc> findUsersUsingUseKeys(List<Long> userIds);
 }

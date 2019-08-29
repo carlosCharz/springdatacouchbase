@@ -110,6 +110,12 @@ http://localhost:8080/springdatacouchbase/users/find/name/coverindex?name=carlos
 http://localhost:8080/springdatacouchbase/users/find/ids
 ```
 
+**14. Get users using USE KEYS. HTTP Method: GET**
+```
+http://localhost:8080/springdatacouchbase/users/find/usekeys?ids=1,2,3
+```
+
+
 ## Considerations about Couchbase
  
  * To create a primary index on the bucket.

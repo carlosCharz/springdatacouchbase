@@ -1,6 +1,7 @@
 package com.wedevol.springdatacouchbase.core.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,25 +105,34 @@ public class UserController {
     logger.info("Count all users");
     return userService.countAll();
   }
-  
+
   @RequestMapping(value = "/delete/age", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.CREATED)
   public List<UserDoc> deleteUsersByAge(@RequestParam(value = "age") Integer age) {
     logger.info("Delete users by age: {}", age);
     return userService.deleteUsersByAge(age);
   }
-  
+
   @RequestMapping(value = "/find/name/coverindex", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
-  public List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(@RequestParam(value = "name") String name) {
-    logger.info("Find users by name with cover index: {}", name);
+  public List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(
+      @RequestParam(value = "name") String name) {
+    logger.info("Find users by name using template N1ql projection with cover index: {}", name);
     return userService.findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(name);
   }
-  
+
   @RequestMapping(value = "/find/ids", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
   public List<Long> findAllUserIdsUsingTemplateN1ql() {
     logger.info("Find all user ids with template N1ql");
     return userService.findAllUserIdsUsingTemplateN1ql();
+  }
+
+  @RequestMapping(value = "/find/usekeys", method = RequestMethod.GET)
+  @ResponseStatus(HttpStatus.OK)
+  public List<UserDoc> findUsersUsingUseKeys(@RequestParam(value = "ids") List<Long> userIds) {
+    logger.info("Find users by keys using template projection N1ql: {}",
+        userIds.stream().map(id -> Long.toString(id)).collect(Collectors.joining(",")));
+    return userService.findUsersUsingUseKeys(userIds);
   }
 }

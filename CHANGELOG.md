@@ -5,6 +5,15 @@ All notable changes to the spring data Couchbase project will be documented in t
 
 -------------------------------------------------------------------------------------
 
+## [project_r1_v11] - 2019-11-09
+
+## Modified
+- Upgrade spring boot lib from 2.1.7.RELEASE to 2.2.1.RELEASE https://github.com/spring-projects/spring-boot/releases/tag/v2.2.1.RELEASE
+
+
+-------------------------------------------------------------------------------------
+
+
 ## [project_r1_v10] - 2019-08-28
 
 ## Added

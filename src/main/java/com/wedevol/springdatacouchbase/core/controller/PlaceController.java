@@ -16,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 
 /**
  * Place REST Controller
- * 
+ *
  * @author charz
  *
  */

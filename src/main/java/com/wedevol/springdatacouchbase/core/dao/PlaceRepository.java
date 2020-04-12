@@ -5,7 +5,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.PlaceDoc;
 
 /**
  * Standard CRUD repository for Place doc + query methods
- * 
+ *
  * @author Charz++
  */
 

@@ -5,7 +5,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.PhoneDoc;
 
 /**
  * Standard CRUD repository for Phone doc + query methods
- * 
+ *
  * @author Charz++
  */
 

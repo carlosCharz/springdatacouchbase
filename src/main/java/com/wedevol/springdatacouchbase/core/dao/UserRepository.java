@@ -9,18 +9,18 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 /**
  * Standard CRUD repository for User doc + query methods
- * 
+ *
  * NOTES:
- * 
+ *
  * 1. To use N1QL we should at least create a primary NQ1L index or, to be more specific, a N1QL secondary indexes
  * tailored for queries for better performance.
- * 
+ *
  * 2. Workaround for raw N1QL queries: add "META(c).id as _ID, META(c).cas as _CAS" to the select and delete. By
  * default, all the queries that Spring Data Couchbase generates SELECT META(`bucket`).id AS _ID, META(`bucket`).cas AS
  * _CAS, `bucket`.* FROM `bucket` WHERE
- * 
+ *
  * 3. As of August 2019 there is no way to get List<String> as response. You need to project the entity partially.
- * 
+ *
  * 4. As of August 2019 there is no way to make a cover index due to the fact that we need to always project the id and
  * the cas. The cas is making the query not covered.
  *

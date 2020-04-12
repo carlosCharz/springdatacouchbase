@@ -20,7 +20,7 @@ import com.wedevol.springdatacouchbase.core.service.UserService;
 
 /**
  * User REST Controller
- * 
+ *
  * @author charz
  *
  */

@@ -2,7 +2,7 @@ package com.wedevol.springdatacouchbase.core.exception;
 
 /**
  * Api exception
- * 
+ *
  * @author charz
  *
  */

@@ -49,7 +49,8 @@ public class UserControllerTest {
   private static final String USER_TWO_KEY = UserDoc.getKeyFor(USER_TWO_ID);
   private static final String USER_THREE_KEY = UserDoc.getKeyFor(USER_THREE_ID);
   private static final String USER_FOUR_KEY = UserDoc.getKeyFor(USER_FOUR_ID);
-  private static MediaType CONTENT_TYPE = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype());
+  private static MediaType CONTENT_TYPE =
+      new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype());
 
   private MockMvc mockMvc;
   @SuppressWarnings("rawtypes")

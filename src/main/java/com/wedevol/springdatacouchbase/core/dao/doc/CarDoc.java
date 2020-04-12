@@ -93,30 +93,37 @@ public class CarDoc implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
-    result = prime * result + ((number == null) ? 0 : number.hashCode());
+    result = prime * result + (manufacturer == null ? 0 : manufacturer.hashCode());
+    result = prime * result + (number == null ? 0 : number.hashCode());
     return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     CarDoc other = (CarDoc) obj;
     if (manufacturer == null) {
-      if (other.manufacturer != null)
+      if (other.manufacturer != null) {
         return false;
-    } else if (!manufacturer.equals(other.manufacturer))
+      }
+    } else if (!manufacturer.equals(other.manufacturer)) {
       return false;
+    }
     if (number == null) {
-      if (other.number != null)
+      if (other.number != null) {
         return false;
-    } else if (!number.equals(other.number))
+      }
+    } else if (!number.equals(other.number)) {
       return false;
+    }
     return true;
   }
 

@@ -97,8 +97,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
   public void configureRepositoryOperationsMapping(RepositoryOperationsMapping baseMapping) {
     try {
       baseMapping // this is already using couchbaseTemplate as default
-          .mapEntity(PlaceDoc.class, placeTemplate())
-          .mapEntity(PhoneDoc.class, placeTemplate());
+          .mapEntity(PlaceDoc.class, placeTemplate()).mapEntity(PhoneDoc.class, placeTemplate());
       // every repository dealing with Place will be backed by placeTemplate()
     } catch (Exception e) {
       throw new RuntimeException("Place bucket could not be configured properly!");

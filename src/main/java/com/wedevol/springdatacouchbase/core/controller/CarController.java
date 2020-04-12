@@ -16,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 
 /**
  * Car REST Controller
- * 
+ *
  * @author charz
  *
  */

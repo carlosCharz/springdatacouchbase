@@ -31,7 +31,7 @@ public class PhoneServiceImpl implements PhoneService {
   // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
   @Autowired
   @Qualifier("placeBucketTemplate")
-  private CouchbaseTemplate placeBucketTemplate; // used to get the key (they applied the prefix and suffix from the doc)
+  private CouchbaseTemplate placeBucketTemplate; // used to get the key (they apply the prefix and suffix from the doc)
 
   @Override
   public PhoneDoc findById(String id) {

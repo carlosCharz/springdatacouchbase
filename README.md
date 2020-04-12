@@ -32,11 +32,13 @@ This is my template for a spring boot project that uses spring data and Couchbas
 ## Exposed methods
 
 **1. Get user by id. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/1
 ```
 
 **2. Create a user. HTTP Method: POST**
+
 ```
 http://localhost:8080/springdatacouchbase/users
 ```
@@ -50,6 +52,7 @@ http://localhost:8080/springdatacouchbase/users
 ```
 
 **3. Update a user. HTTP Method: PUT**
+
 ```
 http://localhost:8080/springdatacouchbase/users/1
 ```
@@ -61,56 +64,67 @@ http://localhost:8080/springdatacouchbase/users/1
 ```
 
 **4. Delete a user. HTTP Method: DELETE**
+
 ```
 http://localhost:8080/springdatacouchbase/users/1
 ```
 
 **5. Find user by email. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/email?email=carlos1@yopmail.com
 ```
 
 **6. Find user by nickname. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/nickname?nickname=charz
 ```
 
 **7. Find user by name. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/name?name=carlos
 ```
 
 **8. User exists? HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/1/exists
 ```
 
 **9. Find all users. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/all
 ```
 
 **10. Count all users. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/count/all
 ```
 
 **11. Delete users by age (to exemplify DELETE with N1QL in the CRUD repo). HTTP Method: POST**
+
 ```
 http://localhost:8080/springdatacouchbase/users/delete/age?age=50
 ```
 
 **12. Get users by name using template N1ql projection with cover index. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/name/coverindex?name=carlos
 ```
 
 **13. Get users ids using template N1ql. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/ids
 ```
 
 **14. Get users using USE KEYS. HTTP Method: GET**
+
 ```
 http://localhost:8080/springdatacouchbase/users/find/usekeys?ids=1,2,3
 ```
@@ -119,26 +133,32 @@ http://localhost:8080/springdatacouchbase/users/find/usekeys?ids=1,2,3
 ## Considerations about Couchbase
  
  * To create a primary index on the bucket.
+ 
  ```
  CREATE PRIMARY INDEX `users_primary_index` ON `users` USING GSI;
  ```
  * To delete the primary index of the bucket.
+ 
  ```
  DROP INDEX `users`.`users_primary_index` USING GSI;
  ```
   * To create a secondary index for the query 'findUsersWithName'
+  
  ```
  CREATE INDEX `idx_user_find_by_name` ON `users` (name) WHERE type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' USING GSI;
  ```
   * To delete the secondary index: idx_user_find_by_name.
+  
  ```
  DROP INDEX `users`.`idx_user_find_by_name` USING GSI;
  ```
    * To create a secondary index for the query 'findUsersWithNickname'
+   
  ```
  CREATE INDEX `idx_user_find_by_nickname` ON `users` (DISTINCT ARRAY x FOR x IN nicknames END) WHERE type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' USING GSI;
  ```
    * To delete the secondary index: idx_user_find_by_nickname.
+   
  ```
  DROP INDEX `users`.`idx_user_find_by_nickname` USING GSI;
  ```
@@ -174,7 +194,7 @@ _**Any improvement or comment about the project is always welcome! As well as ot
 
 ## License
 ```javas
-Copyright 2019 Carlos Becerra
+Copyright 2020 Carlos Becerra
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

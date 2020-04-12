@@ -16,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 
 /**
  * Product REST Controller
- * 
+ *
  * @author charz
  *
  */

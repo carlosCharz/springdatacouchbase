@@ -33,7 +33,8 @@ public class CarServiceImpl implements CarService {
   @Override
   public CarDoc findByKey(Long number, String manufacturer) {
     CarDoc carDoc = new CarDoc(number, manufacturer);
-    Optional<CarDoc> carObj = Optional.ofNullable(defaultTemplate.findById(defaultTemplate.getGeneratedId(carDoc), CarDoc.class));
+    Optional<CarDoc> carObj =
+        Optional.ofNullable(defaultTemplate.findById(defaultTemplate.getGeneratedId(carDoc), CarDoc.class));
     return carObj.orElseThrow(() -> new ApiException(ErrorType.CAR_NOT_FOUND));
   }
 

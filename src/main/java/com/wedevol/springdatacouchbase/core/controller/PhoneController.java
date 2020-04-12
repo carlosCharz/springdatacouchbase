@@ -16,7 +16,7 @@ import com.wedevol.springdatacouchbase.core.service.PhoneService;
 
 /**
  * Phone REST Controller
- * 
+ *
  * @author charz
  *
  */

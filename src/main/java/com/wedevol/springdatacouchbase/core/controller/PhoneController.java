@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.PhoneService;
 @RequestMapping("/phones")
 public class PhoneController {
 
-  protected static final Logger logger = LoggerFactory.getLogger(PhoneController.class);
+  private static final Logger logger = LoggerFactory.getLogger(PhoneController.class);
 
   @Autowired
   private PhoneService phoneService;

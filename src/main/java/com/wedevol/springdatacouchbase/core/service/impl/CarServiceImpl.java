@@ -23,7 +23,7 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @Service
 public class CarServiceImpl implements CarService {
 
-  protected static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
+  private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
   // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
   @Autowired

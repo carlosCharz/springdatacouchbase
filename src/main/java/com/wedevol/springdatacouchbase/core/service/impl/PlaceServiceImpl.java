@@ -21,7 +21,7 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 @Service
 public class PlaceServiceImpl implements PlaceService {
 
-  protected static final Logger logger = LoggerFactory.getLogger(PlaceServiceImpl.class);
+  private static final Logger logger = LoggerFactory.getLogger(PlaceServiceImpl.class);
 
   @Autowired
   private PlaceRepository placeRepo;

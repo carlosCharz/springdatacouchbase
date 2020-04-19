@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-  protected static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+  private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
   // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
   @Autowired

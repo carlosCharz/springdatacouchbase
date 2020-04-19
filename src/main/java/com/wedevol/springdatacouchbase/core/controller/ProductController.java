@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 @RequestMapping("/products")
 public class ProductController {
 
-  protected static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+  private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
   @Autowired
   private ProductService productService;

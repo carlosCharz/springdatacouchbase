@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @RequestMapping("/cars")
 public class CarController {
 
-  protected static final Logger logger = LoggerFactory.getLogger(CarController.class);
+  private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 
   @Autowired
   private CarService carService;

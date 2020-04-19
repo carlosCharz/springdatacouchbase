@@ -28,7 +28,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.PlaceDoc;
 @EnableCouchbaseRepositories(basePackages = {"com.wedevol.springdatacouchbase.core.dao"})
 public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
-  protected static final Logger logger = LoggerFactory.getLogger(CouchbaseConfig.class);
+  private static final Logger logger = LoggerFactory.getLogger(CouchbaseConfig.class);
 
   @Autowired
   private CouchbaseSetting couchbaseSetting;

@@ -15,7 +15,7 @@ import com.couchbase.client.java.repository.annotation.Id;
 public class PlaceDoc implements Serializable {
 
   private static final long serialVersionUID = 3072475211055736282L;
-  protected static final String PLACE_KEY_PREFIX = "place::";
+  private static final String PLACE_KEY_PREFIX = "place::";
 
   @Id
   private String key;
@@ -35,11 +35,6 @@ public class PlaceDoc implements Serializable {
     this.id = id;
     this.name = name;
     this.address = address;
-  }
-
-  public PlaceDoc(Long id, String name) {
-    this.id = id;
-    this.name = name;
   }
 
   public static String getKeyFor(Long id) {

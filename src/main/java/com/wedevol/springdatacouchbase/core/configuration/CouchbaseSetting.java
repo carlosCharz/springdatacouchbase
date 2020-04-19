@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "couchbase")
 public class CouchbaseSetting {
 
-  protected static final Logger logger = LoggerFactory.getLogger(CouchbaseSetting.class);
+  private static final Logger logger = LoggerFactory.getLogger(CouchbaseSetting.class);
 
   private String hostName;
 

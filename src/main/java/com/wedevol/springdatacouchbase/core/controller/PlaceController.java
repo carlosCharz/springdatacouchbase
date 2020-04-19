@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 @RequestMapping("/places")
 public class PlaceController {
 
-  protected static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
+  private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
 
   @Autowired
   private PlaceService placeService;

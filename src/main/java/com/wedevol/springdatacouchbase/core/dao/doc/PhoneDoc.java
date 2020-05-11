@@ -19,111 +19,111 @@ import com.couchbase.client.java.repository.annotation.Id;
 @Document
 public class PhoneDoc implements Serializable {
 
-  private static final long serialVersionUID = 3072475211055736282L;
+    private static final long serialVersionUID = 3072475211055736282L;
 
-  @IdPrefix(order = 0)
-  private String keyPrefix = "ph";
-  @Id
-  @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "::")
-  private String key;
+    @IdPrefix(order = 0)
+    private String keyPrefix = "ph";
+    @Id
+    @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "::")
+    private String key;
 
-  @Field
-  @IdAttribute(order = 0)
-  @NonNull
-  private String id;
+    @Field
+    @IdAttribute(order = 0)
+    @NonNull
+    private String id;
 
-  @Field("mfr")
-  private String manufacturer;
-  @Field
-  private String model;
-  @Field
-  private Integer year;
+    @Field("mfr")
+    private String manufacturer;
+    @Field
+    private String model;
+    @Field
+    private Integer year;
 
-  public PhoneDoc() {}
+    public PhoneDoc() {}
 
-  public static PhoneDoc from(String id) {
-    return new PhoneDoc(id);
-  }
-
-  private PhoneDoc(String id) {
-    super();
-    this.id = id;
-  }
-
-  public PhoneDoc(String model, String manufacturer) {
-    super();
-    this.model = model;
-    this.manufacturer = manufacturer;
-  }
-
-  public String getKey() {
-    return key;
-  }
-
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getManufacturer() {
-    return manufacturer;
-  }
-
-  public void setManufacturer(String manufacturer) {
-    this.manufacturer = manufacturer;
-  }
-
-  public String getModel() {
-    return model;
-  }
-
-  public void setModel(String model) {
-    this.model = model;
-  }
-
-  public Integer getYear() {
-    return year;
-  }
-
-  public void setYear(Integer year) {
-    this.year = year;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + (id == null ? 0 : id.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
+    public static PhoneDoc from(String id) {
+        return new PhoneDoc(id);
     }
-    if (obj == null) {
-      return false;
+
+    private PhoneDoc(String id) {
+        super();
+        this.id = id;
     }
-    if (getClass() != obj.getClass()) {
-      return false;
+
+    public PhoneDoc(String model, String manufacturer) {
+        super();
+        this.model = model;
+        this.manufacturer = manufacturer;
     }
-    PhoneDoc other = (PhoneDoc) obj;
-    if (id == null) {
-      if (other.id != null) {
-        return false;
-      }
-    } else if (!id.equals(other.id)) {
-      return false;
+
+    public String getKey() {
+        return key;
     }
-    return true;
-  }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (id == null ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        PhoneDoc other = (PhoneDoc) obj;
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
 
 }

@@ -16,45 +16,45 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "couchbase")
 public class CouchbaseSetting {
 
-  private static final Logger logger = LoggerFactory.getLogger(CouchbaseSetting.class);
+    private static final Logger logger = LoggerFactory.getLogger(CouchbaseSetting.class);
 
-  private String hostName;
+    private String hostName;
 
-  private String bucketName;
+    private String bucketName;
 
-  private String password;
+    private String password;
 
-  public CouchbaseSetting() {
-    logger.info("Loading Couchbase properties");
-  }
+    public CouchbaseSetting() {
+        logger.info("Loading Couchbase properties");
+    }
 
-  @PostConstruct
-  public void postConstruct() {
-    logger.info("Couchbase properties -> hostName: '{}', bucketName: '{}', password: '{}'", hostName, bucketName,
-        password);
-  }
+    @PostConstruct
+    public void postConstruct() {
+        logger.info("Couchbase properties -> hostName: '{}', bucketName: '{}', password: '{}'", hostName, bucketName,
+                password);
+    }
 
-  public String getHostName() {
-    return hostName;
-  }
+    public String getHostName() {
+        return hostName;
+    }
 
-  public void setHostName(String hostName) {
-    this.hostName = hostName;
-  }
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
 
-  public String getBucketName() {
-    return bucketName;
-  }
+    public String getBucketName() {
+        return bucketName;
+    }
 
-  public void setBucketName(String bucketName) {
-    this.bucketName = bucketName;
-  }
+    public void setBucketName(String bucketName) {
+        this.bucketName = bucketName;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

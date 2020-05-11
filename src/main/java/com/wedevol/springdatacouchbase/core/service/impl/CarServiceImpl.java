@@ -23,25 +23,25 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @Service
 public class CarServiceImpl implements CarService {
 
-  private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
-  // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
-  @Autowired
-  @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
-  private CouchbaseTemplate defaultTemplate;
+    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    @Autowired
+    @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
+    private CouchbaseTemplate defaultTemplate;
 
-  @Override
-  public CarDoc findByKey(Long number, String manufacturer) {
-    CarDoc carDoc = new CarDoc(number, manufacturer);
-    Optional<CarDoc> carObj =
-        Optional.ofNullable(defaultTemplate.findById(defaultTemplate.getGeneratedId(carDoc), CarDoc.class));
-    return carObj.orElseThrow(() -> new ApiException(ErrorType.CAR_NOT_FOUND));
-  }
+    @Override
+    public CarDoc findByKey(Long number, String manufacturer) {
+        CarDoc carDoc = new CarDoc(number, manufacturer);
+        Optional<CarDoc> carObj =
+                Optional.ofNullable(defaultTemplate.findById(defaultTemplate.getGeneratedId(carDoc), CarDoc.class));
+        return carObj.orElseThrow(() -> new ApiException(ErrorType.CAR_NOT_FOUND));
+    }
 
-  @Override
-  public void create(CarDoc car) {
-    defaultTemplate.insert(car);
-    logger.info("car key: {}", car.getKey());
-  }
+    @Override
+    public void create(CarDoc car) {
+        defaultTemplate.insert(car);
+        logger.info("car key: {}", car.getKey());
+    }
 
 }

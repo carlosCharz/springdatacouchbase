@@ -15,122 +15,122 @@ import com.couchbase.client.java.repository.annotation.Id;
 @Document
 public class UserDoc implements Serializable {
 
-  private static final long serialVersionUID = 3072475211055736282L;
-  private static final String USER_KEY_PREFIX = "user::";
+    private static final long serialVersionUID = 3072475211055736282L;
+    private static final String USER_KEY_PREFIX = "user::";
 
-  @Id
-  private String key;
+    @Id
+    private String key;
 
-  @Field
-  private Long id;
-  @Field
-  private String name;
-  @Field
-  private List<String> nicknames;
-  @Field
-  private Integer age;
-  @Field
-  private String email;
+    @Field
+    private Long id;
+    @Field
+    private String name;
+    @Field
+    private List<String> nicknames;
+    @Field
+    private Integer age;
+    @Field
+    private String email;
 
-  public UserDoc() {}
+    public UserDoc() {}
 
-  public UserDoc(String key, Long id, String name, List<String> nicknames, Integer age, String email) {
-    super();
-    this.key = key;
-    this.id = id;
-    this.name = name;
-    this.nicknames = nicknames;
-    this.age = age;
-    this.email = email;
-  }
-
-  public UserDoc(Long id, String name, List<String> nicknames) {
-    this.id = id;
-    this.name = name;
-    this.nicknames = nicknames;
-  }
-
-  public static String getKeyFor(Long id) {
-    return USER_KEY_PREFIX + id;
-  }
-
-  public String getKey() {
-    return key;
-  }
-
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-    this.key = UserDoc.getKeyFor(id);
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public List<String> getNicknames() {
-    return nicknames;
-  }
-
-  public void setNicknames(List<String> nicknames) {
-    this.nicknames = nicknames;
-  }
-
-  public Integer getAge() {
-    return age;
-  }
-
-  public void setAge(Integer age) {
-    this.age = age;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + (id == null ? 0 : id.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
+    public UserDoc(String key, Long id, String name, List<String> nicknames, Integer age, String email) {
+        super();
+        this.key = key;
+        this.id = id;
+        this.name = name;
+        this.nicknames = nicknames;
+        this.age = age;
+        this.email = email;
     }
-    if (obj == null) {
-      return false;
+
+    public UserDoc(Long id, String name, List<String> nicknames) {
+        this.id = id;
+        this.name = name;
+        this.nicknames = nicknames;
     }
-    if (getClass() != obj.getClass()) {
-      return false;
+
+    public static String getKeyFor(Long id) {
+        return USER_KEY_PREFIX + id;
     }
-    UserDoc other = (UserDoc) obj;
-    if (id == null) {
-      if (other.id != null) {
-        return false;
-      }
-    } else if (!id.equals(other.id)) {
-      return false;
+
+    public String getKey() {
+        return key;
     }
-    return true;
-  }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+        this.key = UserDoc.getKeyFor(id);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getNicknames() {
+        return nicknames;
+    }
+
+    public void setNicknames(List<String> nicknames) {
+        this.nicknames = nicknames;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (id == null ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        UserDoc other = (UserDoc) obj;
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
 
 }

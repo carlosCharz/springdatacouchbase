@@ -24,24 +24,24 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 @RequestMapping("/products")
 public class ProductController {
 
-  private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-  @Autowired
-  private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public ProductDoc findById(@PathVariable String id) {
-    logger.info("Find product by id: {}", id);
-    return productService.findById(id);
-  }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDoc findById(@PathVariable String id) {
+        logger.info("Find product by id: {}", id);
+        return productService.findById(id);
+    }
 
-  @RequestMapping(value = "", method = RequestMethod.POST)
-  @ResponseStatus(HttpStatus.CREATED)
-  // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
-  public void create(@Valid @RequestBody ProductDoc product) {
-    logger.info("Create product");
-    productService.create(product);
-  }
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
+    public void create(@Valid @RequestBody ProductDoc product) {
+        logger.info("Create product");
+        productService.create(product);
+    }
 
 }

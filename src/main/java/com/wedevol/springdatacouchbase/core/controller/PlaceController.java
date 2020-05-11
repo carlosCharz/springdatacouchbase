@@ -24,25 +24,26 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 @RequestMapping("/places")
 public class PlaceController {
 
-  private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
 
-  @Autowired
-  private PlaceService placeService;
+    @Autowired
+    private PlaceService placeService;
 
-  @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public PlaceDoc findById(@PathVariable Long placeId) {
-    logger.info("Find place by id: {}", placeId);
-    return placeService.findById(placeId);
-  }
+    @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public PlaceDoc findById(@PathVariable Long placeId) {
+        logger.info("Find place by id: {}", placeId);
+        return placeService.findById(placeId);
+    }
 
-  @RequestMapping(value = "", method = RequestMethod.POST)
-  @ResponseStatus(HttpStatus.CREATED)
-  // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just for
-  // the example.
-  public PlaceDoc create(@Valid @RequestBody PlaceDoc place) {
-    logger.info("Create place");
-    return placeService.create(place);
-  }
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just
+    // for
+    // the example.
+    public PlaceDoc create(@Valid @RequestBody PlaceDoc place) {
+        logger.info("Create place");
+        return placeService.create(place);
+    }
 
 }

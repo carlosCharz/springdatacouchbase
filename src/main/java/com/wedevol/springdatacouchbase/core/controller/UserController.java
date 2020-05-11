@@ -28,111 +28,112 @@ import com.wedevol.springdatacouchbase.core.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-  private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-  @Autowired
-  private UserService userService;
+    @Autowired
+    private UserService userService;
 
-  @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public UserDoc findById(@PathVariable Long userId) {
-    logger.info("Find user by id: {}", userId);
-    return userService.findById(userId);
-  }
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public UserDoc findById(@PathVariable Long userId) {
+        logger.info("Find user by id: {}", userId);
+        return userService.findById(userId);
+    }
 
-  @RequestMapping(value = "", method = RequestMethod.POST)
-  @ResponseStatus(HttpStatus.CREATED)
-  // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just for
-  // the example.
-  public UserDoc create(@Valid @RequestBody UserDoc user) {
-    logger.info("Create user");
-    return userService.create(user);
-  }
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just
+    // for
+    // the example.
+    public UserDoc create(@Valid @RequestBody UserDoc user) {
+        logger.info("Create user");
+        return userService.create(user);
+    }
 
-  @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
-  public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
-    logger.info("Update user: {}", userId);
-    userService.update(userId, user);
-  }
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
+    public void update(@PathVariable Long userId, @Valid @RequestBody UserDoc user) {
+        logger.info("Update user: {}", userId);
+        userService.update(userId, user);
+    }
 
-  @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable Long userId) {
-    logger.info("Delete user: {}", userId);
-    userService.delete(userId);
-  }
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long userId) {
+        logger.info("Delete user: {}", userId);
+        userService.delete(userId);
+    }
 
-  @RequestMapping(value = "/{userId}/exists", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public Boolean exists(@PathVariable Long userId) {
-    logger.info("Exists user {}?", userId);
-    return userService.exists(userId);
-  }
+    @RequestMapping(value = "/{userId}/exists", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean exists(@PathVariable Long userId) {
+        logger.info("Exists user {}?", userId);
+        return userService.exists(userId);
+    }
 
-  @RequestMapping(value = "/find/email", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public UserDoc findByEmail(@RequestParam(value = "email") String email) {
-    logger.info("Find user by email: {}", email);
-    return userService.findByEmail(email);
-  }
+    @RequestMapping(value = "/find/email", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public UserDoc findByEmail(@RequestParam(value = "email") String email) {
+        logger.info("Find user by email: {}", email);
+        return userService.findByEmail(email);
+    }
 
-  @RequestMapping(value = "/find/nickname", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
-    logger.info("Find users by nickname: {}", nickname);
-    return userService.findUsersByNickname(nickname);
-  }
+    @RequestMapping(value = "/find/nickname", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDoc> findUsersByNickname(@RequestParam(value = "nickname") String nickname) {
+        logger.info("Find users by nickname: {}", nickname);
+        return userService.findUsersByNickname(nickname);
+    }
 
-  @RequestMapping(value = "/find/name", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<UserBasicDoc> findUsersByName(@RequestParam(value = "name") String name) {
-    logger.info("Find users by name: {}", name);
-    return userService.findUsersByName(name);
-  }
+    @RequestMapping(value = "/find/name", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserBasicDoc> findUsersByName(@RequestParam(value = "name") String name) {
+        logger.info("Find users by name: {}", name);
+        return userService.findUsersByName(name);
+    }
 
-  @RequestMapping(value = "/find/all", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<UserDoc> findAll() {
-    logger.info("Find all users");
-    return userService.findAll();
-  }
+    @RequestMapping(value = "/find/all", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDoc> findAll() {
+        logger.info("Find all users");
+        return userService.findAll();
+    }
 
-  @RequestMapping(value = "/count/all", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public Integer countAll() {
-    logger.info("Count all users");
-    return userService.countAll();
-  }
+    @RequestMapping(value = "/count/all", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Integer countAll() {
+        logger.info("Count all users");
+        return userService.countAll();
+    }
 
-  @RequestMapping(value = "/delete/age", method = RequestMethod.POST)
-  @ResponseStatus(HttpStatus.CREATED)
-  public List<UserDoc> deleteUsersByAge(@RequestParam(value = "age") Integer age) {
-    logger.info("Delete users by age: {}", age);
-    return userService.deleteUsersByAge(age);
-  }
+    @RequestMapping(value = "/delete/age", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<UserDoc> deleteUsersByAge(@RequestParam(value = "age") Integer age) {
+        logger.info("Delete users by age: {}", age);
+        return userService.deleteUsersByAge(age);
+    }
 
-  @RequestMapping(value = "/find/name/coverindex", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(
-      @RequestParam(value = "name") String name) {
-    logger.info("Find users by name using template N1ql projection with cover index: {}", name);
-    return userService.findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(name);
-  }
+    @RequestMapping(value = "/find/name/coverindex", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(
+            @RequestParam(value = "name") String name) {
+        logger.info("Find users by name using template N1ql projection with cover index: {}", name);
+        return userService.findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(name);
+    }
 
-  @RequestMapping(value = "/find/ids", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<Long> findAllUserIdsUsingTemplateN1ql() {
-    logger.info("Find all user ids with template N1ql");
-    return userService.findAllUserIdsUsingTemplateN1ql();
-  }
+    @RequestMapping(value = "/find/ids", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Long> findAllUserIdsUsingTemplateN1ql() {
+        logger.info("Find all user ids with template N1ql");
+        return userService.findAllUserIdsUsingTemplateN1ql();
+    }
 
-  @RequestMapping(value = "/find/usekeys", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<UserDoc> findUsersUsingUseKeys(@RequestParam(value = "ids") List<Long> userIds) {
-    logger.info("Find users by keys using template projection N1ql: {}",
-        userIds.stream().map(id -> Long.toString(id)).collect(Collectors.joining(",")));
-    return userService.findUsersUsingUseKeys(userIds);
-  }
+    @RequestMapping(value = "/find/usekeys", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDoc> findUsersUsingUseKeys(@RequestParam(value = "ids") List<Long> userIds) {
+        logger.info("Find users by keys using template projection N1ql: {}",
+                userIds.stream().map(id -> Long.toString(id)).collect(Collectors.joining(",")));
+        return userService.findUsersUsingUseKeys(userIds);
+    }
 }

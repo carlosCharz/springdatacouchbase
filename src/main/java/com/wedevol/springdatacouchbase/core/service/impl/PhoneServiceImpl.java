@@ -23,29 +23,30 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 @Service
 public class PhoneServiceImpl implements PhoneService {
 
-  private static final Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
 
-  @Autowired
-  private PhoneRepository phoneRepo;
+    @Autowired
+    private PhoneRepository phoneRepo;
 
-  // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
-  @Autowired
-  @Qualifier("placeBucketTemplate")
-  private CouchbaseTemplate placeBucketTemplate; // used to get the key (they apply the prefix and suffix from the doc)
+    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    @Autowired
+    @Qualifier("placeBucketTemplate")
+    private CouchbaseTemplate placeBucketTemplate; // used to get the key (they apply the prefix and suffix from the
+                                                   // doc)
 
-  @Override
-  public PhoneDoc findById(String id) {
-    PhoneDoc phoneDoc = PhoneDoc.from(id);
-    Optional<PhoneDoc> phoneObj = phoneRepo.findById(placeBucketTemplate.getGeneratedId(phoneDoc));
-    return phoneObj.orElseThrow(() -> new ApiException(ErrorType.PHONE_NOT_FOUND));
-  }
+    @Override
+    public PhoneDoc findById(String id) {
+        PhoneDoc phoneDoc = PhoneDoc.from(id);
+        Optional<PhoneDoc> phoneObj = phoneRepo.findById(placeBucketTemplate.getGeneratedId(phoneDoc));
+        return phoneObj.orElseThrow(() -> new ApiException(ErrorType.PHONE_NOT_FOUND));
+    }
 
-  @Override
-  public PhoneDoc create(PhoneDoc phone) {
-    phone.setId(Util.uuid());
-    PhoneDoc phoneFromDb = phoneRepo.save(phone);
-    logger.info("phone key: {}", phoneFromDb.getKey());
-    return phoneFromDb;
-  }
+    @Override
+    public PhoneDoc create(PhoneDoc phone) {
+        phone.setId(Util.uuid());
+        PhoneDoc phoneFromDb = phoneRepo.save(phone);
+        logger.info("phone key: {}", phoneFromDb.getKey());
+        return phoneFromDb;
+    }
 
 }

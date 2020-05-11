@@ -12,35 +12,35 @@ import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
 
 public interface UserService {
 
-  // CRUD repository interface
+    // CRUD repository interface
 
-  UserDoc findById(Long id);
+    UserDoc findById(Long id);
 
-  UserDoc create(UserDoc user);
+    UserDoc create(UserDoc user);
 
-  void update(Long id, UserDoc user);
+    void update(Long id, UserDoc user);
 
-  void delete(Long id);
+    void delete(Long id);
 
-  Boolean exists(Long id);
+    Boolean exists(Long id);
 
-  // Custom methods
+    // Custom methods
 
-  UserDoc findByEmail(String email);
+    UserDoc findByEmail(String email);
 
-  List<UserDoc> findUsersByNickname(String nickname);
+    List<UserDoc> findUsersByNickname(String nickname);
 
-  List<UserBasicDoc> findUsersByName(String name);
+    List<UserBasicDoc> findUsersByName(String name);
 
-  List<UserDoc> findAll();
+    List<UserDoc> findAll();
 
-  Integer countAll();
+    Integer countAll();
 
-  List<UserDoc> deleteUsersByAge(Integer age);
+    List<UserDoc> deleteUsersByAge(Integer age);
 
-  List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(String name);
+    List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(String name);
 
-  List<Long> findAllUserIdsUsingTemplateN1ql();
+    List<Long> findAllUserIdsUsingTemplateN1ql();
 
-  List<UserDoc> findUsersUsingUseKeys(List<Long> userIds);
+    List<UserDoc> findUsersUsingUseKeys(List<Long> userIds);
 }

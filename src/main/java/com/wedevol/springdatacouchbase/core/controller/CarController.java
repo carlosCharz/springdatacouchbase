@@ -24,24 +24,24 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @RequestMapping("/cars")
 public class CarController {
 
-  private static final Logger logger = LoggerFactory.getLogger(CarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 
-  @Autowired
-  private CarService carService;
+    @Autowired
+    private CarService carService;
 
-  @RequestMapping(value = "/{number}/{manufacturer}", method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public CarDoc findByKey(@PathVariable Long number, @PathVariable String manufacturer) {
-    logger.info("Find car by key: {}-{}", number, manufacturer);
-    return carService.findByKey(number, manufacturer);
-  }
+    @RequestMapping(value = "/{number}/{manufacturer}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public CarDoc findByKey(@PathVariable Long number, @PathVariable String manufacturer) {
+        logger.info("Find car by key: {}-{}", number, manufacturer);
+        return carService.findByKey(number, manufacturer);
+    }
 
-  @RequestMapping(value = "", method = RequestMethod.POST)
-  @ResponseStatus(HttpStatus.CREATED)
-  // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
-  public void create(@Valid @RequestBody CarDoc car) {
-    logger.info("Create car");
-    carService.create(car);
-  }
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
+    public void create(@Valid @RequestBody CarDoc car) {
+        logger.info("Create car");
+        carService.create(car);
+    }
 
 }

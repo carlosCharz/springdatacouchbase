@@ -24,23 +24,23 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-  private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-  // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
-  @Autowired
-  @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
-  private CouchbaseTemplate defaultTemplate;
+    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    @Autowired
+    @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
+    private CouchbaseTemplate defaultTemplate;
 
-  @Override
-  public ProductDoc findById(String id) { // this is the key
-    Optional<ProductDoc> productObj = Optional.ofNullable(defaultTemplate.findById(id, ProductDoc.class));
-    return productObj.orElseThrow(() -> new ApiException(ErrorType.PRODUCT_NOT_FOUND));
-  }
+    @Override
+    public ProductDoc findById(String id) { // this is the key
+        Optional<ProductDoc> productObj = Optional.ofNullable(defaultTemplate.findById(id, ProductDoc.class));
+        return productObj.orElseThrow(() -> new ApiException(ErrorType.PRODUCT_NOT_FOUND));
+    }
 
-  @Override
-  public void create(ProductDoc product) {
-    defaultTemplate.insert(product);
-    logger.info("product key: {}", product.getId());
-  }
+    @Override
+    public void create(ProductDoc product) {
+        defaultTemplate.insert(product);
+        logger.info("product key: {}", product.getId());
+    }
 
 }

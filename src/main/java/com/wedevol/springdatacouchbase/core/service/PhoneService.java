@@ -10,7 +10,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.PhoneDoc;
 
 public interface PhoneService {
 
-  PhoneDoc findById(String id);
+    PhoneDoc findById(String id);
 
-  PhoneDoc create(PhoneDoc phone);
+    PhoneDoc create(PhoneDoc phone);
 }

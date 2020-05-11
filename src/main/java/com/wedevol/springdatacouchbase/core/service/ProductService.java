@@ -10,7 +10,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.ProductDoc;
 
 public interface ProductService {
 
-  ProductDoc findById(String id);
+    ProductDoc findById(String id);
 
-  void create(ProductDoc product);
+    void create(ProductDoc product);
 }

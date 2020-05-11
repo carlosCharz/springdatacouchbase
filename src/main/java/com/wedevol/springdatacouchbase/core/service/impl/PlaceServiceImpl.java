@@ -21,26 +21,26 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 @Service
 public class PlaceServiceImpl implements PlaceService {
 
-  private static final Logger logger = LoggerFactory.getLogger(PlaceServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(PlaceServiceImpl.class);
 
-  @Autowired
-  private PlaceRepository placeRepo;
+    @Autowired
+    private PlaceRepository placeRepo;
 
-  @Autowired
-  private PlaceCounterRepository placeCounterRepo;
+    @Autowired
+    private PlaceCounterRepository placeCounterRepo;
 
-  @Override
-  public PlaceDoc findById(Long id) {
-    Optional<PlaceDoc> placeObj = placeRepo.findById(PlaceDoc.getKeyFor(id));
-    return placeObj.orElseThrow(() -> new ApiException(ErrorType.PLACE_NOT_FOUND));
-  }
+    @Override
+    public PlaceDoc findById(Long id) {
+        Optional<PlaceDoc> placeObj = placeRepo.findById(PlaceDoc.getKeyFor(id));
+        return placeObj.orElseThrow(() -> new ApiException(ErrorType.PLACE_NOT_FOUND));
+    }
 
-  @Override
-  public PlaceDoc create(PlaceDoc place) {
-    place.setId(placeCounterRepo.counter()); // internally we set the key with that id
-    PlaceDoc placeFromDb = placeRepo.save(place);
-    logger.info("place key: {}", placeFromDb.getKey());
-    return placeFromDb;
-  }
+    @Override
+    public PlaceDoc create(PlaceDoc place) {
+        place.setId(placeCounterRepo.counter()); // internally we set the key with that id
+        PlaceDoc placeFromDb = placeRepo.save(place);
+        logger.info("place key: {}", placeFromDb.getKey());
+        return placeFromDb;
+    }
 
 }

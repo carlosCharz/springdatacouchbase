@@ -8,12 +8,12 @@ package com.wedevol.springdatacouchbase.core.exception;
  */
 public abstract class BaseRuntimeException extends RuntimeException {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  public BaseRuntimeException(String message) {
-    super(message);
-  }
+    public BaseRuntimeException(String message) {
+        super(message);
+    }
 
-  public abstract Integer getCode();
+    public abstract Integer getCode();
 
 }

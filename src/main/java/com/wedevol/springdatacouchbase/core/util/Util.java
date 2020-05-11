@@ -11,16 +11,16 @@ import java.util.UUID;
 
 public class Util {
 
-  public static boolean isNullOrEmpty(String param) {
-    return param == null || param.trim().length() == 0;
-  }
+    public static boolean isNullOrEmpty(String param) {
+        return param == null || param.trim().length() == 0;
+    }
 
-  public static boolean isNullOrEmpty(List<?> element) {
-    return element == null || element.isEmpty();
-  }
+    public static boolean isNullOrEmpty(List<?> element) {
+        return element == null || element.isEmpty();
+    }
 
-  public static String uuid() {
-    return UUID.randomUUID().toString();
-  }
+    public static String uuid() {
+        return UUID.randomUUID().toString();
+    }
 
 }

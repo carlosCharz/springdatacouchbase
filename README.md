@@ -15,6 +15,7 @@ This is my template for a spring boot project that uses spring data and Couchbas
 3. Tomcat 8.5.x
 4. Couchbase 5.x
 5. Maven
+6. JUnit 5
 
 ## Tests
 

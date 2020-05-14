@@ -3,6 +3,9 @@ All notable changes to the spring data Couchbase project will be documented in t
 
 ## [UNRELEASED]
 
+## Modified
+- Migrate tests from JUnit 4 to JUnit 5
+
 
 -------------------------------------------------------------------------------------
 

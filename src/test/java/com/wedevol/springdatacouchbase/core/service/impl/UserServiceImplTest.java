@@ -3,16 +3,18 @@ package com.wedevol.springdatacouchbase.core.service.impl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import com.wedevol.springdatacouchbase.core.dao.UserRepository;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserBasicDoc;
 import com.wedevol.springdatacouchbase.core.dao.doc.UserDoc;
@@ -24,7 +26,7 @@ import com.wedevol.springdatacouchbase.core.exception.ApiException;
  * @author Charz++
  */
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
     private static final Long USER_ONE_ID = 1L;
@@ -39,7 +41,7 @@ public class UserServiceImplTest {
     private UserDoc userDoc;
     private UserBasicDoc userBasicDoc;
 
-    @Before
+    @BeforeEach // For example, to reinitialize some class attributes used by the methods.
     public void init() {
         userDoc = new UserDoc();
         userDoc.setId(USER_ONE_ID);
@@ -54,6 +56,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Find one and user exists")
     public void findOneAndUserExists() {
         // Data preparation
         Mockito.when(repoMock.findById(USER_ONE_KEY)).thenReturn(Optional.of(userDoc));
@@ -62,43 +65,48 @@ public class UserServiceImplTest {
         UserDoc user = userService.findById(USER_ONE_ID);
 
         // Verification
-        Assert.assertNotNull(user);
+        Assertions.assertNotNull(user);
         Mockito.verify(repoMock, Mockito.times(1)).findById(ArgumentMatchers.anyString());
         Mockito.verifyNoMoreInteractions(repoMock);
     }
 
-    @Test(expected = ApiException.class)
+    @Test
     public void findOneAndUserIsNull() {
         // Method call
-        UserDoc user = userService.findById(USER_ONE_ID);
-
+        Assertions.assertThrows(ApiException.class, () -> {
+            UserDoc user = userService.findById(USER_ONE_ID);
+            Assertions.assertNull(user);
+        });
         // Verification
-        Assert.assertNull(user);
         Mockito.verify(repoMock, Mockito.times(1)).findById(ArgumentMatchers.anyString());
         Mockito.verifyNoMoreInteractions(repoMock);
     }
 
-    @Test(expected = ApiException.class)
+    @Test
     public void createUserAndUserAlreadyExists() {
         // Data preparation
         Mockito.when(repoMock.findByEmail("carlos@yopmail.com")).thenReturn(userDoc);
 
         // Method call
-        UserDoc user = userService.create(userDoc);
+        Assertions.assertThrows(ApiException.class, () -> {
+            UserDoc user = userService.create(userDoc);
+            Assertions.assertNull(user);
+        });
 
         // Verification
-        Assert.assertNull(user);
         Mockito.verify(repoMock, Mockito.times(1)).findByEmail(ArgumentMatchers.anyString());
         Mockito.verifyNoMoreInteractions(repoMock);
     }
 
-    @Test(expected = ApiException.class)
+    @Test
     public void updateUserAndUserNotExists() {
         // Method call
-        userService.update(USER_ONE_ID, userDoc);
+        Assertions.assertThrows(ApiException.class, () -> {
+            userService.update(USER_ONE_ID, userDoc);
+        });
 
         // Verification
-        Mockito.verify(repoMock, Mockito.times(1)).findByEmail(ArgumentMatchers.anyString());
+        Mockito.verify(repoMock, Mockito.times(1)).findById(ArgumentMatchers.anyString());
         Mockito.verifyNoMoreInteractions(repoMock);
     }
 
@@ -112,7 +120,7 @@ public class UserServiceImplTest {
         List<UserDoc> userList = userService.findUsersByNickname("charz");
 
         // Verification
-        Assert.assertThat(userList, Matchers.hasSize(3));
+        MatcherAssert.assertThat(userList, Matchers.hasSize(3));
         Mockito.verify(repoMock, Mockito.times(1)).findUsersWithNickname(ArgumentMatchers.anyString());
         Mockito.verifyNoMoreInteractions(repoMock);
     }
@@ -127,7 +135,7 @@ public class UserServiceImplTest {
         List<UserBasicDoc> userList = userService.findUsersByName("CARLOS");
 
         // Verification
-        Assert.assertThat(userList, Matchers.hasSize(1));
+        MatcherAssert.assertThat(userList, Matchers.hasSize(1));
         Mockito.verify(repoMock, Mockito.times(1)).findUsersWithName(ArgumentMatchers.anyString());
         Mockito.verifyNoMoreInteractions(repoMock);
     }
@@ -142,7 +150,7 @@ public class UserServiceImplTest {
         List<UserDoc> userList = userService.findAll();
 
         // Verification
-        Assert.assertThat(userList, Matchers.hasSize(3));
+        MatcherAssert.assertThat(userList, Matchers.hasSize(3));
         Mockito.verify(repoMock, Mockito.times(1)).findAllUsers();
         Mockito.verifyNoMoreInteractions(repoMock);
     }
@@ -157,7 +165,7 @@ public class UserServiceImplTest {
         Integer usersQty = userService.countAll();
 
         // Verification
-        Assert.assertThat(usersQty, Matchers.is(3));
+        MatcherAssert.assertThat(usersQty, Matchers.is(3));
         Mockito.verify(repoMock, Mockito.times(1)).countAll();
         Mockito.verifyNoMoreInteractions(repoMock);
     }
@@ -172,7 +180,7 @@ public class UserServiceImplTest {
         List<UserDoc> usersDeleted = userService.deleteUsersByAge(18);
 
         // Verification
-        Assert.assertThat(usersDeleted.size(), Matchers.is(1));
+        MatcherAssert.assertThat(usersDeleted.size(), Matchers.is(1));
         Mockito.verify(repoMock, Mockito.times(1)).deleteUsersWithAge(ArgumentMatchers.anyInt());
         Mockito.verifyNoMoreInteractions(repoMock);
     }

@@ -43,8 +43,7 @@ public class UserController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     // TODO it is not a good practice to expose the DB entity (the doc) in the request and the response. This is just
-    // for
-    // the example.
+    // for the example.
     public UserDoc create(@Valid @RequestBody UserDoc user) {
         logger.info("Create user");
         return userService.create(user);

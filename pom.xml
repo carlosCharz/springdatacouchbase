@@ -6,8 +6,8 @@
 	<artifactId>springdatacouchbase</artifactId>
 	<version>1.0.5</version>
 	<packaging>war</packaging>
-	<name>Spring Data + Couchbase + Tests</name>
-	<description>Spring boot project that uses spring data and couchbase. It includes integration and unit tests.</description>
+	<name>Spring Data Couchbase + Tests</name>
+	<description>Spring boot project that uses spring data Couchbase 3.x. It includes integration and unit tests.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.6.RELEASE</version>
+		<version>2.2.7.RELEASE</version>
 		<!-- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Release-Notes -->
 		<!-- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1.0-M1-Release-Notes -->
 		<!-- https://github.com/spring-projects/spring-booT/wiki/Spring-Boot-2.2.0-M1-Release-Notes -->

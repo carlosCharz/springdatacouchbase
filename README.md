@@ -1,6 +1,6 @@
-# Spring Data with Couchbase + Tests
+# Spring Data Couchbase 3.x + Tests
 
-This is my template for a spring boot project that uses spring data and Couchbase. It includes integration and unit tests.
+This is my template for a spring boot project that uses spring data Couchbase 3.x. It includes integration and unit tests.
 
 ## Architecture
  

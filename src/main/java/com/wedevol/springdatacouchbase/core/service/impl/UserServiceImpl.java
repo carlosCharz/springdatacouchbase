@@ -34,7 +34,7 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepo;
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setId(userCounterRepo.counter()); // internally we set the key with that id
         UserDoc userFromDb = userRepo.save(user);
-        logger.info("user key: {}", userFromDb.getKey());
+        LOG.info("user key: {}", userFromDb.getKey());
         return userFromDb;
     }
 
@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDoc> deleteUsersByAge(Integer age) {
         List<UserDoc> userDocs = userRepo.deleteUsersWithAge(age);
-        logger.info("size: {}", userDocs.size());
+        LOG.info("size: {}", userDocs.size());
         return userDocs;
     }
 
@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
         N1qlParams n1qlParams = N1qlParams.build().pretty(false); // TODO add more configurations
         List<UserBasicDoc> userDocs = defaultTemplate.findByN1QLProjection(
                 N1qlQuery.parameterized(queryStr, placeholderValues, n1qlParams), UserBasicDoc.class);
-        logger.info("size: {}", userDocs.size());
+        LOG.info("size: {}", userDocs.size());
         return userDocs;
     }
 
@@ -153,12 +153,12 @@ public class UserServiceImpl implements UserService {
                 "SELECT u.id AS userId FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc'";
         N1qlQueryResult result = defaultTemplate.queryN1QL(N1qlQuery.simple(queryStr));
         if (!result.errors().isEmpty()) {
-            logger.error("Error running query findAllUserIdsUsingTemplateN1ql()");
+            LOG.error("Error running query findAllUserIdsUsingTemplateN1ql()");
             return Collections.emptyList();
         }
         List<Long> userIds =
                 result.allRows().stream().map(row -> row.value().getLong("userId")).collect(Collectors.toList());
-        logger.info("size: {}", userIds.size());
+        LOG.info("size: {}", userIds.size());
         return userIds;
     }
 
@@ -173,7 +173,7 @@ public class UserServiceImpl implements UserService {
         N1qlParams n1qlParams = N1qlParams.build().pretty(false); // TODO add more configurations
         List<UserDoc> userDocs = defaultTemplate
                 .findByN1QL(N1qlQuery.parameterized(queryStr, placeholderValues, n1qlParams), UserDoc.class);
-        logger.info("size: {}", userDocs.size());
+        LOG.info("size: {}", userDocs.size());
         return userDocs;
     }
 

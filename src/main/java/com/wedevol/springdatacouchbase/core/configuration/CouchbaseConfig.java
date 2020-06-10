@@ -28,26 +28,26 @@ import com.wedevol.springdatacouchbase.core.dao.doc.PlaceDoc;
 @EnableCouchbaseRepositories(basePackages = {"com.wedevol.springdatacouchbase.core.dao"})
 public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(CouchbaseConfig.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CouchbaseConfig.class);
 
     @Autowired
     private CouchbaseSetting couchbaseSetting;
 
     @Override
     protected List<String> getBootstrapHosts() {
-        logger.info("Registering host '{}' for couchbase cluster", couchbaseSetting.getHostName());
+        LOG.info("Registering host '{}' for couchbase cluster", couchbaseSetting.getHostName());
         return Arrays.asList(couchbaseSetting.getHostName());
     }
 
     @Override
     protected String getBucketName() {
-        logger.info("Opening bucket '{}'", couchbaseSetting.getBucketName());
+        LOG.info("Opening bucket '{}'", couchbaseSetting.getBucketName());
         return couchbaseSetting.getBucketName();
     }
 
     @Override
     protected String getBucketPassword() {
-        logger.info("Get bucket password '{}'", couchbaseSetting.getPassword());
+        LOG.info("Get bucket password '{}'", couchbaseSetting.getPassword());
         return couchbaseSetting.getPassword();
     }
 

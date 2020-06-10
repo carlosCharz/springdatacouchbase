@@ -23,7 +23,7 @@ import com.wedevol.springdatacouchbase.core.util.Util;
 @Service
 public class PhoneServiceImpl implements PhoneService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PhoneServiceImpl.class);
 
     @Autowired
     private PhoneRepository phoneRepo;
@@ -44,7 +44,7 @@ public class PhoneServiceImpl implements PhoneService {
     public PhoneDoc create(PhoneDoc phone) {
         phone.setId(Util.uuid());
         PhoneDoc phoneFromDb = phoneRepo.save(phone);
-        logger.info("phone key: {}", phoneFromDb.getKey());
+        LOG.info("phone key: {}", phoneFromDb.getKey());
         return phoneFromDb;
     }
 

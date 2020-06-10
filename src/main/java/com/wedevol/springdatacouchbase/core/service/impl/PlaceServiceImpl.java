@@ -21,7 +21,7 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 @Service
 public class PlaceServiceImpl implements PlaceService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlaceServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PlaceServiceImpl.class);
 
     @Autowired
     private PlaceRepository placeRepo;
@@ -39,7 +39,7 @@ public class PlaceServiceImpl implements PlaceService {
     public PlaceDoc create(PlaceDoc place) {
         place.setId(placeCounterRepo.counter()); // internally we set the key with that id
         PlaceDoc placeFromDb = placeRepo.save(place);
-        logger.info("place key: {}", placeFromDb.getKey());
+        LOG.info("place key: {}", placeFromDb.getKey());
         return placeFromDb;
     }
 

@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.PlaceService;
 @RequestMapping("/places")
 public class PlaceController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PlaceController.class);
 
     @Autowired
     private PlaceService placeService;
@@ -32,7 +32,7 @@ public class PlaceController {
     @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public PlaceDoc findById(@PathVariable Long placeId) {
-        logger.info("Find place by id: {}", placeId);
+        LOG.info("Find place by id: {}", placeId);
         return placeService.findByIdOrThrow(placeId);
     }
 
@@ -42,7 +42,7 @@ public class PlaceController {
     // for
     // the example.
     public PlaceDoc create(@Valid @RequestBody PlaceDoc place) {
-        logger.info("Create place");
+        LOG.info("Create place");
         return placeService.create(place);
     }
 

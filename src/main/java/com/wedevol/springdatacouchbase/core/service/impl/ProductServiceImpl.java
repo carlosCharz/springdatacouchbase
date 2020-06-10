@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void create(ProductDoc product) {
         defaultTemplate.insert(product);
-        logger.info("product key: {}", product.getId());
+        LOG.info("product key: {}", product.getId());
     }
 
 }

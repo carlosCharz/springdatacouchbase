@@ -24,7 +24,7 @@ import com.wedevol.springdatacouchbase.core.service.PhoneService;
 @RequestMapping("/phones")
 public class PhoneController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PhoneController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PhoneController.class);
 
     @Autowired
     private PhoneService phoneService;
@@ -32,7 +32,7 @@ public class PhoneController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public PhoneDoc findById(@PathVariable String id) {
-        logger.info("Find phone by id: {}", id);
+        LOG.info("Find phone by id: {}", id);
         return phoneService.findByIdOrThrow(id);
     }
 
@@ -40,7 +40,7 @@ public class PhoneController {
     @ResponseStatus(HttpStatus.CREATED)
     // TODO it is not a good practice to expose the DB entity (the doc) in the request. This is just for the example.
     public void create(@Valid @RequestBody PhoneDoc phone) {
-        logger.info("Create phone");
+        LOG.info("Create phone");
         phoneService.create(phone);
     }
 

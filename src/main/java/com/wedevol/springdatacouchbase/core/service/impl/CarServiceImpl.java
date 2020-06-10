@@ -23,7 +23,7 @@ import com.wedevol.springdatacouchbase.core.service.CarService;
 @Service
 public class CarServiceImpl implements CarService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CarServiceImpl.class);
 
     // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
@@ -41,7 +41,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void create(CarDoc car) {
         defaultTemplate.insert(car);
-        logger.info("car key: {}", car.getKey());
+        LOG.info("car key: {}", car.getKey());
     }
 
 }

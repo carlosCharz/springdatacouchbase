@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "couchbase")
 public class CouchbaseSetting {
 
-    private static final Logger logger = LoggerFactory.getLogger(CouchbaseSetting.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CouchbaseSetting.class);
 
     private String hostName;
 
@@ -25,12 +25,12 @@ public class CouchbaseSetting {
     private String password;
 
     public CouchbaseSetting() {
-        logger.info("Loading Couchbase properties");
+        LOG.info("Loading Couchbase properties");
     }
 
     @PostConstruct
     public void postConstruct() {
-        logger.info("Couchbase properties -> hostName: '{}', bucketName: '{}', password: '{}'", hostName, bucketName,
+        LOG.info("Couchbase properties -> hostName: '{}', bucketName: '{}', password: '{}'", hostName, bucketName,
                 password);
     }
 

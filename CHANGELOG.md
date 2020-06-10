@@ -3,8 +3,17 @@ All notable changes to the spring data Couchbase project will be documented in t
 
 ## [UNRELEASED]
 
+-------------------------------------------------------------------------------
+
+
+## [r1_v13] - 2020-06-10
+
 ## Modified
+- Upgrade spring boot lib from 2.2.6.RELEASE to 2.3.0.RELEASE https://github.com/spring-projects/spring-boot/releases/tag/v2.3.0.RELEASE
 - Migrate tests from JUnit 4 to JUnit 5
+- Code format and clean up
+- Apply some UCD detector changes
+- Upgrade Tomcat version to 8.5.56 t https://tomcat.apache.org/tomcat-8.5-doc/changelog.html
 
 
 -------------------------------------------------------------------------------------

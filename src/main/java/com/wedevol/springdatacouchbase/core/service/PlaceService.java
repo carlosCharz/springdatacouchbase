@@ -10,7 +10,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.PlaceDoc;
 
 public interface PlaceService {
 
-    PlaceDoc findById(Long id);
+    PlaceDoc findByIdOrThrow(Long id);
 
     PlaceDoc create(PlaceDoc place);
 }

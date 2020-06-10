@@ -51,8 +51,8 @@ public class UserServiceImplTest {
         userDoc.setEmail("carlos@yopmail.com");
 
         userBasicDoc = new UserBasicDoc();
-        userDoc.setId(USER_ONE_ID);
-        userDoc.setName("Carlos");
+        userBasicDoc.setId(USER_ONE_ID);
+        userBasicDoc.setName("Carlos");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class UserServiceImplTest {
         Mockito.when(repoMock.findById(USER_ONE_KEY)).thenReturn(Optional.of(userDoc));
 
         // Method call
-        UserDoc user = userService.findById(USER_ONE_ID);
+        UserDoc user = userService.findByIdOrThrow(USER_ONE_ID);
 
         // Verification
         Assertions.assertNotNull(user);
@@ -74,7 +74,7 @@ public class UserServiceImplTest {
     public void findOneAndUserIsNull() {
         // Method call
         Assertions.assertThrows(ApiException.class, () -> {
-            UserDoc user = userService.findById(USER_ONE_ID);
+            UserDoc user = userService.findByIdOrThrow(USER_ONE_ID);
             Assertions.assertNull(user);
         });
         // Verification

@@ -28,14 +28,13 @@ public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRepo;
 
-    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
     @Qualifier("placeBucketTemplate")
-    private CouchbaseTemplate placeBucketTemplate; // used to get the key (they apply the prefix and suffix from the
-                                                   // doc)
+    private CouchbaseTemplate placeBucketTemplate; // to get the key (they apply the prefix and suffix from the doc)
 
     @Override
-    public PhoneDoc findById(String id) {
+    public PhoneDoc findByIdOrThrow(String id) {
         PhoneDoc phoneDoc = PhoneDoc.from(id);
         Optional<PhoneDoc> phoneObj = phoneRepo.findById(placeBucketTemplate.getGeneratedId(phoneDoc));
         return phoneObj.orElseThrow(() -> new ApiException(ErrorType.PHONE_NOT_FOUND));

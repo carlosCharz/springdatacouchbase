@@ -33,7 +33,7 @@ public class PlaceController {
     @ResponseStatus(HttpStatus.OK)
     public PlaceDoc findById(@PathVariable Long placeId) {
         logger.info("Find place by id: {}", placeId);
-        return placeService.findById(placeId);
+        return placeService.findByIdOrThrow(placeId);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

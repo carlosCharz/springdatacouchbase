@@ -30,7 +30,7 @@ public class PlaceServiceImpl implements PlaceService {
     private PlaceCounterRepository placeCounterRepo;
 
     @Override
-    public PlaceDoc findById(Long id) {
+    public PlaceDoc findByIdOrThrow(Long id) {
         Optional<PlaceDoc> placeObj = placeRepo.findById(PlaceDoc.getKeyFor(id));
         return placeObj.orElseThrow(() -> new ApiException(ErrorType.PLACE_NOT_FOUND));
     }

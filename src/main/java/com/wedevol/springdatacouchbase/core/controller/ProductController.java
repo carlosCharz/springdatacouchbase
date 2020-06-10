@@ -33,7 +33,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public ProductDoc findById(@PathVariable String id) {
         logger.info("Find product by id: {}", id);
-        return productService.findById(id);
+        return productService.findByIdOrThrow(id);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

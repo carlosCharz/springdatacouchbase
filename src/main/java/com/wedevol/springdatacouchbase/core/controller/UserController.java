@@ -37,7 +37,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDoc findById(@PathVariable Long userId) {
         logger.info("Find user by id: {}", userId);
-        return userService.findById(userId);
+        return userService.findByIdOrThrow(userId);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

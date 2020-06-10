@@ -10,7 +10,7 @@ import com.wedevol.springdatacouchbase.core.dao.doc.CarDoc;
 
 public interface CarService {
 
-    CarDoc findByKey(Long number, String manufacturer);
+    CarDoc findByKeyOrThrow(Long number, String manufacturer);
 
     void create(CarDoc car);
 }

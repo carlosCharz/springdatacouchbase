@@ -26,13 +26,13 @@ public class ProductServiceImpl implements ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
     @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
     private CouchbaseTemplate defaultTemplate;
 
     @Override
-    public ProductDoc findById(String id) { // this is the key
+    public ProductDoc findByIdOrThrow(String id) { // this is the key
         Optional<ProductDoc> productObj = Optional.ofNullable(defaultTemplate.findById(id, ProductDoc.class));
         return productObj.orElseThrow(() -> new ApiException(ErrorType.PRODUCT_NOT_FOUND));
     }

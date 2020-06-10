@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDoc findById(Long id) {
+    public UserDoc findByIdOrThrow(Long id) {
         Optional<UserDoc> userObj = userRepo.findById(UserDoc.getKeyFor(id));
         return userObj.orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
     }
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDoc create(UserDoc user) {
         // We first search by email, the user should not exist
-        Optional<UserDoc> userObj = Optional.ofNullable(this.findByEmail(user.getEmail()));
+        Optional<UserDoc> userObj = Optional.ofNullable(findByEmail(user.getEmail()));
         if (userObj.isPresent()) {
             throw new ApiException(ErrorType.USER_ALREADY_EXISTS);
         }
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(Long id, UserDoc user) {
         // The user should exist
-        final UserDoc existingUser = this.findById(id);
+        UserDoc existingUser = findByIdOrThrow(id);
         if (!Util.isNullOrEmpty(user.getName())) {
             existingUser.setName(user.getName());
         }
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         // The user should exist
-        this.findById(id);
+        findByIdOrThrow(id);
         userRepo.deleteById(UserDoc.getKeyFor(id));
     }
 
@@ -148,7 +148,7 @@ public class UserServiceImpl implements UserService {
     // TODO move this method to a repo class
     @Override
     public List<Long> findAllUserIdsUsingTemplateN1ql() {
-        // NOTE: This method uses raw N1QL query that projects 1 attribute
+        // NOTE This method uses raw N1QL query that projects 1 attribute
         String queryStr =
                 "SELECT u.id AS userId FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc'";
         N1qlQueryResult result = defaultTemplate.queryN1QL(N1qlQuery.simple(queryStr));
@@ -165,9 +165,9 @@ public class UserServiceImpl implements UserService {
     // TODO move this method to a repo class
     @Override
     public List<UserDoc> findUsersUsingUseKeys(List<Long> userIds) {
-        // NOTE: the keys are constructed based on the ids
+        // NOTE the keys are constructed based on the ids
         List<String> userKeys = userIds.stream().map(UserDoc::getKeyFor).collect(Collectors.toList());
-        // NOTE: This method uses raw N1QL query that projects the complete entity
+        // NOTE This method uses raw N1QL query that projects the complete entity
         String queryStr = "SELECT u.*, META(u).id AS _ID, META(u).cas AS _CAS FROM users u USE KEYS $userIdKeys";
         JsonObject placeholderValues = JsonObject.create().put("userIdKeys", JsonArray.from(userKeys));
         N1qlParams n1qlParams = N1qlParams.build().pretty(false); // TODO add more configurations

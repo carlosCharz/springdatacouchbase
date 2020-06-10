@@ -33,7 +33,7 @@ public class PhoneController {
     @ResponseStatus(HttpStatus.OK)
     public PhoneDoc findById(@PathVariable String id) {
         logger.info("Find phone by id: {}", id);
-        return phoneService.findById(id);
+        return phoneService.findByIdOrThrow(id);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

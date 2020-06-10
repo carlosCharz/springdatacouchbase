@@ -25,13 +25,13 @@ public class CarServiceImpl implements CarService {
 
     private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
-    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
     @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
     private CouchbaseTemplate defaultTemplate;
 
     @Override
-    public CarDoc findByKey(Long number, String manufacturer) {
+    public CarDoc findByKeyOrThrow(Long number, String manufacturer) {
         CarDoc carDoc = new CarDoc(number, manufacturer);
         Optional<CarDoc> carObj =
                 Optional.ofNullable(defaultTemplate.findById(defaultTemplate.getGeneratedId(carDoc), CarDoc.class));

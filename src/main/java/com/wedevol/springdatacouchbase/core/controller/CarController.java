@@ -33,7 +33,7 @@ public class CarController {
     @ResponseStatus(HttpStatus.OK)
     public CarDoc findByKey(@PathVariable Long number, @PathVariable String manufacturer) {
         logger.info("Find car by key: {}-{}", number, manufacturer);
-        return carService.findByKey(number, manufacturer);
+        return carService.findByKeyOrThrow(number, manufacturer);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

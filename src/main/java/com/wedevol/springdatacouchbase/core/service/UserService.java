@@ -14,7 +14,7 @@ public interface UserService {
 
     // CRUD repository interface
 
-    UserDoc findById(Long id);
+    UserDoc findByIdOrThrow(Long id);
 
     UserDoc create(UserDoc user);
 

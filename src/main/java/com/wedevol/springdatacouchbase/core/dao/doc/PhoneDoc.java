@@ -1,6 +1,5 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
-import java.io.Serializable;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
@@ -13,15 +12,15 @@ import com.couchbase.client.java.repository.annotation.Id;
 /**
  * Represents a Phone doc from Couchbase. The doc key is generated using Java UUID with automatic prefix.
  *
+ * Example of Key: "ph::<id>"
+ *
  * @author Charz++
  */
 
 @Document
-public class PhoneDoc implements Serializable {
+public class PhoneDoc {
 
-    private static final long serialVersionUID = 3072475211055736282L;
-
-    @IdPrefix(order = 0)
+    @IdPrefix
     private String keyPrefix = "ph";
     @Id
     @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "::")
@@ -39,8 +38,6 @@ public class PhoneDoc implements Serializable {
     @Field
     private Integer year;
 
-    public PhoneDoc() {}
-
     public static PhoneDoc from(String id) {
         return new PhoneDoc(id);
     }
@@ -48,12 +45,6 @@ public class PhoneDoc implements Serializable {
     private PhoneDoc(String id) {
         super();
         this.id = id;
-    }
-
-    public PhoneDoc(String model, String manufacturer) {
-        super();
-        this.model = model;
-        this.manufacturer = manufacturer;
     }
 
     public String getKey() {

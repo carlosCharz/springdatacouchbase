@@ -34,8 +34,7 @@ public interface UserRepository extends CrudRepository<UserDoc, String> {
     UserDoc findByEmail(String email);
 
     // These methods use the Query annotation to provide a N1QL statement inline. A few N1QL-specific values are
-    // provided
-    // through SpEL.
+    // provided through SpEL.
     @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND ARRAY_LENGTH(nicknames) > 0 AND ANY nick IN nicknames SATISFIES nick = $1 END")
     List<UserDoc> findUsersWithNickname(String nickname);
 

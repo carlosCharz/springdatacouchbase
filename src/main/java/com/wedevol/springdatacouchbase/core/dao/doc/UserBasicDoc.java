@@ -1,6 +1,5 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
-import java.io.Serializable;
 import org.springframework.data.couchbase.core.mapping.Document;
 import com.couchbase.client.java.repository.annotation.Field;
 
@@ -11,9 +10,7 @@ import com.couchbase.client.java.repository.annotation.Field;
  */
 
 @Document
-public class UserBasicDoc implements Serializable {
-
-    private static final long serialVersionUID = 3072475211055736282L;
+public class UserBasicDoc {
 
     @Field("id")
     private Long id;

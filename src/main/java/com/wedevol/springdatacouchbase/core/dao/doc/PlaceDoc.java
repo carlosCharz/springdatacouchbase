@@ -1,6 +1,5 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
-import java.io.Serializable;
 import org.springframework.data.couchbase.core.mapping.Document;
 import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
@@ -8,13 +7,14 @@ import com.couchbase.client.java.repository.annotation.Id;
 /**
  * Represents a place doc from Couchbase. The doc key is generated using a Couchbase atomic counter with manual prefix.
  *
+ * Example of Key: "place::<id>"
+ *
  * @author Charz++
  */
 
 @Document
-public class PlaceDoc implements Serializable {
+public class PlaceDoc {
 
-    private static final long serialVersionUID = 3072475211055736282L;
     private static final String PLACE_KEY_PREFIX = "place::";
 
     @Id
@@ -26,8 +26,6 @@ public class PlaceDoc implements Serializable {
     private String name;
     @Field
     private String address;
-
-    public PlaceDoc() {}
 
     public PlaceDoc(String key, Long id, String name, String address) {
         super();

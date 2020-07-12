@@ -1,6 +1,5 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
-import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
@@ -11,13 +10,13 @@ import com.couchbase.client.java.repository.annotation.Id;
 /**
  * Represents a Product doc from Couchbase. The doc key is generated using a unique number (Couchbase UUID).
  *
+ * Example of Key: "<id>"
+ *
  * @author Charz++
  */
 
 @Document
-public class ProductDoc implements Serializable {
-
-    private static final long serialVersionUID = 3072475211055736282L;
+public class ProductDoc {
 
     @Id
     @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
@@ -30,8 +29,6 @@ public class ProductDoc implements Serializable {
     private String description;
     @Field
     private Integer quantity;
-
-    public ProductDoc() {}
 
     public static ProductDoc from(String id) {
         return new ProductDoc(id);

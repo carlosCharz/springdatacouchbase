@@ -1,6 +1,6 @@
 # Spring Data Couchbase 3.x + Tests
 
-This is my template for a spring boot project that uses spring data Couchbase 3.x. It includes integration and unit tests.
+This is a spring boot project that uses Spring Data Couchbase 3.x. This project exemplifies different cases to set up documents, keys, repositories and queries. It includes integration and unit tests.
 
 ## Architecture
  
@@ -11,24 +11,25 @@ This is my template for a spring boot project that uses spring data Couchbase 3.
 ## Technologies
 
 1. Spring Boot (spring-boot-starter-web, spring-boot-starter-tomcat, spring-boot-starter-test, spring-boot-starter-data-couchbase)
-2. Java 8
+2. Java 8+
 3. Tomcat 8.5.x
-4. Couchbase 5.x
+4. Couchbase 6.x
 5. Maven 3.6.x
 6. JUnit 5
 
 ## Tests
 
- 1. **Integration Test (for the Controller):** it uses the Spring Boot Test framework with mockMvc and hamcrest matchers
- 2. **Unit Test (for the Service):** it uses the Mockito framework with hamcrest matchers, mock and injectMocks annotations 
+ 1. **Integration Test (for the Controller):** it uses the Spring Boot Test framework with mockMvc and Hamcrest matchers
+ 2. **Unit Test (for the Service):** it uses the Mockito framework with Hamcrest matchers, mock and injectMocks annotations 
  
 ## Examples
 
 1. User -> key: external Couchbase atomic counter (with manual prefix) | bucket: default | repo: crud repo
 2. Car -> key: doc attributes (with automatic prefix and suffix) | bucket: default | repo: template
 3. Product -> key: auto generated Couchbase unique number | bucket: default | repo: template
-4. Place -> key: external Couchbase atomic counter with doc attributes (with manual prefix) | bucket: non-default | repo: crud repo (for multiple buckets)
-5. Phone -> key: external Java UUID key with doc attributes (with automatic prefix) | bucket: non-default | repo: crud repo (for multiple buckets)
+For multiple buckets
+4. Place -> key: external Couchbase atomic counter (with manual prefix) | bucket: non-default | repo: crud repo
+5. Phone -> key: external Java UUID key (with automatic prefix) | bucket: non-default | repo: crud repo
 
 ## Exposed methods
 

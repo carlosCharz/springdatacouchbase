@@ -43,10 +43,7 @@ public class UserServiceImplTest {
 
     @BeforeEach // For example, to reinitialize some class attributes used by the methods.
     public void init() {
-        userDoc = new UserDoc();
-        userDoc.setId(USER_ONE_ID);
-        userDoc.setName("Carlos");
-        userDoc.setNicknames(Arrays.asList("charz", "carlito"));
+        userDoc = new UserDoc(USER_ONE_ID, "Carlos", Arrays.asList("charz", "carlito"));
         userDoc.setAge(26);
         userDoc.setEmail("carlos@yopmail.com");
 

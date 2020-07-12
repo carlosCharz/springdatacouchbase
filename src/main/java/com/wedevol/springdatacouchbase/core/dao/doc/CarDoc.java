@@ -1,6 +1,5 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
-import java.io.Serializable;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
@@ -13,20 +12,20 @@ import com.couchbase.client.java.repository.annotation.Id;
 /**
  * Represents a Car doc from Couchbase. The doc key is generated using doc attributes with automatic prefix and suffix.
  *
+ * Example of Key: "car::<number>::<manufacturer>::test"
+ *
  * @author Charz++
  */
 
 @Document
-public class CarDoc implements Serializable {
+public class CarDoc {
 
-    private static final long serialVersionUID = 3072475211055736282L;
-
-    @IdPrefix(order = 0)
-    private String keyPrefix = "car";
     @Id
     @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "::")
     private String key;
-    @IdSuffix(order = 0)
+    @IdPrefix
+    private String keyPrefix = "car";
+    @IdSuffix
     private String keySuffix = "test";
 
     @Field
@@ -40,8 +39,6 @@ public class CarDoc implements Serializable {
     private String model;
     @Field
     private Integer year;
-
-    public CarDoc() {}
 
     public CarDoc(Long number, String manufacturer) {
         super();

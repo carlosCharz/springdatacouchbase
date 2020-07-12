@@ -49,18 +49,19 @@ public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    
+
     @SuppressWarnings("rawtypes")
     private HttpMessageConverter mappingJackson2HttpMessageConverter;
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     public void setConverters(HttpMessageConverter<?>[] converters) {
         mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
                 .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter).findAny().orElse(null);
-        Assertions.assertNotNull(this.mappingJackson2HttpMessageConverter, "the JSON message converter must not be null");
+        Assertions.assertNotNull(this.mappingJackson2HttpMessageConverter,
+                "the JSON message converter must not be null");
     }
 
     @BeforeEach

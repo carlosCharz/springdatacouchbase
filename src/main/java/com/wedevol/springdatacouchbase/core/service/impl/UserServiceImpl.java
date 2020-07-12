@@ -26,7 +26,7 @@ import com.wedevol.springdatacouchbase.core.service.UserService;
 import com.wedevol.springdatacouchbase.core.util.Util;
 
 /**
- * Service that manages the valid operations over the user repository.
+ * Service that manages the valid operations over the user repository. It exemplifies multiple query methods.
  *
  * @author Charz++
  */

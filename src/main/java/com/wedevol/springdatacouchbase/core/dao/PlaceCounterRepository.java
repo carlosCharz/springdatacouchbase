@@ -17,7 +17,7 @@ public class PlaceCounterRepository {
     private static final long INITIAL_COUNTER_VALUE = 1;
     private static final String PLACE_COUNTER_KEY = "place::counter";
 
-    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
     @Qualifier("placeBucket")
     private Bucket bucket;

@@ -1,6 +1,5 @@
 package com.wedevol.springdatacouchbase.core.dao.doc;
 
-import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.couchbase.core.mapping.Document;
 import com.couchbase.client.java.repository.annotation.Field;
@@ -9,13 +8,14 @@ import com.couchbase.client.java.repository.annotation.Id;
 /**
  * Represents a user doc from Couchbase. The doc key is generated using a Couchbase atomic counter with manual prefix.
  *
+ * Example of Key: "user::<id>"
+ *
  * @author Charz++
  */
 
 @Document
-public class UserDoc implements Serializable {
+public class UserDoc {
 
-    private static final long serialVersionUID = 3072475211055736282L;
     private static final String USER_KEY_PREFIX = "user::";
 
     @Id
@@ -31,8 +31,6 @@ public class UserDoc implements Serializable {
     private Integer age;
     @Field
     private String email;
-
-    public UserDoc() {}
 
     public UserDoc(String key, Long id, String name, List<String> nicknames, Integer age, String email) {
         super();

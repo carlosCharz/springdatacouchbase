@@ -53,14 +53,17 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
     @Override
     protected CouchbaseEnvironment getEnvironment() {
-        DefaultCouchbaseEnvironment.builder().connectTimeout(60000) // by default 5 sec (5000 ms)
+        LOG.info("Customizing Couchbase environment ...");
+        DefaultCouchbaseEnvironment env = DefaultCouchbaseEnvironment.builder().connectTimeout(60000) // by default 5
+                                                                                                      // sec (5000 ms)
                 .queryTimeout(20000) // by default 75 sec (75000 ms)
-                .socketConnectTimeout(45000); // by default 1 sec (1000 ms)
-        return super.getEnvironment();
+                .socketConnectTimeout(45000).build(); // by default 1 sec (1000 ms)
+        return env;
     }
 
     @Override
-    public Consistency getDefaultConsistency() {
+    protected Consistency getDefaultConsistency() {
+        LOG.info("Customizing Default consistency ...");
         // By default, READ_YOUR_OWN_WRITES
         // Values: READ_YOUR_OWN_WRITES, STRONGLY_CONSISTENT, UPDATE_AFTER, EVENTUALLY_CONSISTENT
         return Consistency.READ_YOUR_OWN_WRITES;
@@ -68,6 +71,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
     @Override
     public String typeKey() {
+        LOG.info("Customizing Type Key ...");
         // By default, this attribute is named "_class".
         // Spring Data automatically adds to each document an attribute containing the full class name of the entity.
         // This field is the one used by N1QL queries to filter only documents corresponding to the repository’s entity.
@@ -80,11 +84,12 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
     @Bean(name = "placeBucket") // this is to differentiate with the default beans
     public Bucket placeBucket() throws Exception {
+        LOG.info("Opening places bucket ...");
         return couchbaseCluster().openBucket("places", "123456abC"); // TODO you can get values from properties
     }
 
     @Bean(name = "placeBucketTemplate") // this is to differentiate with the default beans
-    public CouchbaseTemplate placeTemplate() throws Exception {
+    public CouchbaseTemplate placeBucketTemplate() throws Exception {
         CouchbaseTemplate template = new CouchbaseTemplate(couchbaseClusterInfo(), // reuse the default bean
                 placeBucket(), // the bucket is non-default
                 mappingCouchbaseConverter(), translationService() // default beans here as well
@@ -97,7 +102,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
     public void configureRepositoryOperationsMapping(RepositoryOperationsMapping baseMapping) {
         try {
             baseMapping // this is already using couchbaseTemplate as default
-                    .mapEntity(PlaceDoc.class, placeTemplate()).mapEntity(PhoneDoc.class, placeTemplate());
+                    .mapEntity(PlaceDoc.class, placeBucketTemplate()).mapEntity(PhoneDoc.class, placeBucketTemplate());
             // every repository dealing with Place will be backed by placeTemplate()
         } catch (Exception e) {
             throw new RuntimeException("Place bucket could not be configured properly!");

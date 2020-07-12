@@ -169,7 +169,7 @@ http://localhost:8080/springdatacouchbase/users/find/usekeys?ids=1,2,3
  * In the UserRepository, the CrudRepository provides sophisticated CRUD functionality for the entity class that is being managed.
  * Above Couchbase 5 the bucket name and password is the username and password located on the Security tab on the web console.
  * For doc expiration use for example: @Document(expiry = 10) or @Document(expiryExpression = "${valid.document.expiry}").
- * Key generation: UserDoc -> uses a Couchbase atomic counter. CarDoc -> uses doc attributes. ProductDoc -> uses random uuid.
+ * Key generation: UserDoc -> uses an external Couchbase atomic counter. CarDoc -> uses doc attributes. ProductDoc -> uses Couchbase unique number.
 
 ## Documentation and Examples
  

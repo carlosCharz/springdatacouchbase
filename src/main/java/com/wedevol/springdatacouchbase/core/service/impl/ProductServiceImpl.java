@@ -15,8 +15,9 @@ import com.wedevol.springdatacouchbase.core.service.ProductService;
 
 /**
  * Service that manages the creation of a Product to exemplify the use of unique number (Couchbase UUID) for key
- * generation and the usage of the template methods (not the CRUD repository). NOTE: As of 2019 I could not save the
- * auto-generated unique Couchbase key inside the doc.
+ * generation and the usage of the template methods (not the CRUD repository).
+ *
+ * NOTE: As of 2019 I could not save the auto-generated unique Couchbase key inside the doc.
  *
  * @author Charz++
  */

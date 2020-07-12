@@ -27,9 +27,10 @@ This is a spring boot project that uses Spring Data Couchbase 3.x. This project 
 1. User -> key: external Couchbase atomic counter (with manual prefix) | bucket: default | repo: crud repo
 2. Car -> key: doc attributes (with automatic prefix and suffix) | bucket: default | repo: template
 3. Product -> key: auto generated Couchbase unique number | bucket: default | repo: template
-For multiple buckets
-4. Place -> key: external Couchbase atomic counter (with manual prefix) | bucket: non-default | repo: crud repo
-5. Phone -> key: external Java UUID key (with automatic prefix) | bucket: non-default | repo: crud repo
+
+With multiple buckets
+1. Place -> key: external Couchbase atomic counter (with manual prefix) | bucket: non-default | repo: crud repo
+2. Phone -> key: external Java UUID key (with automatic prefix) | bucket: non-default | repo: crud repo
 
 ## Exposed methods
 

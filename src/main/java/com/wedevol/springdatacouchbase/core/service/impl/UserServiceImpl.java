@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService {
     private UserCounterRepository userCounterRepo;
 
     // TODO move this method to a repo class
-    // NOTE: add the qualifier in case you have multiple buckets in your configuration otherwise remove it
+    // NOTE add the qualifier in case you have multiple buckets in your configuration otherwise remove it
     @Autowired
     @Qualifier(BeanNames.COUCHBASE_TEMPLATE)
-    private CouchbaseTemplate defaultTemplate; // NOTE: used for the example of N1QL query with cover index
+    private CouchbaseTemplate defaultTemplate; // NOTE used for the example of N1QL query with cover index
 
     @Override
     public UserDoc findByEmail(String email) {
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserBasicDoc> findUsersbyNameUsingTemplateN1QLProjectionWithCoverIndex(String name) {
         final String cleanName = name.toLowerCase().trim();
-        // NOTE: This method uses raw N1QL query that projects 1 attribute and it is a covered index
+        // NOTE This method uses raw N1QL query that projects 1 attribute and it is a covered index
         // ('idx_user_find_by_name')
         String queryStr =
                 "SELECT u.name FROM users u WHERE u.type = 'com.wedevol.springdatacouchbase.core.dao.doc.UserDoc' AND LOWER(u.name) LIKE '%' || $name || '%'";
